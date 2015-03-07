@@ -3,12 +3,12 @@ using System.Collections;
 
 public enum attackTypes
 {
+	wait,
 	singleFire,
 	multipleShots,
 	spreadShot,
 	superAttack
-}
-;
+};
 
 public class bossAttack : MonoBehaviour
 {
@@ -35,7 +35,7 @@ public class bossAttack : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-	
+		bossAttackTypes = attackTypes.wait;
 	}
 	
 	// Update is called once per frame
@@ -53,7 +53,7 @@ public class bossAttack : MonoBehaviour
 	IEnumerator delayTimer (float delayTimer)
 	{
 		yield return new WaitForSeconds (delayTimer);
-		spawnObject ();
+		spawnObject (); //replace with CheckAttackTypes();
 	}
 
 	void spawnObject ()
@@ -78,8 +78,34 @@ public class bossAttack : MonoBehaviour
 		} else
 			canFire = false;
 	}
+	
+	void spawnObject2 ()
+	{
+		bossAttackTypes = attackTypes.spreadShot;
+		CheckAttackTypes ();
 
-	void attackTypes ()
+		if(currentCount <= shotCount)
+		if (lastStateCheck + defaultDelay < timeElapsed) {
+			
+			canFire = true;
+			Vector3 bossPos = transform.position;
+			
+			Vector3 fireSpawn;
+			fireSpawn.x = bossPos.x - 1;
+			fireSpawn.y = bossPos.y;
+			fireSpawn.z = 0.0f;
+			
+			attackInstance = Instantiate (attackPrefab, fireSpawn, Quaternion.identity) as Rigidbody2D;
+			attackInstance.gravityScale = 0.0f;
+			attackInstance.velocity = (new Vector2 (-shotSpeed, 0));
+			
+			currentCount++;
+			lastStateCheck = timeElapsed;
+		} else
+			canFire = false;
+	}
+
+	void CheckAttackTypes ()
 	{
 		//other attack ideas:
 		//projectiles stop dead in their tracks, and starting floating down (spaces inbetween each projectile)
@@ -93,9 +119,7 @@ public class bossAttack : MonoBehaviour
 			//allocate shot counts?
 			shotCount = 1;
 			shotDelay = 1.0f;
-
 			attackInstance.velocity = new Vector2 (-shotSpeed, 0);
-
 
 			break;
 		case global::attackTypes.multipleShots:
@@ -105,24 +129,30 @@ public class bossAttack : MonoBehaviour
 		case global::attackTypes.spreadShot:
 			//shotCount must be dividle by 3! 
 			//shotCount will fire projectiles straight, diagonally up and down 
+
+			float spreadDelay = 2.0f;
+			defaultDelay = spreadDelay;
+
 			shotCount = 15;
-
 			float shotSpread = shotCount / 3;
+			float spreadShotSpeed = 3.0f;
+			shotSpeed = spreadShotSpeed;
 
-			if(shotCount == shotCount / 3){
-				
-				//attackInstance.rotation = new Vector3();
+			if(shotCount < shotCount / 3){
+				//transform.parent.Rotate(0,0, rot)
+				attackInstance.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
 			}
 
-			if(shotCount == (shotCount / 3) * 2){
-
+			if(shotCount < (shotSpread * 2) && shotCount > shotSpread){
+				attackInstance.transform.rotation = Quaternion.Euler(new Vector3(45, 0, 0));
 			}
 
-			if(shotCount == 15){
-
+			if(shotCount > (shotSpread * 2) && shotCount <= 15){
+				attackInstance.transform.rotation = Quaternion.Euler(new Vector3(-45, 0, 0));
+				//attackInstance not instantiated yet (spawnObject needs to be called first)
 			}
 
-			attackInstance.velocity = new Vector2 (-shotSpeed, 0);
+			spawnObject2();
 
 			break;
 		case global::attackTypes.superAttack:
