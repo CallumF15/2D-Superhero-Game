@@ -85,9 +85,6 @@ public class Movement : MonoBehaviour
 			if (faceRight) {
 				transform.parent.Rotate(0,0, rot);
 				transform.parent.position += transform.right * Time.deltaTime * flySpeed;
-			} else { //facing left
-				transform.parent.Rotate(0,0, -rot);
-				transform.parent.position -= transform.right * Time.deltaTime * flySpeed;
 			}
 			break;
 

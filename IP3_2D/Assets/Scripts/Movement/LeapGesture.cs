@@ -17,7 +17,6 @@ public class LeapGesture : MonoBehaviour
 
 	private Movement movement;
 	private float fixedAngle = 90.0f;
-	private float fixedAngle2 = 45.0f;
 
 	// Use this for initialization
 	void Start ()
@@ -33,7 +32,7 @@ public class LeapGesture : MonoBehaviour
 
 	public void CalculateHandAngle ()
 	{
-		var prevFrame = m_leapController.Frame (1); 
+		var prevFrame = m_leapController.Frame (10); 
 		
 		float rotationX = _frame.RotationAngle (prevFrame, Vector.XAxis);
 		float rotationY = _frame.RotationAngle (prevFrame, Vector.YAxis);
@@ -129,20 +128,19 @@ public class LeapGesture : MonoBehaviour
 				//CheckAngle(type, true);
 			}
 		}
-
-		if (hand.IsRight) {
-			if (yawDegrees <= -45 && yawDegrees >= -180) {
-				type = MovementType.fly;
-
-				if(pitchDegrees <= fixedAngle && pitchDegrees >= -fixedAngle){
-				movement.getPitchAngle = pitchDegrees;
-				movement.CheckMovementType (type, false);
-				}
-
-				//CheckAngle(type, false);
-
-			}
-		}
+//		if (hand.IsRight) {
+//			if (yawDegrees <= -45 && yawDegrees >= -180) {
+//				type = MovementType.fly;
+//
+//				if(pitchDegrees <= fixedAngle && pitchDegrees >= -fixedAngle){
+//				movement.getPitchAngle = pitchDegrees;
+//				movement.CheckMovementType (type, false);
+//				}
+//
+//				//CheckAngle(type, false);
+//
+//			}
+//		}
 	}
 
 	/// <summary>
@@ -153,12 +151,12 @@ public class LeapGesture : MonoBehaviour
 		if(pitchDegrees > fixedAngle)
 		{
 			Debug.Log ("greater");
-			movement.getPitchAngle = fixedAngle2;
+			movement.getPitchAngle = fixedAngle;
 			//movement.CheckMovementType (type, direction);
 		}else if(pitchDegrees < -fixedAngle)
 		{			
 			print ("lower");
-			movement.getPitchAngle = -fixedAngle2;
+			movement.getPitchAngle = -fixedAngle;
 			//movement.CheckMovementType (type, direction);
 		}
 	}
