@@ -65,14 +65,16 @@ public class LeapGesture : MonoBehaviour
 		//Debug.Log ("Roll: " + rollDegrees);
 	}
 
-	public void HandPlayerMovement (Frame frame, Hand hand, Controller controller)
+	public void HandPlayerMovement (Hand hand)
 	{
-		_frame = frame;
 		MovementType type;
 
 		HandRotation (hand);
 		CalculateHandAngle ();
 
+		Debug.Log ("pos.x " + hand.PalmPosition.x);
+		Debug.Log ("pos.y " + hand.PalmPosition.y);
+		Debug.Log ("pos.z " + hand.PalmPosition.z);
 		//Hand rotation for left/right movement below:
 
 

@@ -58,10 +58,9 @@ public class testFly : MonoBehaviour
 			if (hand != null && frame.Hands.Count <= 1 && hand.IsValid) { //if hand is not over LeapMotion == null & only 1 hand
 			
 				//	Time.timeScale = 1.0f;
-				gesture.HandPlayerMovement (frame, hand, m_leapController);
+				gesture.HandPlayerMovement (hand);
 			}
 		} else {
-
 			//Time.timeScale = 0.0f;
 			//not connected -- pause game -- await connection
 		}

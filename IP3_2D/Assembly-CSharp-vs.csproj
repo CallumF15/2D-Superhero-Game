@@ -83,6 +83,7 @@
      <Compile Include="Assets\Scripts\Menu\Menu.cs" />
      <Compile Include="Assets\Scripts\Movement\LeapGesture.cs" />
      <Compile Include="Assets\Scripts\Movement\Movement.cs" />
+     <Compile Include="Assets\Scripts\Movement\cursor.cs" />
      <Compile Include="Assets\Scripts\Movement\testFly.cs" />
      <Compile Include="Assets\Scripts\Powerups\IPowerups.cs" />
      <Compile Include="Assets\Scripts\Powerups\SpeedBoost.cs" />
