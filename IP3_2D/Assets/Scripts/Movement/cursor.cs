@@ -1,24 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 using Leap;
 
 public class cursor : MonoBehaviour {
 
 	Controller m_leapController;
+	GameObject cursorObject;
 	HandList hList;
 	Camera camera;
 	int count = 1;
-
+	
 	// Use this for initialization
 	void Start () {
 		m_leapController = new Controller ();
 		m_leapController.EnableGesture (Gesture.GestureType.TYPESCREENTAP);
 		camera = GameObject.FindGameObjectWithTag ("MainCamera").gameObject.camera;
+		cursorObject = GameObject.FindGameObjectWithTag ("cursor");
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		setupLeap();
+
 	}
 
 
@@ -41,23 +45,53 @@ public class cursor : MonoBehaviour {
 		var palmPos = hList [0].PalmPosition;
 		//Vector3 handPosition = hList [0].PalmPosition.ToUnityScaled ();
 		Vector3 handPosition = hList[0].PalmPosition.ToUnity();
-		Vector3 cursorPosition = camera.WorldToScreenPoint (handPosition);
+		//Vector3 cursorPosition = camera.WorldToScreenPoint (handPosition);
+		//cursorPosition.z = 0;
+		handPosition.z = -5;
+		handPosition.y = handPosition.y - 150;
+
+		if(handPosition.y >= 45)
+			handPosition.y = 45;
+		if(handPosition.y <= -45)
+			handPosition.y = -45;
+
+		if (handPosition.x >= 75)
+			handPosition.x = 75;
+		if (handPosition.x <= -75)
+			handPosition.x = -75;
 
 
+		cursorObject.transform.position = handPosition;
 
-
-
-		//Debug.Log ("hand pos: " + handPosition);
-		bb (cursorPosition);
-
-//		for (int i = 0; i < count; i++) {
-//			//bb (cursorPosition);
-		//}
-		//create a temp 2D sphere to act as cursor
+		hoveringButton (handPosition);
 	}
 
-	void bb(Vector3 pos){
-		//pos.z = 0;
-		Instantiate (GameObject.CreatePrimitive (PrimitiveType.Cube), pos, Quaternion.identity);
+	void hoveringButton(Vector3 pos)
+	{
+		Debug.DrawLine(pos, Vector3.forward, Color.red);
+
+		RaycastHit hit;
+		if (Physics.Raycast (transform.position, Vector3.forward, out hit, 100.0F)) {
+
+			switch(hit.transform.name)
+			{
+			case "btnPlay":
+				Debug.Log("btnPlay");
+				Application.LoadLevel("game");
+				break;
+
+			case "btnStore":
+
+				break;
+
+			case "btnSettings":
+
+				break;
+
+			case "btnExit":
+
+				break;
+			}
+		}
 	}
 }

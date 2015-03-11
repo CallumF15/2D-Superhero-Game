@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\Leapmotion\Utils\TriggerDrawing.cs" />
     <Compile Include="Assets\Scripts\Leapmotion\Utils\Utils.cs" />
     <Compile Include="Assets\Scripts\Menu\LoadLevel.cs" />
+    <Compile Include="Assets\Scripts\Menu\LoadingBar.cs" />
     <Compile Include="Assets\Scripts\Menu\Menu.cs" />
     <Compile Include="Assets\Scripts\Movement\LeapGesture.cs" />
     <Compile Include="Assets\Scripts\Movement\Movement.cs" />
