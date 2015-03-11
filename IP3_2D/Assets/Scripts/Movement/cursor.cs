@@ -39,12 +39,16 @@ public class cursor : MonoBehaviour {
 	void handToScreenPosition(){
 
 		var palmPos = hList [0].PalmPosition;
-
-		Vector3 handPosition = hList [0].PalmPosition.ToUnityScaled ();
-		//Vector3 handPosition = new Vector3 (palmPos.x, palmPos.y, 0);
+		//Vector3 handPosition = hList [0].PalmPosition.ToUnityScaled ();
+		Vector3 handPosition = hList[0].PalmPosition.ToUnity();
 		Vector3 cursorPosition = camera.WorldToScreenPoint (handPosition);
 
-		Debug.Log ("hand pos: " + cursorPosition);
+
+
+
+
+		//Debug.Log ("hand pos: " + handPosition);
+		bb (cursorPosition);
 
 //		for (int i = 0; i < count; i++) {
 //			//bb (cursorPosition);
@@ -53,11 +57,7 @@ public class cursor : MonoBehaviour {
 	}
 
 	void bb(Vector3 pos){
-
-			///Vector3 pos2 = camera.ScreenToWorldPoint(pos);
-			//pos2.z = 0;
-		pos.z = 0;
+		//pos.z = 0;
 		Instantiate (GameObject.CreatePrimitive (PrimitiveType.Cube), pos, Quaternion.identity);
-	
 	}
 }
