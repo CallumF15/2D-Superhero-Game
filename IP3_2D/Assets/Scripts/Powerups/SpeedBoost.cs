@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpeedBoost {
+public class SpeedBoost{
 
 	public float speed;
 	public float speedMultipliers;

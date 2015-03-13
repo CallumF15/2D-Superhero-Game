@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Boss\bossAttack.cs" />
-    <Compile Include="Assets\Scripts\Boss\bossHealth.cs" />
     <Compile Include="Assets\Scripts\Boss\cameraFollow.cs" />
     <Compile Include="Assets\Scripts\Boss\move.cs" />
     <Compile Include="Assets\Scripts\Boss\setup.cs" />
@@ -78,20 +77,21 @@
     <Compile Include="Assets\Scripts\Leapmotion\Utils\StretchToScreen.cs" />
     <Compile Include="Assets\Scripts\Leapmotion\Utils\TriggerDrawing.cs" />
     <Compile Include="Assets\Scripts\Leapmotion\Utils\Utils.cs" />
-    <Compile Include="Assets\Scripts\Menu\LoadLevel.cs" />
-    <Compile Include="Assets\Scripts\Menu\LoadingBar.cs" />
     <Compile Include="Assets\Scripts\Menu\Menu.cs" />
     <Compile Include="Assets\Scripts\Movement\LeapGesture.cs" />
     <Compile Include="Assets\Scripts\Movement\Movement.cs" />
     <Compile Include="Assets\Scripts\Movement\cursor.cs" />
     <Compile Include="Assets\Scripts\Movement\testFly.cs" />
+    <Compile Include="Assets\Scripts\Player\playerHealth.cs" />
     <Compile Include="Assets\Scripts\Powerups\IPowerups.cs" />
     <Compile Include="Assets\Scripts\Powerups\SpeedBoost.cs" />
     <Compile Include="Assets\Scripts\Powerups\hyperShield.cs" />
+    <Compile Include="Assets\Scripts\Powerups\rotate.cs" />
     <Compile Include="Assets\Scripts\World\Spawn.cs" />
     <Compile Include="Assets\Scripts\World\attack.cs" />
     <Compile Include="Assets\Scripts\World\cannonball.cs" />
     <Compile Include="Assets\Scripts\follow.cs" />
+    <Compile Include="Assets\Scripts\healthbar.cs" />
     <Compile Include="Assets\hit.cs" />
     <Reference Include="UnityEngine.UI">
       <HintPath>C:\Program Files %28x86%29\Unity\Editor\Data\UnityExtensions\Unity\GUISystem\4.6.2\UnityEngine.UI.dll</HintPath>

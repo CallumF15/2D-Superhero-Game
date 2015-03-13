@@ -22,7 +22,6 @@ public class cursor : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		setupLeap();
-
 	}
 
 
@@ -60,7 +59,6 @@ public class cursor : MonoBehaviour {
 		if (handPosition.x <= -75)
 			handPosition.x = -75;
 
-
 		cursorObject.transform.position = handPosition;
 
 		hoveringButton (handPosition);
@@ -68,30 +66,41 @@ public class cursor : MonoBehaviour {
 
 	void hoveringButton(Vector3 pos)
 	{
-		Debug.DrawLine(pos, Vector3.forward, Color.red);
+		Debug.DrawLine(pos, new Vector3(pos.x, pos.y, 5), Color.red);
 
 		RaycastHit hit;
-		if (Physics.Raycast (transform.position, Vector3.forward, out hit, 100.0F)) {
+		if (Physics.Raycast (pos, Vector3.forward, out hit, 100.0F)) {
 
 			switch(hit.transform.name)
 			{
 			case "btnPlay":
+
 				Debug.Log("btnPlay");
-				Application.LoadLevel("game");
+				//loadingBar(pos);
+				//Application.LoadLevel("game");
 				break;
 
 			case "btnStore":
-
+				//loadingBar(pos);
+				Debug.Log("btnStore");
 				break;
 
 			case "btnSettings":
-
+				//loadingBar(pos);
+				Debug.Log("btnSettings");
 				break;
 
-			case "btnExit":
-
+			case "btnQuit":
+				//loadingBar(pos);
+				Debug.Log("btnQuit");
 				break;
 			}
 		}
+	}
+
+	void loadingBar(Vector3 pos){
+
+		int width = UnityEngine.Screen.width;
+		renderer.material.SetFloat ("_Cutoff", Mathf.InverseLerp (0, width, pos.x));
 	}
 }
