@@ -31,6 +31,10 @@ public class hyperShield : IPowerups {
 		}
 	}
 
+	void OnCollisionEnter(){
+
+	}
+
 	// Use this for initialization
 	void Start () {
 	

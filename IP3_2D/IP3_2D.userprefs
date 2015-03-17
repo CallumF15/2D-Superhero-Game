@@ -1,19 +1,19 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="c:\Users\Callum\Documents\GitHub\IP3_2D_CF\IP3_2D\Assets\Scripts\Boss\bossAttack.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Powerups\placement.cs">
     <Files>
-      <File FileName="c:\Users\Callum\Documents\GitHub\IP3_2D_CF\IP3_2D\Assets\Scripts\Boss\bossAttack.cs" Line="183" Column="3" />
-      <File FileName="Assets\Scripts\Movement\Movement.cs" Line="87" Column="32" />
+      <File FileName="Assets\Scripts\Powerups\placement.cs" Line="101" Column="25" />
+      <File FileName="Assets\Scripts\Boss\bossAttack.cs" Line="105" Column="46" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Scripts" expanded="True">
-              <Node name="Boss" expanded="True">
-                <Node name="bossAttack.cs" selected="True" />
+              <Node name="Boss" expanded="True" />
+              <Node name="Powerups" expanded="True">
+                <Node name="placement.cs" selected="True" />
               </Node>
-              <Node name="Movement" expanded="True" />
             </Node>
           </Node>
         </State>

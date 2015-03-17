@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class follow : MonoBehaviour
+public class terrainCreator : MonoBehaviour
 {
 
 	Mesh mesh;

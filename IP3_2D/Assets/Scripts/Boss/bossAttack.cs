@@ -5,7 +5,7 @@ public class bossAttack : MonoBehaviour
 {
 	public enum attackTypes
 	{
-		wait,
+		defaultstate,
 		singleFire,
 		multipleShots,
 		spreadShot,
@@ -27,17 +27,20 @@ public class bossAttack : MonoBehaviour
 
 	//below variables deal with the number of projectiles for each attack type
 	public int singleShotCount = 1;
+	public int multipleShotCount = 5;
 	public int spreadShotCount = 15; //must be dividle by 3
 	public int superAttackShotCount = 30;
 
 	//below variables deal with the projectiles speed
 	public int singleShotSpeed = 1;
-	public int spreadShotSpeed = 15; //must be dividle by 3
+	public int multipleShotSpeed = 3;
+	public int spreadShotSpeed = 10; 
 	public int superAttackShotSpeed = 30;
 
 	//below variables deal with delay between projectiles
 	public int singleShotDelay = 1;
-	public int spreadShotDelay = 15; //must be dividle by 3
+	public int multipleShotDelay = 2;
+	public int spreadShotDelay = 2; 
 	public int superAttackShotDelay = 30;
 
 	float timeFrequency;
@@ -45,10 +48,12 @@ public class bossAttack : MonoBehaviour
 	private int shotCount = 0;
 	private int currentCount = 0;
 
+	Rigidbody2D currentAttack;
+	
 	// Use this for initialization
 	void Start ()
 	{
-		bossAttackTypes = attackTypes.singleFire;
+		bossAttackTypes = attackTypes.spreadShot;
 	}
 	
 	// Update is called once per frame
@@ -56,7 +61,7 @@ public class bossAttack : MonoBehaviour
 	{
 		Debug.Log ("attack type" + bossAttackTypes);
 		timeElapsed = Time.time;
-		//StartCoroutine (delayTimer (startGameDelay)); 
+		StartCoroutine (delayTimer (startGameDelay));
 	}
 
 	/// <summary>
@@ -65,98 +70,126 @@ public class bossAttack : MonoBehaviour
 	IEnumerator delayTimer (float delayTimer)
 	{
 		yield return new WaitForSeconds (delayTimer);
-		spawnObject (); //replace with CheckAttackTypes();
+		CheckAttackTypes (); //replace with CheckAttackTypes();
 	}
 
+	/// <summary>
+	/// Randomly picks which attack type to use
+	/// </summary>
 	void determineAttack ()
 	{
-		int health = bossHealth.getHealth;
-		float freq;
+		Rigidbody2D icePrefab = Resources.Load ("iceAttack") as Rigidbody2D;
+		Rigidbody2D plasmaPrefab = Resources.Load ("plasmaAttack") as Rigidbody2D;
+		Rigidbody2D firePrefab = Resources.Load ("fireAttack") as Rigidbody2D;
 
-		for (int i = health; i > 0;) {
-			freq = i * 0.01f;
-			//lower health, higher frequency
-		}
+		System.Collections.Generic.List<Rigidbody2D> attackList = new System.Collections.Generic.List<Rigidbody2D> ();
+		attackList.Add (icePrefab);
+		attackList.Add (plasmaPrefab);
+		attackList.Add (firePrefab);
+
+		int index = Random.Range (0, attackList.Count);
+		currentAttack = attackList [index];
 	}
 	
-	void spawnObject ()
+	void spawnObject (bool fire)
 	{
-		CheckAttackTypes ();
-
-		if (currentCount <= shotCount)
+		//if (currentCount >= shotCount)
+		//	currentCount = 0;
+		
+		if (currentCount <= shotCount && fire)
 		if (lastStateCheck + shotDelay < timeElapsed) {
-			
-			canFire = true;
+	
 			Vector3 bossPos = transform.position;
-			Vector3 fireSpawn = new Vector3 (bossPos.x - 1, bossPos.y, 0.0f);
-			
+			Vector3 fireSpawn = new Vector3 (bossPos.x - 1, bossPos.y , 0.0f);
+		
 			attackInstance = Instantiate (attackPrefab, fireSpawn, Quaternion.identity) as Rigidbody2D;
-			attackInstance.gravityScale = 0.0f;
-			attackInstance.velocity = (new Vector2 (-shotSpeed, 0));
+			attackInstance.transform.localScale = new Vector3(0.1f, 0.1f, 1);
+
+			if(bossAttackTypes == attackTypes.spreadShot)
+				shotCountAttack();
+			//else
+				//attackInstance.velocity = (new Vector2 (-shotSpeed, 0));
 			
 			currentCount++;
 			lastStateCheck = timeElapsed;
 		} else
 			canFire = false;
-
-		if (currentCount >= shotCount)
-			currentCount = 0;
 	}
-
+	
 	void CheckAttackTypes ()
 	{
-		if (canFire = true) {
 			switch (bossAttackTypes) {
 
 			case attackTypes.singleFire:
+				Debug.Log("singleFire");
 				shotCount = singleShotCount;
 				shotSpeed = singleShotSpeed;
 				shotDelay = singleShotDelay;
-				spawnObject();
+				spawnObject(true);
 				break;
 
 			case attackTypes.multipleShots:
-				shotCount = 5;
-
+			    shotCount = multipleShotCount;
+				shotSpeed = multipleShotSpeed;
+				shotDelay = multipleShotDelay;
+				spawnObject(true);
 				break;
 			case attackTypes.spreadShot:
-			//shotCount must be dividle by 3! 
-			//shotCount will fire projectiles straight, diagonally up and down 
-
-				float spreadDelay = 2.0f;
-				shotDelay = spreadDelay;
-
-				shotCount = 15;
-				float shotSpread = shotCount / 3;
-				float spreadShotSpeed = 3.0f;
+				shotCount = spreadShotCount;
 				shotSpeed = spreadShotSpeed;
-
-				if (shotCount < shotCount / 3) {
-					//transform.parent.Rotate(0,0, rot)
-					attackInstance.transform.rotation = Quaternion.Euler (new Vector3 (0, 0, 0));
-				}
-
-				if (shotCount < (shotSpread * 2) && shotCount > shotSpread) {
-					attackInstance.transform.rotation = Quaternion.Euler (new Vector3 (45, 0, 0));
-				}
-
-				if (shotCount > (shotSpread * 2) && shotCount <= 15) {
-					attackInstance.transform.rotation = Quaternion.Euler (new Vector3 (-45, 0, 0));
-					//attackInstance not instantiated yet (spawnObject needs to be called first)
-				}
-
-				spawnObject ();
+			    shotDelay = spreadShotDelay;
+				spawnObject (true);
 
 				break;
 			case attackTypes.superAttack:
 				shotCount = 20;
 
+				Vector2 pos = transform.position;
+				Vector2 screenPos = camera.WorldToScreenPoint(pos);
+				int offset = 10;
+
+				for(int i = 0; i <= 4; i++){
+
+					int width = (Screen.width / i) - offset;
+					int height = (Screen.height / i) - offset;
+
+					Vector2 newPos = camera.ScreenToWorldPoint(new Vector3(width, height, 0));
+					transform.position = newPos;
+
+					attackInstance.transform.position = new Vector3(-superAttackShotSpeed, 0, 0);
+				}
+
 				break;
 			default:
-
 				break;
-
-			}
 		}
+	}
+
+	void shotCountAttack(){
+		float shotSpread = shotCount / 3;
+
+		if (currentCount <= shotSpread) {
+			attackInstance.transform.Rotate(0, 0, 0);
+		}
+		
+		if (currentCount < (shotSpread * 2) && currentCount > shotSpread) {
+			attackInstance.transform.Rotate(0, 0, 45);
+			attackInstance.rotation = 45;
+			//attackInstance.transform.position -= transform.right * Time.deltaTime * shotSpeed;
+		}
+		
+		if (currentCount > (shotSpread * 2) && currentCount <= spreadShotCount) {
+			//attackInstance.transform.Rotate(0, 0, -45);
+			attackInstance.rotation = -45;
+			attackInstance.velocity = transform.right * spreadShotSpeed;
+		}
+
+		//attackInstance.velocity = -transform.TransformDirection(Vector3.right) * shotSpeed;
+		attackInstance.velocity = -transform.right * spreadShotSpeed;
+
+		//attackInstance.transform.rigidbody2D.AddForce (-transform.forward * Time.deltaTime * shotSpeed, ForceMode2D.Impulse);
+		//attackInstance.rigidbody2D.velocity = -transform.forward * Time.deltaTime * spreadShotSpeed;
+		//attackInstance.transform.position = -transform.right * Time.deltaTime * spreadShotSpeed;
+		//attackInstance.rigidbody2D.AddForce(attackInstance.transform.right * Time.deltaTime * spreadShotSpeed);
 	}
 }

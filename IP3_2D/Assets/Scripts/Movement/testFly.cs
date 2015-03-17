@@ -35,7 +35,6 @@ public class testFly : MonoBehaviour
 		}
 	}
 
-	
 	void FixedUpdate ()
 	{
 		Frame frame = m_leapController.Frame ();
@@ -64,11 +63,7 @@ public class testFly : MonoBehaviour
 			//Time.timeScale = 0.0f;
 			//not connected -- pause game -- await connection
 		}
-
-	
-		//if we have 1 hand active
-
-
+		
 			// if closed fist, then stop the plane and slowly go backwards.
 //			if (frame.Fingers.Count < 3) {
 //				transform.parent.rigidbody.velocity = new Vector3 (speed, 0, 0);

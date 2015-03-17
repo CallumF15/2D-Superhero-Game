@@ -2,9 +2,7 @@
 using System.Collections;
 
 public class healthbar : MonoBehaviour {
-
-	int health = 10;
-
+	
 	int width, height;
 
 	Texture healthTexture;
@@ -18,6 +16,7 @@ public class healthbar : MonoBehaviour {
 		height = Screen.height / 4;
 
 		healthTexture =  Resources.Load("healthBar") as Texture2D;
+		int health = playerHealth.getHealth;
 	}
 	
 	// Update is called once per frame

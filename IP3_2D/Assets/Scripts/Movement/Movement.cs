@@ -18,15 +18,12 @@ public class Movement : MonoBehaviour
 	public float jumpPower = 1.0f;
 	public float fallPower = 1.0f;
 	public float rotationSpeed = 1.0f;
-
-	[HideInInspector]
-	public bool getfaceRight { get; set; }
-
+	
 	[HideInInspector]
 	public float getPitchAngle { get; set; }
 
 	[HideInInspector]
-	private float speed = 0.3f;
+	private float speed = .3f;
 	
 	/// <summary>
 	/// Resets the rotation back to 0 
@@ -35,7 +32,7 @@ public class Movement : MonoBehaviour
 	void resetRotation() 
 	{
 		float objZrot = transform.eulerAngles.z;
-		float tParam = 0.5f;
+		float tParam = .3f;
 
 		if (objZrot != 0) 
 		if (objZrot >= 0 && objZrot <= 100) {
@@ -43,7 +40,7 @@ public class Movement : MonoBehaviour
 			float value = Mathf.Lerp(transform.rotation.z, 0, tParam);
 			transform.parent.rotation = Quaternion.Euler(new Vector3(0,0, value));
 		}
-		else if (objZrot >= 300 && objZrot <= 360) {
+		else if (objZrot >= 270 && objZrot <= 360) {
 			tParam = Time.deltaTime * speed;
 			float value = Mathf.Lerp(transform.rotation.z, 0, tParam);
 			transform.parent.rotation = Quaternion.Euler(new Vector3(0,0, value));
@@ -53,22 +50,9 @@ public class Movement : MonoBehaviour
 	/// <summary>
 	/// Runs the appropriate code depending on the type of movement
 	/// </summary>
-	public void CheckMovementType (MovementType type, bool faceRight)
+	public void CheckMovementType (MovementType type)
 	{
-		//Change 2D face direction to right/left
-		getfaceRight = faceRight;
-
 		Debug.Log ("Type: " + type);
-		
-		if (faceRight) { 
-			Debug.Log ("FACERIGHT");
-			transform.localScale = new Vector3 (1f, 1f, 1f); 
-		} else {
-			Debug.Log ("FACELEFT");
-			transform.localScale = new Vector3 (-1f, 1f, 1f);
-		}
-		
-		//Movement related below (will make more complex later):
 
 		switch (type) {
 
@@ -80,12 +64,9 @@ public class Movement : MonoBehaviour
 		//Flying code below:
 		
 		case MovementType.fly: 
-			float rot = getPitchAngle * Time.deltaTime * rotationSpeed;
-
-			if (faceRight) {
+				float rot = getPitchAngle * Time.deltaTime * rotationSpeed;
 				transform.parent.Rotate(0,0, rot);
 				transform.parent.position += transform.right * Time.deltaTime * flySpeed;
-			}
 			break;
 
 		case MovementType.flyAscend:
@@ -100,7 +81,6 @@ public class Movement : MonoBehaviour
 			transform.parent.rigidbody.velocity = new Vector3 (0, -descentSpeed, 0);
 			break;
 		case MovementType.fire:
-			//fire code goes here
 
 			break;
 

@@ -6,6 +6,7 @@ public class move : MonoBehaviour
 
 	public float Speed = 3.0f;
 	public float delayTime = 1.0f;
+	public float offsetX = 30;
 	Vector3 bossPos, playerPos;
 
 		
@@ -26,7 +27,7 @@ public class move : MonoBehaviour
 		//boss position on Y axis has to be somewhat near the players slight delay
 		float val = trackPlayer ();
 
-		bossPos.x = playerPos.x + 15;
+		bossPos.x = playerPos.x + offsetX;
 		bossPos.y = val;
 		transform.position = bossPos;
 	}
