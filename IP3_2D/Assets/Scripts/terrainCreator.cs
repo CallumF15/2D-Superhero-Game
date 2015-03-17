@@ -8,7 +8,6 @@ public class terrainCreator : MonoBehaviour
 
 	Mesh mesh;
 	List<Vector3> meshPos = new List<Vector3> ();
-	Camera camera;
 	float highestYvalue, lowestYvalue;
 	bool isVertice;
 	public bool lastVertice;

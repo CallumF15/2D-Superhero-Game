@@ -16,9 +16,7 @@ public class Spawn : MonoBehaviour {
 
 			Instantiate(GameObject.CreatePrimitive(PrimitiveType.Cube), new Vector3(count,0,0), Quaternion.identity);
 		}
-
-
-		GameObject object2;
+		
 		GameObject[] go = UnityEngine.GameObject.FindGameObjectsWithTag ("cubes");
 
 

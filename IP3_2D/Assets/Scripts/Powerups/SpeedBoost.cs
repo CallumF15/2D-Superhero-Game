@@ -3,20 +3,20 @@ using System.Collections;
 
 public class SpeedBoost{
 
-	public float speed;
-	public float speedMultipliers;
-	public float durations; //may change to time?
+	public float Speed;
+	public float SpeedMultipliers;
+	public float Durations; //may change to time?
 	
 	public SpeedBoost(float speed, float speedmultiplier, float duration)
 	{
-		speed = speed;
-		speedmultiplier = speedmultiplier;
-		durations = durations;
+		Speed = speed;
+		SpeedMultipliers = speedmultiplier;
+		Durations = duration;
 	}
 	
 	void SpecialEffects(){
 
 		GameObject obj =  GameObject.FindGameObjectWithTag ("Player");
-		obj.transform.rigidbody.velocity = new Vector3 (speed, 0, 0);
+		obj.transform.rigidbody.velocity = new Vector3 (Speed, 0, 0);
 	}
 }

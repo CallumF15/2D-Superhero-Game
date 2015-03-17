@@ -4,11 +4,8 @@ using System.Collections;
 public class Score : MonoBehaviour {
 
 	public GUIText message;
-
-
 	private int score = 0;
-
-
+	
 	// Use this for initialization
 	void Start () {
 		message.text = "";
@@ -16,13 +13,19 @@ public class Score : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		message.text = "Score: " + score;
+	}
+
+	void OnCollisionEnter(Collision hit){
+		Debug.Log ("COLLISION TEST");
+
+		if (hit.gameObject.tag == "cubes") {
+			calculateScore();
+			Destroy (hit.gameObject);
+		}
 	}
 
 	void calculateScore(){
-
-		//if player picks up coin score + 1;
-
-		message.text = "Score: " + score;
+		score = score + 1;
 	}
 }

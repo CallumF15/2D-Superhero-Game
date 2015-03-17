@@ -5,10 +5,16 @@ using System.Collections.Generic;
 
 public class placement : MonoBehaviour
 {
-	GameObject player, powerObject;
+	GameObject powerObject, player;
+<<<<<<< HEAD
+	List<GameObject> powerArray;
+=======
+>>>>>>> origin/master
+
 	public float distanceBetweenPowerup = 30.0f;
+	public float powerupOffset = 50.0f;
+	public float offsetY = 5.0f;
 	private int numberOfPowerups = 5;
-	private int Angle = 45;
 
 	List<int> aList;
 	List<Rigidbody2D> powerupList;
@@ -17,21 +23,20 @@ public class placement : MonoBehaviour
 	float lastStateCheck = 0f;
 	public float delay = 5.0f;
 
-	private float currentPosY, prevPosY;
-	private bool canSpawn;
+	private float currentPosY, prevPosY, currentPosX, prevPosX;
 
 	// Use this for initialization
 	void Start ()
 	{
 		aList = new List<int> ();
 		powerupList = new List<Rigidbody2D> ();
+		player = GameObject.FindGameObjectWithTag ("Player");
 		//getPrefabs ();
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		//Need to put a delay on this
 		timeElapsed = Time.time;
 		if (lastStateCheck + delay < timeElapsed) {
 			powerupSelector ();
@@ -75,22 +80,26 @@ public class placement : MonoBehaviour
 		int lastValue = 0;
 		int heightestValue = 0;
 		int lowestValue = 0;
+		int select = 0;
 
 		foreach (var x in q) {
-			Debug.Log ("Value: " + x.Value + " Count: " + x.Count);
+			//Debug.Log ("Value: " + x.Value + " Count: " + x.Count);
 
 			if(x.Count > lastValue)
 			{
-				if(x.Count > heightestValue)
+				if(x.Count > heightestValue){
 					heightestValue = x.Count;
+				}
 
-				if(x.Count < lowestValue)
-					lowestValue = x.Count; 
+				if(x.Count < lowestValue){
+					lowestValue = x.Count;
+					select = x.Value;
+				}
 
 				lastValue = x.Count;
 			}
 		}
-		spawnPowerup (lowestValue);
+		spawnPowerup (select);
 	}
 
 	/// <summary>
@@ -98,9 +107,34 @@ public class placement : MonoBehaviour
 	/// </summary>
 	public void spawnPowerup(int index)
 	{
-		Rigidbody2D selectedObject = powerupList [index];
+		//Rigidbody2D selectedObject = powerupList [index];
+<<<<<<< HEAD
+		currentPosX = player.transform.position.x;
 		Vector3 position = calcPowerupPosition ();
-		Instantiate (selectedObject, position, Quaternion.identity);
+
+		if (currentPosX > prevPosX) {
+			GameObject blah =  Instantiate (GameObject.CreatePrimitive (PrimitiveType.Cube), position, Quaternion.identity) as GameObject;
+			blah.AddComponent<Rigidbody>();
+			blah.rigidbody.useGravity = false;
+			blah.tag = "cubes";
+		}
+		prevPosX = currentPosX;
+	}
+
+	void despawnPowerup()
+	{
+		for (int i = 0; i < powerArray.Count; i++) {
+			float posX = player.transform.position.x;
+			float objectPosX = powerArray[i].transform.position.x;
+
+			if(posX > objectPosX){
+				Destroy(powerArray[i]);
+			}
+		}
+=======
+		Vector3 position = calcPowerupPosition ();
+		Instantiate (GameObject.CreatePrimitive(PrimitiveType.Cube), position, Quaternion.identity);
+>>>>>>> origin/master
 	}
 
 	/// <summary>
@@ -108,65 +142,99 @@ public class placement : MonoBehaviour
 	/// </summary>
 	Vector3 calcPowerupPosition ()
 	{
+		player = GameObject.FindGameObjectWithTag ("Player");
 		Vector3 powerupPosition = new Vector3 ();
+<<<<<<< HEAD
+=======
+
 		float distance = calculateDistance ();
+>>>>>>> origin/master
 		playerHeight heightLimit = new playerHeight ();
 		float height = heightLimit.playerHeightLimit;
+		Debug.Log ("max height limit" + height);
 		float groundLevel = 0;
-		float offsetY = 20f;
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/master
 
 		currentPosY = player.transform.position.y;
+		Debug.Log ("posY " + currentPosY);
 
-		if (currentPosY > prevPosY) {
-			if (currentPosY < height - offsetY) {
+<<<<<<< HEAD
+			if (currentPosY > prevPosY && currentPosY <= height - 10.0f) { 	//we are going up the way
+				if (lastStateCheck + delay < timeElapsed) { 
+					Debug.Log ("up way");
+					//if going up for 5 seconds, activate power-up spawn
+					powerupPosition.y = currentPosY + 5;
+					lastStateCheck = timeElapsed;
+					//prevPosY = currentPosY;
+				}
+			}
+
+			if (currentPosY < prevPosY && currentPosY >= groundLevel + 10.0f) {		//we are going down the way
+				if (lastStateCheck + delay < timeElapsed) { 
+					Debug.Log ("down way");
+					//if going up for 5 seconds, activate power-up spawn
+					powerupPosition.y = currentPosY - 5;
+					lastStateCheck = timeElapsed;
+					//prevPosY = currentPosY;
+				}
+			}
+
+			if (currentPosY >= (height - (offsetY * 2)) && currentPosY < height - offsetY) {
 				//below max height
+				Debug.Log ("max height");
 				powerupPosition.y = currentPosY - offsetY;
 			}
 
-			//note: need to get time elapsed going up & down
-			//we are going up the way
-
+			if (currentPosY >= groundLevel + offsetY && currentPosY < groundLevel + offsetY * 2) {
+				//above min height
+				Debug.Log ("min height");
+				powerupPosition.y = currentPosY + offsetY;
+			}
+=======
+		if (currentPosY > prevPosY && currentPosY < height - 10.0f) { 	//we are going up the way
 			if (lastStateCheck + delay < timeElapsed) { 
+				Debug.Log("up way");
 				//if going up for 5 seconds, activate power-up spawn
+				powerupPosition.y = currentPosY + 5;
 				canSpawn = true;
 				lastStateCheck = timeElapsed;
 				prevPosY = currentPosY;
-			}
+			} else
+				canSpawn = false;
 		}
 
-		if (currentPosY < prevPosY) {	
-			if (currentPosY > groundLevel + offsetY) {
-				//above min height
-				powerupPosition.y = currentPosY + offsetY;
-			}
-			//we are going down the way
-			powerupPosition.y = currentPosY + 10;
+		if (currentPosY < prevPosY && currentPosY > groundLevel + 10.0f) {		//we are going down the way
+			if (lastStateCheck + delay < timeElapsed) { 
+				Debug.Log("down way");
+				//if going up for 5 seconds, activate power-up spawn
+				powerupPosition.y = currentPosY - 5;
+				canSpawn = true;
+				lastStateCheck = timeElapsed;
+				prevPosY = currentPosY;
+			}else
+				canSpawn = false;
 		}
 
-
-		if (canSpawn == true) {
-			//spawn prefab
-			//call method pass position Vector3 parameter
+		if (currentPosY > height - offsetY * 2 && currentPosY < height - offsetY) {
+			//below max height
+			Debug.Log("max height");
+			powerupPosition.y = currentPosY - offsetY;
 		}
 
+		if (currentPosY > groundLevel + offsetY && currentPosY < groundLevel + offsetY * 2) {
+			//above min height
+			Debug.Log("min height");
+			powerupPosition.y = currentPosY + offsetY;
+		}
+>>>>>>> origin/master
 
+		powerupPosition.x = player.transform.position.x + powerupOffset;
+		powerupPosition.z  = 0;
 		prevPosY = currentPosY;
-
 		return powerupPosition;
 	}
-
-	/// <summary>
-	/// Calculates the distance per second
-	/// </summary>
-	float calculateDistance ()
-	{
-		Movement blah = new Movement ();
-		float speed = blah.flySpeed;
-		float distance = speed * Time.deltaTime;
-		return distance;
-	}
-
-
 }
 

@@ -9,7 +9,6 @@ public class cursor : MonoBehaviour {
 	GameObject cursorObject;
 	HandList hList;
 	Camera camera;
-	int count = 1;
 	
 	// Use this for initialization
 	void Start () {

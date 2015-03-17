@@ -6,17 +6,22 @@ public class playerHeight : MonoBehaviour {
 	GameObject player;
 	public GUIText message;
 
-	public float playerHeightLimit = 25.0f;
+	public float playerHeightLimit = 100.0f;
 	public float timeRemaining = 11.0f;
 	private float timeLeft;
-
+	
 	float currentPosX, prevPosX;
 
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
-		message.text = "";
 		timeLeft = timeRemaining;
+<<<<<<< HEAD
+		prevPosX = -16;
+=======
+		currentPosX = 1;
+		prevPosX = 0;
+>>>>>>> origin/master
 	}
 	
 	// Update is called once per frame
@@ -25,8 +30,15 @@ public class playerHeight : MonoBehaviour {
 	}
 
 	void limitHeight(){
+		Debug.Log ("currentPosX " + currentPosX);
+<<<<<<< HEAD
+		Debug.Log ("prevPosX " + prevPosX);
+
+=======
+>>>>>>> origin/master
 
 		currentPosX = player.transform.position.x;
+
 		float playerHeight = player.transform.position.y;
 
 		if (playerHeight >= playerHeightLimit) {
@@ -40,10 +52,24 @@ public class playerHeight : MonoBehaviour {
 			WrongDirectionMessage ();
 		}
 
-		if (prevPosX < currentPosX)
-			timeRemaining = timeLeft;
+		if (playerHeight <= 0) {
+			Vector3 playerPos = player.transform.position;
+			playerPos.y = 0;
+			player.transform.position = playerPos;
+		}
 
-		//Debug.Log ("prevX " + prevPosX);
+
+
+		if (prevPosX < currentPosX) {
+			timeRemaining = timeLeft;
+			message.text = "";
+		}
+
+<<<<<<< HEAD
+	
+=======
+		Debug.Log ("prevPosX " + prevPosX);
+>>>>>>> origin/master
 		prevPosX = currentPosX;
 	}
 
@@ -52,8 +78,8 @@ public class playerHeight : MonoBehaviour {
 		timeRemaining -= Time.deltaTime;
 		int timeLeft = (int)timeRemaining;
 
-		message.text = "Wrong direction! " + timeLeft.ToString() + " seconds to turn round"; 
-		Debug.Log (message.text);
+		Debug.Log ("message hitttt");
+		message.text = "Wrong direction! " + timeLeft.ToString() + " seconds to turn round"; ;
 
 		if (timeRemaining < 0) {
 			message.text = "GAME OVER!";

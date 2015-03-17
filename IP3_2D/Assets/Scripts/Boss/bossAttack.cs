@@ -44,7 +44,6 @@ public class bossAttack : MonoBehaviour
 	public int superAttackShotDelay = 30;
 
 	float timeFrequency;
-	bool canFire;
 	private int shotCount = 0;
 	private int currentCount = 0;
 
@@ -112,8 +111,7 @@ public class bossAttack : MonoBehaviour
 			
 			currentCount++;
 			lastStateCheck = timeElapsed;
-		} else
-			canFire = false;
+		}
 	}
 	
 	void CheckAttackTypes ()

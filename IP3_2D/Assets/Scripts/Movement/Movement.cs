@@ -14,10 +14,10 @@ public enum MovementType
 
 public class Movement : MonoBehaviour
 {
-	public float flySpeed = 15.0f;
+	public float flySpeed = 17.0f;
 	public float jumpPower = 1.0f;
 	public float fallPower = 1.0f;
-	public float rotationSpeed = 1.0f;
+	public float rotationSpeed = 1.5f;
 	
 	[HideInInspector]
 	public float getPitchAngle { get; set; }

@@ -17,7 +17,6 @@ public class LeapGesture : MonoBehaviour
 
 	private Movement movement;
 	private float fixedAngle = 90.0f;
-	public float rotationSpeed = 0.5f;
 
 	// Use this for initialization
 	void Start ()
@@ -54,7 +53,7 @@ public class LeapGesture : MonoBehaviour
 		yawDegrees = yaw * Mathf.Rad2Deg;
 		rollDegrees = roll * Mathf.Rad2Deg;;
 
-	    Debug.Log ("Pitch: " + pitchDegrees);
+	    //Debug.Log ("Pitch: " + pitchDegrees);
 		//Debug.Log ("Yaw: " + yawDegrees);
 		//Debug.Log ("Roll: " + rollDegrees);
 	}
@@ -97,7 +96,7 @@ public class LeapGesture : MonoBehaviour
 				type = MovementType.fly;
 
 				if (pitchDegrees <= fixedAngle && pitchDegrees >= -fixedAngle) {
-					movement.getPitchAngle = pitchDegrees * rotationSpeed;
+					movement.getPitchAngle = pitchDegrees;
 					movement.CheckMovementType (type);
 				}
 			}
