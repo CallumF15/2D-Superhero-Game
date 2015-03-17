@@ -37,10 +37,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>C:\Program Files %28x86%29\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>D:\Software\UNITY\Editor\Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>C:\Program Files %28x86%29\Unity\Editor\Data\Managed\UnityEditor.dll</HintPath>
+      <HintPath>D:\Software\UNITY\Editor\Data\Managed\UnityEditor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -95,12 +95,11 @@
     <Compile Include="Assets\Scripts\World\cannonball.cs" />
     <Compile Include="Assets\Scripts\healthbar.cs" />
     <Compile Include="Assets\Scripts\terrainCreator.cs" />
-    <Compile Include="Assets\hit.cs" />
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:\Program Files %28x86%29\Unity\Editor\Data\UnityExtensions\Unity\GUISystem\4.6.2\UnityEngine.UI.dll</HintPath>
+      <HintPath>D:\Software\UNITY\Editor\Data\UnityExtensions\Unity\GUISystem\4.6.2\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="LeapCSharp.NET3.5">
-      <HintPath>C:\Users\Callum\Documents\GitHub\IP3_2D_CF\IP3_2D\Assets\LeapCSharp.NET3.5.dll</HintPath>
+      <HintPath>D:\Documents\GitHub\IP3_2D_CF\IP3_2D\Assets\LeapCSharp.NET3.5.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -54,7 +54,7 @@ public class LeapGesture : MonoBehaviour
 		yawDegrees = yaw * Mathf.Rad2Deg;
 		rollDegrees = roll * Mathf.Rad2Deg;;
 
-	    Debug.Log ("Pitch: " + pitchDegrees);
+	    //Debug.Log ("Pitch: " + pitchDegrees);
 		//Debug.Log ("Yaw: " + yawDegrees);
 		//Debug.Log ("Roll: " + rollDegrees);
 	}
