@@ -1,15 +1,21 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
 <<<<<<< HEAD
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Movement\playerHeight.cs">
     <Files>
       <File FileName="Assets\Scripts\Powerups\placement.cs" Line="114" Column="38" />
       <File FileName="Assets\Scripts\Movement\playerHeight.cs" Line="57" Column="22" />
 =======
+=======
+>>>>>>> origin/master
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Powerups\placement.cs">
     <Files>
       <File FileName="Assets\Scripts\Powerups\placement.cs" Line="130" Column="61" />
       <File FileName="Assets\Scripts\Movement\playerHeight.cs" Line="48" Column="38" />
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
     </Files>
     <Pads>

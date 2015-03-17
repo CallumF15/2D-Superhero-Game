@@ -17,7 +17,12 @@ public class playerHeight : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		timeLeft = timeRemaining;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		prevPosX = -16;
+=======
+		currentPosX = 1;
+		prevPosX = 0;
+>>>>>>> origin/master
 =======
 		currentPosX = 1;
 		prevPosX = 0;
@@ -32,8 +37,11 @@ public class playerHeight : MonoBehaviour {
 	void limitHeight(){
 		Debug.Log ("currentPosX " + currentPosX);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		Debug.Log ("prevPosX " + prevPosX);
 
+=======
+>>>>>>> origin/master
 =======
 >>>>>>> origin/master
 
@@ -66,7 +74,11 @@ public class playerHeight : MonoBehaviour {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+		Debug.Log ("prevPosX " + prevPosX);
+>>>>>>> origin/master
 =======
 		Debug.Log ("prevPosX " + prevPosX);
 >>>>>>> origin/master

@@ -7,7 +7,10 @@ public class placement : MonoBehaviour
 {
 	GameObject powerObject, player;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	List<GameObject> powerArray;
+=======
+>>>>>>> origin/master
 =======
 >>>>>>> origin/master
 
@@ -109,6 +112,7 @@ public class placement : MonoBehaviour
 	{
 		//Rigidbody2D selectedObject = powerupList [index];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		currentPosX = player.transform.position.x;
 		Vector3 position = calcPowerupPosition ();
 
@@ -135,6 +139,10 @@ public class placement : MonoBehaviour
 		Vector3 position = calcPowerupPosition ();
 		Instantiate (GameObject.CreatePrimitive(PrimitiveType.Cube), position, Quaternion.identity);
 >>>>>>> origin/master
+=======
+		Vector3 position = calcPowerupPosition ();
+		Instantiate (GameObject.CreatePrimitive(PrimitiveType.Cube), position, Quaternion.identity);
+>>>>>>> origin/master
 	}
 
 	/// <summary>
@@ -145,7 +153,10 @@ public class placement : MonoBehaviour
 		player = GameObject.FindGameObjectWithTag ("Player");
 		Vector3 powerupPosition = new Vector3 ();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/master
 
 		float distance = calculateDistance ();
 >>>>>>> origin/master
@@ -154,12 +165,16 @@ public class placement : MonoBehaviour
 		Debug.Log ("max height limit" + height);
 		float groundLevel = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/master
 
 >>>>>>> origin/master
 
 		currentPosY = player.transform.position.y;
 		Debug.Log ("posY " + currentPosY);
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 			if (currentPosY > prevPosY && currentPosY <= height - 10.0f) { 	//we are going up the way
@@ -194,6 +209,9 @@ public class placement : MonoBehaviour
 				powerupPosition.y = currentPosY + offsetY;
 			}
 =======
+=======
+
+>>>>>>> origin/master
 		if (currentPosY > prevPosY && currentPosY < height - 10.0f) { 	//we are going up the way
 			if (lastStateCheck + delay < timeElapsed) { 
 				Debug.Log("up way");
@@ -229,6 +247,9 @@ public class placement : MonoBehaviour
 			Debug.Log("min height");
 			powerupPosition.y = currentPosY + offsetY;
 		}
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
 
 		powerupPosition.x = player.transform.position.x + powerupOffset;
