@@ -6,13 +6,7 @@ using System.Collections.Generic;
 public class placement : MonoBehaviour
 {
 	GameObject powerObject, player;
-<<<<<<< HEAD
-<<<<<<< HEAD
 	List<GameObject> powerArray;
-=======
->>>>>>> origin/master
-=======
->>>>>>> origin/master
 
 	public float distanceBetweenPowerup = 30.0f;
 	public float powerupOffset = 50.0f;
@@ -111,8 +105,6 @@ public class placement : MonoBehaviour
 	public void spawnPowerup(int index)
 	{
 		//Rigidbody2D selectedObject = powerupList [index];
-<<<<<<< HEAD
-<<<<<<< HEAD
 		currentPosX = player.transform.position.x;
 		Vector3 position = calcPowerupPosition ();
 
@@ -135,14 +127,8 @@ public class placement : MonoBehaviour
 				Destroy(powerArray[i]);
 			}
 		}
-=======
 		Vector3 position = calcPowerupPosition ();
 		Instantiate (GameObject.CreatePrimitive(PrimitiveType.Cube), position, Quaternion.identity);
->>>>>>> origin/master
-=======
-		Vector3 position = calcPowerupPosition ();
-		Instantiate (GameObject.CreatePrimitive(PrimitiveType.Cube), position, Quaternion.identity);
->>>>>>> origin/master
 	}
 
 	/// <summary>
@@ -152,31 +138,15 @@ public class placement : MonoBehaviour
 	{
 		player = GameObject.FindGameObjectWithTag ("Player");
 		Vector3 powerupPosition = new Vector3 ();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> origin/master
-
-		float distance = calculateDistance ();
->>>>>>> origin/master
 		playerHeight heightLimit = new playerHeight ();
 		float height = heightLimit.playerHeightLimit;
 		Debug.Log ("max height limit" + height);
 		float groundLevel = 0;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> origin/master
 
->>>>>>> origin/master
 
 		currentPosY = player.transform.position.y;
 		Debug.Log ("posY " + currentPosY);
-<<<<<<< HEAD
 
-<<<<<<< HEAD
 			if (currentPosY > prevPosY && currentPosY <= height - 10.0f) { 	//we are going up the way
 				if (lastStateCheck + delay < timeElapsed) { 
 					Debug.Log ("up way");
@@ -208,20 +178,15 @@ public class placement : MonoBehaviour
 				Debug.Log ("min height");
 				powerupPosition.y = currentPosY + offsetY;
 			}
-=======
-=======
 
->>>>>>> origin/master
 		if (currentPosY > prevPosY && currentPosY < height - 10.0f) { 	//we are going up the way
 			if (lastStateCheck + delay < timeElapsed) { 
 				Debug.Log("up way");
 				//if going up for 5 seconds, activate power-up spawn
 				powerupPosition.y = currentPosY + 5;
-				canSpawn = true;
 				lastStateCheck = timeElapsed;
 				prevPosY = currentPosY;
-			} else
-				canSpawn = false;
+			}
 		}
 
 		if (currentPosY < prevPosY && currentPosY > groundLevel + 10.0f) {		//we are going down the way
@@ -229,11 +194,9 @@ public class placement : MonoBehaviour
 				Debug.Log("down way");
 				//if going up for 5 seconds, activate power-up spawn
 				powerupPosition.y = currentPosY - 5;
-				canSpawn = true;
 				lastStateCheck = timeElapsed;
 				prevPosY = currentPosY;
-			}else
-				canSpawn = false;
+			}
 		}
 
 		if (currentPosY > height - offsetY * 2 && currentPosY < height - offsetY) {
@@ -247,10 +210,6 @@ public class placement : MonoBehaviour
 			Debug.Log("min height");
 			powerupPosition.y = currentPosY + offsetY;
 		}
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
 
 		powerupPosition.x = player.transform.position.x + powerupOffset;
 		powerupPosition.z  = 0;

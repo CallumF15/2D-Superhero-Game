@@ -16,17 +16,8 @@ public class playerHeight : MonoBehaviour {
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		timeLeft = timeRemaining;
-<<<<<<< HEAD
-<<<<<<< HEAD
 		prevPosX = -16;
-=======
 		currentPosX = 1;
-		prevPosX = 0;
->>>>>>> origin/master
-=======
-		currentPosX = 1;
-		prevPosX = 0;
->>>>>>> origin/master
 	}
 	
 	// Update is called once per frame
@@ -36,14 +27,7 @@ public class playerHeight : MonoBehaviour {
 
 	void limitHeight(){
 		Debug.Log ("currentPosX " + currentPosX);
-<<<<<<< HEAD
-<<<<<<< HEAD
 		Debug.Log ("prevPosX " + prevPosX);
-
-=======
->>>>>>> origin/master
-=======
->>>>>>> origin/master
 
 		currentPosX = player.transform.position.x;
 
@@ -73,15 +57,6 @@ public class playerHeight : MonoBehaviour {
 			message.text = "";
 		}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-	
-=======
-		Debug.Log ("prevPosX " + prevPosX);
->>>>>>> origin/master
-=======
-		Debug.Log ("prevPosX " + prevPosX);
->>>>>>> origin/master
 		prevPosX = currentPosX;
 	}
 
