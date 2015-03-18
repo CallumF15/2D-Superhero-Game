@@ -11,13 +11,12 @@ public class placement : MonoBehaviour
 	public float distanceBetweenPowerup = 30.0f;
 	public float powerupOffset = 50.0f;
 	public float offsetY = 5.0f;
-	private int numberOfPowerups = 5;
 
 	List<int> aList;
-	List<Rigidbody2D> powerupList;
 
 	float timeElapsed;
 	float lastStateCheck = 0f;
+	float lastStateCheck2 = 0f;
 	public float delay = 5.0f;
 
 	private float currentPosY, prevPosY, currentPosX, prevPosX;
@@ -26,38 +25,53 @@ public class placement : MonoBehaviour
 	void Start ()
 	{
 		aList = new List<int> ();
-		powerupList = new List<Rigidbody2D> ();
+		powerArray = new List<GameObject> ();
 		player = GameObject.FindGameObjectWithTag ("Player");
-		//getPrefabs ();
+		getPrefabs ();
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
 		timeElapsed = Time.time;
-		if (lastStateCheck + delay < timeElapsed) {
-			powerupSelector ();
-			lastStateCheck = timeElapsed;
+		currentPosX = player.transform.position.x;
+
+
+		
+		if (currentPosX > prevPosX) {
+			if (lastStateCheck + delay < timeElapsed) {
+				powerupSelector ();
+				lastStateCheck = timeElapsed;
+			}
+
+			if(lastStateCheck2 + 1 < timeElapsed){
+				int index = Random.Range (0, powerArray.Count );
+				aList.Add (index);
+				lastStateCheck2 = timeElapsed;
+
+			}
+
+
+			prevPosX = currentPosX;
 		}
 	}
 
 	void getPrefabs ()
 	{
+		GameObject coinPickup = Resources.Load ("Powerups/coin") as GameObject;
+		GameObject healthPickup = Resources.Load ("Powerups/Health") as GameObject;
+		GameObject crystalPickup = Resources.Load ("Powerups/CrystalGreen") as GameObject;
+		GameObject shieldPickup = Resources.Load ("Powerups/Health") as GameObject;
 
-		//Rigidbody2D healthPickup = Resources.Load ("Powerups/Health") as Rigidbody2D;
-		GameObject healthPickup = Resources.Load ("Health") as GameObject;
+//		coinPickup.transform.rotation = Quaternion.Euler (new Vector3 (0, 90, 90));
+//		healthPickup.transform.rotation = Quaternion.Euler (new Vector3 (90, 0, 0));
+//		crystalPickup.transform.rotation = Quaternion.Euler (new Vector3 (270,0, 0));
+//		shieldPickup.transform.rotation = Quaternion.Euler (new Vector3 (270, 0, 0));
 	
-		if (healthPickup == null)
-			Debug.Log ("NULL");
-		else
-			Debug.Log ("NOT NULL");
-
-		//Rigidbody2D shieldPickup = Resources.Load ("IP3_2D_CF/IP3_2D/Assets/Models/Powerups/Shield") as Rigidbody2D;
-		//Rigidbody2D healthPickup = Resources.Load ("healthpickup");
-
-		GameObject blah = Instantiate (healthPickup, new Vector3 (0, 0, 0), Quaternion.identity) as GameObject;
-		//Rigidbody2D blah = Instantiate(healthPickup, new Vector3(0,0,0), Quaternion.identity) as Rigidbody2D;
-
+		powerArray.Add (coinPickup);
+		powerArray.Add (healthPickup);
+		powerArray.Add (crystalPickup);
+		powerArray.Add (shieldPickup);
 	}
 	
 	/// <summary>
@@ -65,8 +79,7 @@ public class placement : MonoBehaviour
 	/// </summary>
 	void powerupSelector ()
 	{
-		int index = Random.Range (0, numberOfPowerups - 1);
-		aList.Add (index);
+
 
 		var q = from x in aList
 			group x by x into g
@@ -76,45 +89,52 @@ public class placement : MonoBehaviour
 
 		int lastValue = 0;
 		int heightestValue = 0;
-		int lowestValue = 0;
+		int lowestValue = 1;
 		int select = 0;
 
-		foreach (var x in q) {
-			//Debug.Log ("Value: " + x.Value + " Count: " + x.Count);
+		//coin 0
+		//health 1
+		//crystal 2
+		//shield 3
 
-			if(x.Count > lastValue)
-			{
+		foreach (var x in q) {
+			Debug.Log ("Value: " + x.Value + " Count: " + x.Count);
+
+				Debug.Log("heightVal " + heightestValue);
 				if(x.Count > heightestValue){
 					heightestValue = x.Count;
+					//select = x.Value;
 				}
+				
+				Debug.Log("lowValu " + lowestValue);
 
-				if(x.Count < lowestValue){
+			if(lowestValue < x.Count ){
 					lowestValue = x.Count;
 					select = x.Value;
+				Debug.Log("select " + x.Value);
 				}
-
-				lastValue = x.Count;
-			}
 		}
+		//Debug.Log("select val " + select);
 		spawnPowerup (select);
 	}
+
 
 	/// <summary>
 	/// Spawns the powerup.
 	/// </summary>
 	public void spawnPowerup(int index)
 	{
-		//Rigidbody2D selectedObject = powerupList [index];
+		GameObject selectedObject = powerArray [index];
 		currentPosX = player.transform.position.x;
 		Vector3 position = calcPowerupPosition ();
 
-		if (currentPosX > prevPosX) {
-			GameObject blah =  Instantiate (GameObject.CreatePrimitive (PrimitiveType.Cube), position, Quaternion.identity) as GameObject;
-			blah.AddComponent<Rigidbody>();
-			blah.rigidbody.useGravity = false;
+
+			//GameObject blah =  Instantiate (GameObject.CreatePrimitive (PrimitiveType.Cube), position, Quaternion.identity) as GameObject;
+			GameObject blah =  Instantiate (selectedObject, position, selectedObject.transform.rotation) as GameObject;
+			//blah.AddComponent<Rigidbody>();
+			//blah.rigidbody.useGravity = false;
 			blah.tag = "cubes";
-		}
-		prevPosX = currentPosX;
+
 	}
 
 	void despawnPowerup()
@@ -145,14 +165,14 @@ public class placement : MonoBehaviour
 
 
 		currentPosY = player.transform.position.y;
-		Debug.Log ("posY " + currentPosY);
+		//Debug.Log ("posY " + currentPosY);
 
 			if (currentPosY > prevPosY && currentPosY <= height - 10.0f) { 	//we are going up the way
 				if (lastStateCheck + delay < timeElapsed) { 
 					Debug.Log ("up way");
 					//if going up for 5 seconds, activate power-up spawn
 					powerupPosition.y = currentPosY + 5;
-					lastStateCheck = timeElapsed;
+					//lastStateCheck = timeElapsed;
 					//prevPosY = currentPosY;
 				}
 			}
@@ -162,7 +182,7 @@ public class placement : MonoBehaviour
 					Debug.Log ("down way");
 					//if going up for 5 seconds, activate power-up spawn
 					powerupPosition.y = currentPosY - 5;
-					lastStateCheck = timeElapsed;
+					//lastStateCheck = timeElapsed;
 					//prevPosY = currentPosY;
 				}
 			}
@@ -184,8 +204,8 @@ public class placement : MonoBehaviour
 				Debug.Log("up way");
 				//if going up for 5 seconds, activate power-up spawn
 				powerupPosition.y = currentPosY + 5;
-				lastStateCheck = timeElapsed;
-				prevPosY = currentPosY;
+				//lastStateCheck = timeElapsed;
+				//prevPosY = currentPosY;
 			}
 		}
 
@@ -194,8 +214,8 @@ public class placement : MonoBehaviour
 				Debug.Log("down way");
 				//if going up for 5 seconds, activate power-up spawn
 				powerupPosition.y = currentPosY - 5;
-				lastStateCheck = timeElapsed;
-				prevPosY = currentPosY;
+				//lastStateCheck = timeElapsed;
+				//prevPosY = currentPosY;
 			}
 		}
 

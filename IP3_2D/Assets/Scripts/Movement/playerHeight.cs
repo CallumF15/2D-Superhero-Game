@@ -26,8 +26,8 @@ public class playerHeight : MonoBehaviour {
 	}
 
 	void limitHeight(){
-		Debug.Log ("currentPosX " + currentPosX);
-		Debug.Log ("prevPosX " + prevPosX);
+		//Debug.Log ("currentPosX " + currentPosX);
+		//Debug.Log ("prevPosX " + prevPosX);
 
 		currentPosX = player.transform.position.x;
 
