@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class bossAttack : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class bossAttack : MonoBehaviour
 		superAttack
 	}
 	;
-
+	List<Rigidbody2D> attackList;
 	public Rigidbody2D attackPrefab;
 	Rigidbody2D attackInstance;
 	attackTypes bossAttackTypes;
@@ -38,10 +39,10 @@ public class bossAttack : MonoBehaviour
 	public int superAttackShotSpeed = 30;
 
 	//below variables deal with delay between projectiles
-	public int singleShotDelay = 1;
-	public int multipleShotDelay = 2;
-	public int spreadShotDelay = 2; 
-	public int superAttackShotDelay = 30;
+	public float singleShotDelay = 1;
+	public float multipleShotDelay = 2;
+	public float spreadShotDelay = 2; 
+	public float superAttackShotDelay = 30;
 
 	float timeFrequency;
 	private int shotCount = 0;
@@ -52,11 +53,12 @@ public class bossAttack : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		getPrefabs ();
 		bossAttackTypes = attackTypes.spreadShot;
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
 	{
 		Debug.Log ("attack type" + bossAttackTypes);
 		timeElapsed = Time.time;
@@ -72,24 +74,25 @@ public class bossAttack : MonoBehaviour
 		CheckAttackTypes (); //replace with CheckAttackTypes();
 	}
 
+	void getPrefabs(){
+		attackList = new List<Rigidbody2D> ();
+		Rigidbody2D icePrefab = Resources.Load ("iceAttack") as Rigidbody2D;
+		Rigidbody2D plasmaPrefab = Resources.Load ("plasmaAttack") as Rigidbody2D;
+		Rigidbody2D firePrefab = Resources.Load ("fireAttack") as Rigidbody2D;
+		attackList.Add (icePrefab);
+		attackList.Add (plasmaPrefab);
+		attackList.Add (firePrefab);
+	}
+
 	/// <summary>
 	/// Randomly picks which attack type to use
 	/// </summary>
 	void determineAttack ()
 	{
-		Rigidbody2D icePrefab = Resources.Load ("iceAttack") as Rigidbody2D;
-		Rigidbody2D plasmaPrefab = Resources.Load ("plasmaAttack") as Rigidbody2D;
-		Rigidbody2D firePrefab = Resources.Load ("fireAttack") as Rigidbody2D;
-
-		System.Collections.Generic.List<Rigidbody2D> attackList = new System.Collections.Generic.List<Rigidbody2D> ();
-		attackList.Add (icePrefab);
-		attackList.Add (plasmaPrefab);
-		attackList.Add (firePrefab);
-
 		int index = Random.Range (0, attackList.Count);
 		currentAttack = attackList [index];
 	}
-	
+
 	void spawnObject (bool fire)
 	{
 		//if (currentCount >= shotCount)
@@ -116,7 +119,7 @@ public class bossAttack : MonoBehaviour
 	
 	void CheckAttackTypes ()
 	{
-			switch (bossAttackTypes) {
+			switch (bossAttackTypes){
 
 			case attackTypes.singleFire:
 				Debug.Log("singleFire");
@@ -171,7 +174,7 @@ public class bossAttack : MonoBehaviour
 		}
 		
 		if (currentCount < (shotSpread * 2) && currentCount > shotSpread) {
-			attackInstance.transform.Rotate(0, 0, 45);
+			//attackInstance.transform.Rotate(0, 0, 45);
 			attackInstance.rotation = 45;
 			//attackInstance.transform.position -= transform.right * Time.deltaTime * shotSpeed;
 		}
@@ -179,11 +182,12 @@ public class bossAttack : MonoBehaviour
 		if (currentCount > (shotSpread * 2) && currentCount <= spreadShotCount) {
 			//attackInstance.transform.Rotate(0, 0, -45);
 			attackInstance.rotation = -45;
-			attackInstance.velocity = transform.right * spreadShotSpeed;
+			//attackInstance.velocity = transform.right * spreadShotSpeed;
 		}
 
 		//attackInstance.velocity = -transform.TransformDirection(Vector3.right) * shotSpeed;
-		attackInstance.velocity = -transform.right * spreadShotSpeed;
+		//attackInstance.transform.position -= transform.right * spreadShotSpeed;
+		//attackInstance.velocity = -transform.right * spreadShotSpeed;
 
 		//attackInstance.transform.rigidbody2D.AddForce (-transform.forward * Time.deltaTime * shotSpeed, ForceMode2D.Impulse);
 		//attackInstance.rigidbody2D.velocity = -transform.forward * Time.deltaTime * spreadShotSpeed;

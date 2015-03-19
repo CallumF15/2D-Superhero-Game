@@ -17,9 +17,9 @@ public class Score : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision hit){
-		Debug.Log ("COLLISION TEST");
+		Debug.Log ("COLLISION COIN");
 
-		if (hit.gameObject.tag == "cubes") {
+		if (hit.gameObject.tag == "coin") {
 			calculateScore();
 			Destroy (hit.gameObject);
 		}

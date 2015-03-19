@@ -83,6 +83,7 @@
      <Compile Include="Assets\Scripts\Movement\cursor.cs" />
      <Compile Include="Assets\Scripts\Movement\playerHeight.cs" />
      <Compile Include="Assets\Scripts\Movement\testFly.cs" />
+     <Compile Include="Assets\Scripts\Player\altitude.cs" />
      <Compile Include="Assets\Scripts\Player\cameraFollow.cs" />
      <Compile Include="Assets\Scripts\Player\playerHealth.cs" />
      <Compile Include="Assets\Scripts\Powerups\IPowerups.cs" />
@@ -93,6 +94,8 @@
      <Compile Include="Assets\Scripts\Score.cs" />
      <Compile Include="Assets\Scripts\World\Spawn.cs" />
      <Compile Include="Assets\Scripts\healthbar.cs" />
+     <Compile Include="Assets\Scripts\planeScale.cs" />
+     <Compile Include="Assets\Scripts\powerMessage.cs" />
      <Compile Include="Assets\Scripts\terrainCreator.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll</HintPath>
