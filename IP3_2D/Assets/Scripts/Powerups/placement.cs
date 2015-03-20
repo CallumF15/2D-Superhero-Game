@@ -11,15 +11,16 @@ public class placement : MonoBehaviour
 	List<int> aList;
 
 	public float powerupOffsetX = 50.0f;
-	public float offsetY = 5.0f;
+	public float offsetY = 30.0f;
 
 	float timeElapsed;
 	float lastStateCheck = 0f;
-	float lastStateCheck2 = 0f;
 	public float delay = 5.0f;
 
 	private float currentPosY, prevPosY, currentPosX, prevPosX;
 	float lastValue;
+
+	private float groundLevel = 0;
 
 	// Use this for initialization
 	void Start ()
@@ -70,15 +71,10 @@ public class placement : MonoBehaviour
 		GameObject blah = Instantiate (selectedObject, position, selectedObject.transform.rotation) as GameObject;	
 		blah.transform.DetachChildren ();
 		spawnedList.Add (blah);
-
-		//despawnPowerup ();
 	}
 
 	void despawnPowerup ()
 	{
-		//Check currentObjects position to player
-		//if greater than offset, destroy position
-
 		for (int i = 0; i < spawnedList.Count; i++) {
 			float posX = player.transform.position.x;
 			float objectPosX = spawnedList [i].transform.position.x;
@@ -100,76 +96,27 @@ public class placement : MonoBehaviour
 		playerHeight heightLimit = new playerHeight ();
 		float height = heightLimit.playerHeightLimit;
 		Debug.Log ("max height limit" + height);
-		float groundLevel = 0;
-
 
 		currentPosY = player.transform.position.y;
-		//Debug.Log ("posY " + currentPosY);
 
-		if (currentPosY > prevPosY && currentPosY <= height - 10.0f) { 	//we are going up the way
-			if (lastStateCheck + delay < timeElapsed) { 
-				Debug.Log ("up way");
-				//if going up for 5 seconds, activate power-up spawn
+		if (currentPosY > prevPosY && currentPosY <= height - offsetY) { 	//we are going up the way
 				powerupPosition.y = currentPosY + 5;
-				//lastStateCheck = timeElapsed;
-				//prevPosY = currentPosY;
-			}
 		}
 
-		if (currentPosY < prevPosY && currentPosY >= groundLevel + 10.0f) {		//we are going down the way
-			if (lastStateCheck + delay < timeElapsed) { 
-				Debug.Log ("down way");
-				//if going up for 5 seconds, activate power-up spawn
+		if (currentPosY < prevPosY && currentPosY >= groundLevel + offsetY) {		//we are going down the way
 				powerupPosition.y = currentPosY - 5;
-				//lastStateCheck = timeElapsed;
-				//prevPosY = currentPosY;
-			}
 		}
 
-		if (currentPosY >= (height - (offsetY * 2)) && currentPosY < height - offsetY) {
-			//below max height
-			Debug.Log ("max height");
-			powerupPosition.y = currentPosY - offsetY;
+		if (powerupPosition.y >= groundLevel && powerupPosition.y <= groundLevel + offsetY) {
+			powerupPosition.y = powerupPosition.y + 10.0f;
 		}
 
-		if (currentPosY >= groundLevel + offsetY && currentPosY < groundLevel + offsetY * 2) {
-			//above min height
-			Debug.Log ("min height");
-			powerupPosition.y = currentPosY + offsetY;
+		if (powerupPosition.y <= height && powerupPosition.y >= height - offsetY) {
+			powerupPosition.y = height - 10.0f;
 		}
 
-		if (currentPosY > prevPosY && currentPosY < height - 10.0f) { 	//we are going up the way
-			if (lastStateCheck + delay < timeElapsed) { 
-				Debug.Log ("up way");
-				//if going up for 5 seconds, activate power-up spawn
-				powerupPosition.y = currentPosY + 5;
-				//lastStateCheck = timeElapsed;
-				//prevPosY = currentPosY;
-			}
-		}
-
-		if (currentPosY < prevPosY && currentPosY > groundLevel + 10.0f) {		//we are going down the way
-			if (lastStateCheck + delay < timeElapsed) { 
-				Debug.Log ("down way");
-				//if going up for 5 seconds, activate power-up spawn
-				powerupPosition.y = currentPosY - 5;
-				//lastStateCheck = timeElapsed;
-				//prevPosY = currentPosY;
-			}
-		}
-
-		if (currentPosY > height - offsetY * 2 && currentPosY < height - offsetY) {
-			//below max height
-			Debug.Log ("max height");
-			powerupPosition.y = currentPosY - offsetY;
-		}
-
-		if (currentPosY > groundLevel + offsetY && currentPosY < groundLevel + offsetY * 2) {
-			//above min height
-			Debug.Log ("min height");
-			powerupPosition.y = currentPosY + offsetY;
-		}
-
+		Debug.Log ("POWERUP Y POS " + powerupPosition.y);
+	
 		powerupPosition.x = player.transform.position.x + powerupOffsetX;
 		powerupPosition.z = 0;
 		prevPosY = currentPosY;

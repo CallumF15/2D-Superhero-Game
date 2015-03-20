@@ -1,108 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-	<ProductVersion>10.0.20506</ProductVersion>
-	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{26F47631-D966-915A-956F-5639A0A37765}</ProjectGuid>
-	<OutputType>Library</OutputType>
-	<AppDesignerFolder>Properties</AppDesignerFolder>
-	<RootNamespace></RootNamespace>
-	<AssemblyName>Assembly-CSharp</AssemblyName>
-	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-	<FileAlignment>512</FileAlignment>
-	<BaseDirectory>Assets</BaseDirectory>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{26F47631-D966-915A-956F-5639A0A37765}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseDirectory>Assets</BaseDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-	<DebugSymbols>true</DebugSymbols>
-	<DebugType>full</DebugType>
-	<Optimize>false</Optimize>
-	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_4_6_2;UNITY_4_6;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
-	<ErrorReport>prompt</ErrorReport>
-	<WarningLevel>4</WarningLevel>
-	<NoWarn>0169</NoWarn>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>Temp\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;UNITY_4_6_2;UNITY_4_6;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-	<DebugType>pdbonly</DebugType>
-	<Optimize>true</Optimize>
-	<OutputPath>Temp\bin\Release\</OutputPath>
-	<DefineConstants>TRACE</DefineConstants>
-	<ErrorReport>prompt</ErrorReport>
-	<WarningLevel>4</WarningLevel>
-	<NoWarn>0169</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-	<Reference Include="System" />
-    <Reference Include="System.XML" />
-	<Reference Include="System.Core" />
-	<Reference Include="System.Xml.Linq" />
-	<Reference Include="UnityEngine">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
-	</Reference>
-	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
-	</Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>C:\Program Files %28x86%29\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>C:\Program Files %28x86%29\Unity\Editor\Data\Managed\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Boss\bossAttack.cs" />
-     <Compile Include="Assets\Scripts\Boss\move.cs" />
-     <Compile Include="Assets\Scripts\Boss\scaleAttack.cs" />
-     <Compile Include="Assets\Scripts\Boss\setup.cs" />
-     <Compile Include="Assets\Scripts\Equipment\Items.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\HandController.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\HandCycler.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Hands\DebugFinger.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Hands\DebugHand.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Hands\FingerModel.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Hands\HandModel.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Hands\PolyFinger.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Hands\PolyHand.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Hands\RiggedFinger.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Hands\RiggedHand.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Hands\RigidFinger.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Hands\RigidHand.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Hands\SkeletalFinger.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Hands\SkeletalHand.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\LeapImageRetriever.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Tools\ToolModel.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Utils\ConfidenceTransparency.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Utils\DisconnectionNotice.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Utils\FitHeightToScreen.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Utils\GrabbableObject.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Utils\GrabbingHand.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Utils\LeapRecorder.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Utils\LeapUnityExtensions.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Utils\MagneticPinch.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Utils\StretchToScreen.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Utils\TriggerDrawing.cs" />
-     <Compile Include="Assets\Scripts\Leapmotion\Utils\Utils.cs" />
-     <Compile Include="Assets\Scripts\Movement\LeapGesture.cs" />
-     <Compile Include="Assets\Scripts\Movement\Movement.cs" />
-     <Compile Include="Assets\Scripts\Movement\cursor.cs" />
-     <Compile Include="Assets\Scripts\Movement\playerHeight.cs" />
-     <Compile Include="Assets\Scripts\Movement\testFly.cs" />
-     <Compile Include="Assets\Scripts\Player\altitude.cs" />
-     <Compile Include="Assets\Scripts\Player\cameraFollow.cs" />
-     <Compile Include="Assets\Scripts\Player\playerHealth.cs" />
-     <Compile Include="Assets\Scripts\Powerups\IPowerups.cs" />
-     <Compile Include="Assets\Scripts\Powerups\SpeedBoost.cs" />
-     <Compile Include="Assets\Scripts\Powerups\hyperShield.cs" />
-     <Compile Include="Assets\Scripts\Powerups\placement.cs" />
-     <Compile Include="Assets\Scripts\Powerups\rotate.cs" />
-     <Compile Include="Assets\Scripts\Score.cs" />
-     <Compile Include="Assets\Scripts\World\Spawn.cs" />
-     <Compile Include="Assets\Scripts\healthbar.cs" />
-     <Compile Include="Assets\Scripts\planeScale.cs" />
-     <Compile Include="Assets\Scripts\powerMessage.cs" />
-     <Compile Include="Assets\Scripts\terrainCreator.cs" />
- <Reference Include="UnityEngine.UI">
- <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="LeapCSharp.NET3.5">
- <HintPath>C:/Users/Callum/Documents/GitHub/IP3_2D_CF/IP3_2D/Assets/LeapCSharp.NET3.5.dll</HintPath>
- </Reference>
+    <Compile Include="Assets\Scripts\Boss\bossAttack.cs" />
+    <Compile Include="Assets\Scripts\Boss\move.cs" />
+    <Compile Include="Assets\Scripts\Boss\scaleAttack.cs" />
+    <Compile Include="Assets\Scripts\Boss\setup.cs" />
+    <Compile Include="Assets\Scripts\Equipment\Items.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\HandController.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\HandCycler.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Hands\DebugFinger.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Hands\DebugHand.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Hands\FingerModel.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Hands\HandModel.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Hands\PolyFinger.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Hands\PolyHand.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Hands\RiggedFinger.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Hands\RiggedHand.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Hands\RigidFinger.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Hands\RigidHand.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Hands\SkeletalFinger.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Hands\SkeletalHand.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\LeapImageRetriever.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Tools\ToolModel.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Utils\ConfidenceTransparency.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Utils\DisconnectionNotice.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Utils\FitHeightToScreen.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Utils\GrabbableObject.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Utils\GrabbingHand.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Utils\LeapRecorder.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Utils\LeapUnityExtensions.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Utils\MagneticPinch.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Utils\StretchToScreen.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Utils\TriggerDrawing.cs" />
+    <Compile Include="Assets\Scripts\Leapmotion\Utils\Utils.cs" />
+    <Compile Include="Assets\Scripts\Movement\LeapGesture.cs" />
+    <Compile Include="Assets\Scripts\Movement\Movement.cs" />
+    <Compile Include="Assets\Scripts\Movement\cursor.cs" />
+    <Compile Include="Assets\Scripts\Movement\playerHeight.cs" />
+    <Compile Include="Assets\Scripts\Movement\testFly.cs" />
+    <Compile Include="Assets\Scripts\Player\altitude.cs" />
+    <Compile Include="Assets\Scripts\Player\cameraFollow.cs" />
+    <Compile Include="Assets\Scripts\Player\playerHealth.cs" />
+    <Compile Include="Assets\Scripts\Powerups\IPowerups.cs" />
+    <Compile Include="Assets\Scripts\Powerups\SpeedBoost.cs" />
+    <Compile Include="Assets\Scripts\Powerups\hyperShield.cs" />
+    <Compile Include="Assets\Scripts\Powerups\placement.cs" />
+    <Compile Include="Assets\Scripts\Powerups\rotate.cs" />
+    <Compile Include="Assets\Scripts\Score.cs" />
+    <Compile Include="Assets\Scripts\World\Spawn.cs" />
+    <Compile Include="Assets\Scripts\healthbar.cs" />
+    <Compile Include="Assets\Scripts\planeScale.cs" />
+    <Compile Include="Assets\Scripts\powerMessage.cs" />
+    <Compile Include="Assets\Scripts\terrainCreator.cs" />
+    <Reference Include="UnityEngine.UI">
+      <HintPath>C:\Program Files %28x86%29\Unity\Editor\Data\UnityExtensions\Unity\GUISystem\4.6.2\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="LeapCSharp.NET3.5">
+      <HintPath>C:\Users\Callum\Documents\GitHub\IP3_2D_CF\IP3_2D\Assets\LeapCSharp.NET3.5.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -112,5 +111,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  
 </Project>

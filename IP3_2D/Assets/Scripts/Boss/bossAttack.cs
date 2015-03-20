@@ -4,22 +4,23 @@ using System.Collections.Generic;
 
 public class bossAttack : MonoBehaviour
 {
-	public enum attackTypes
+	public enum attackTypes 
 	{
-		defaultstate,
-		singleFire,
-		multipleShots,
-		spreadShot,
-		superAttack
-	}
-	;
-	List<Rigidbody2D> attackList;
-	public Rigidbody2D attackPrefab;
+		defaultstate = 0,
+		singleFire = 1,
+		multipleShots = 2,
+		spreadShot = 3,
+		superAttack = 4
+	};
+
+	List<GameObject> attackList;
+	public GameObject attackPrefab;
 	Rigidbody2D attackInstance;
 	attackTypes bossAttackTypes;
 	Vector3 playerPos;
 	float timeElapsed;
-	float lastStateCheck = 0f;
+	float lastStateCheck;
+	float lastAttackCheck;
 
 	/// below variables deal with boss attack delays
 	public float startGameDelay = 10.0f;  //start of game delay
@@ -35,21 +36,18 @@ public class bossAttack : MonoBehaviour
 	//below variables deal with the projectiles speed
 	public int singleShotSpeed = 1;
 	public int multipleShotSpeed = 3;
-	public int spreadShotSpeed = 10; 
+	public int spreadShotSpeed = 10;
 	public int superAttackShotSpeed = 30;
 
 	//below variables deal with delay between projectiles
 	public float singleShotDelay = 1;
 	public float multipleShotDelay = 2;
-	public float spreadShotDelay = 2; 
+	public float spreadShotDelay = 2;
 	public float superAttackShotDelay = 30;
-
 	float timeFrequency;
 	private int shotCount = 0;
 	private int currentCount = 0;
 
-	Rigidbody2D currentAttack;
-	
 	// Use this for initialization
 	void Start ()
 	{
@@ -71,14 +69,16 @@ public class bossAttack : MonoBehaviour
 	IEnumerator delayTimer (float delayTimer)
 	{
 		yield return new WaitForSeconds (delayTimer);
-		CheckAttackTypes (); //replace with CheckAttackTypes();
+		CheckAttackTypes (); 
 	}
 
-	void getPrefabs(){
-		attackList = new List<Rigidbody2D> ();
-		Rigidbody2D icePrefab = Resources.Load ("iceAttack") as Rigidbody2D;
-		Rigidbody2D plasmaPrefab = Resources.Load ("plasmaAttack") as Rigidbody2D;
-		Rigidbody2D firePrefab = Resources.Load ("fireAttack") as Rigidbody2D;
+	void getPrefabs ()
+	{
+		attackList = new List<GameObject> ();
+		GameObject icePrefab = Resources.Load ("bossAttacks/iceAttack") as GameObject;
+		GameObject plasmaPrefab = Resources.Load ("bossAttacks/plasmaAttack") as GameObject;
+		GameObject firePrefab = Resources.Load ("bossAttacks/fireAttack") as GameObject;
+
 		attackList.Add (icePrefab);
 		attackList.Add (plasmaPrefab);
 		attackList.Add (firePrefab);
@@ -87,31 +87,53 @@ public class bossAttack : MonoBehaviour
 	/// <summary>
 	/// Randomly picks which attack type to use
 	/// </summary>
-	void determineAttack ()
+	int determineAttack ()
 	{
 		int index = Random.Range (0, attackList.Count);
-		currentAttack = attackList [index];
+		return index;
+	}
+
+	void determineAttack2 ()
+	{
+		int Health = playerHealth.getHealth;
+		int previousHealth = 0;
+
+		if (previousHealth > Health) { //been hit
+			if (lastAttackCheck + shotDelay < timeElapsed) { //delay until random attack is picked
+				System.Array A = System.Enum.GetValues(typeof(attackTypes));
+				bossAttackTypes = (attackTypes)A.GetValue(Random.Range(0,A.Length));
+			}
+		}
+
+		if (Health == previousHealth) //not been hit
+		if (lastAttackCheck + shotDelay < timeElapsed) { //time until attack is assigned
+			bossAttackTypes = attackTypes.superAttack;
+		}
+
+		previousHealth = Health;
 	}
 
 	void spawnObject (bool fire)
 	{
+		int index = 0;
 		//if (currentCount >= shotCount)
 		//	currentCount = 0;
+
+		if (currentCount >= shotCount)
+			index = determineAttack ();
 		
 		if (currentCount <= shotCount && fire)
 		if (lastStateCheck + shotDelay < timeElapsed) {
 	
 			Vector3 bossPos = transform.position;
-			Vector3 fireSpawn = new Vector3 (bossPos.x - 1, bossPos.y , 0.0f);
-		
-			attackInstance = Instantiate (attackPrefab, fireSpawn, Quaternion.identity) as Rigidbody2D;
-			attackInstance.transform.localScale = new Vector3(0.1f, 0.1f, 1);
+			Vector3 fireSpawn = new Vector3 (bossPos.x - 1, bossPos.y, 0.0f);
 
-			if(bossAttackTypes == attackTypes.spreadShot)
-				shotCountAttack();
-			//else
-				//attackInstance.velocity = (new Vector2 (-shotSpeed, 0));
-			
+			attackList [index].transform.localScale = new Vector3 (0.1f, 0.1f, 1);
+			Instantiate (attackList [index], fireSpawn, Quaternion.identity);
+
+			if (bossAttackTypes == attackTypes.spreadShot)
+				shotCountAttack (index);
+						
 			currentCount++;
 			lastStateCheck = timeElapsed;
 		}
@@ -119,79 +141,60 @@ public class bossAttack : MonoBehaviour
 	
 	void CheckAttackTypes ()
 	{
-			switch (bossAttackTypes){
+		switch (bossAttackTypes) {
 
-			case attackTypes.singleFire:
-				Debug.Log("singleFire");
-				shotCount = singleShotCount;
-				shotSpeed = singleShotSpeed;
-				shotDelay = singleShotDelay;
-				spawnObject(true);
-				break;
+		case attackTypes.singleFire:
+			;
+			shotCount = singleShotCount;
+			shotSpeed = singleShotSpeed;
+			shotDelay = singleShotDelay;
+			spawnObject (true);
+			break;
 
-			case attackTypes.multipleShots:
-			    shotCount = multipleShotCount;
-				shotSpeed = multipleShotSpeed;
-				shotDelay = multipleShotDelay;
-				spawnObject(true);
-				break;
-			case attackTypes.spreadShot:
-				shotCount = spreadShotCount;
-				shotSpeed = spreadShotSpeed;
-			    shotDelay = spreadShotDelay;
-				spawnObject (true);
+		case attackTypes.multipleShots:
+			shotCount = multipleShotCount;
+			shotSpeed = multipleShotSpeed;
+			shotDelay = multipleShotDelay;
+			spawnObject (true);
+			break;
+		case attackTypes.spreadShot:
+			shotCount = spreadShotCount;
+			shotSpeed = spreadShotSpeed;
+			shotDelay = spreadShotDelay;
+			spawnObject (true);
 
-				break;
-			case attackTypes.superAttack:
-				shotCount = 20;
+			break;
+		case attackTypes.superAttack:
+			shotCount = superAttackShotCount;
+			shotSpeed = superAttackShotSpeed;
+			shotDelay = superAttackShotSpeed;
 
-				Vector2 pos = transform.position;
-				Vector2 screenPos = camera.WorldToScreenPoint(pos);
-				int offset = 10;
-
-				for(int i = 0; i <= 4; i++){
-
-					int width = (Screen.width / i) - offset;
-					int height = (Screen.height / i) - offset;
-
-					Vector2 newPos = camera.ScreenToWorldPoint(new Vector3(width, height, 0));
-					transform.position = newPos;
-
-					attackInstance.transform.position = new Vector3(-superAttackShotSpeed, 0, 0);
-				}
-
-				break;
-			default:
-				break;
+				//call method
+			break;
+		default:
+			break;
 		}
 	}
 
-	void shotCountAttack(){
+	void shotCountAttack (int index)
+	{
 		float shotSpread = shotCount / 3;
 
 		if (currentCount <= shotSpread) {
-			attackInstance.transform.Rotate(0, 0, 0);
+			attackList [index].transform.Rotate (0, 0, 0);
 		}
 		
 		if (currentCount < (shotSpread * 2) && currentCount > shotSpread) {
 			//attackInstance.transform.Rotate(0, 0, 45);
-			attackInstance.rotation = 45;
+			attackList [index].transform.Rotate (0, 0, 45);
 			//attackInstance.transform.position -= transform.right * Time.deltaTime * shotSpeed;
 		}
 		
 		if (currentCount > (shotSpread * 2) && currentCount <= spreadShotCount) {
 			//attackInstance.transform.Rotate(0, 0, -45);
-			attackInstance.rotation = -45;
+			attackList [index].transform.Rotate (0, 0, -45);
 			//attackInstance.velocity = transform.right * spreadShotSpeed;
 		}
-
-		//attackInstance.velocity = -transform.TransformDirection(Vector3.right) * shotSpeed;
-		//attackInstance.transform.position -= transform.right * spreadShotSpeed;
-		//attackInstance.velocity = -transform.right * spreadShotSpeed;
-
-		//attackInstance.transform.rigidbody2D.AddForce (-transform.forward * Time.deltaTime * shotSpeed, ForceMode2D.Impulse);
-		//attackInstance.rigidbody2D.velocity = -transform.forward * Time.deltaTime * spreadShotSpeed;
-		//attackInstance.transform.position = -transform.right * Time.deltaTime * spreadShotSpeed;
-		//attackInstance.rigidbody2D.AddForce(attackInstance.transform.right * Time.deltaTime * spreadShotSpeed);
+		transform.parent.position += transform.right * Time.deltaTime * shotSpeed;
 	}
 }
