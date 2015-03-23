@@ -7,8 +7,8 @@ public class placement : MonoBehaviour
 {
 	GameObject powerObject, player;
 	public List<GameObject> powerArray;
-	List<GameObject> spawnedList;
 	List<int> aList;
+	List<GameObject> spawnedList = new List<GameObject> ();
 
 	public float powerupOffsetX = 50.0f;
 	public float offsetY = 30.0f;
@@ -19,6 +19,7 @@ public class placement : MonoBehaviour
 
 	private float currentPosY, prevPosY, currentPosX, prevPosX;
 	float lastValue;
+	bool isCoin;
 
 	private float groundLevel = 0;
 
@@ -26,7 +27,6 @@ public class placement : MonoBehaviour
 	void Start ()
 	{
 		aList = new List<int> ();
-		spawnedList = new List<GameObject> ();
 		player = GameObject.FindGameObjectWithTag ("Player");
 	}
 	
@@ -54,7 +54,16 @@ public class placement : MonoBehaviour
 				lastStateCheck = timeElapsed;
 			}
 
-			despawnPowerup();
+			test ();
+
+//			if(isCoin){
+//				GameObject[] obj = GameObject.FindGameObjectsWithTag("coin");
+//				despawnPowerup(obj);
+//			}else{
+//				GameObject[] obj2 = GameObject.FindGameObjectsWithTag("powerups");
+//				despawnPowerup(obj2);
+//			}
+
 			prevPosX = currentPosX;
 		}
 	}
@@ -69,23 +78,42 @@ public class placement : MonoBehaviour
 		Vector3 position = calcPowerupPosition ();
 
 		GameObject blah = Instantiate (selectedObject, position, selectedObject.transform.rotation) as GameObject;	
-		blah.transform.DetachChildren ();
+
+		if (blah.tag == "coin") {
+			isCoin = true;
+			blah.transform.DetachChildren ();
+			Destroy (blah);
+		} else
+			isCoin = false;
+
 		spawnedList.Add (blah);
 	}
 
-	void despawnPowerup ()
-	{
+	void test(){
+
 		for (int i = 0; i < spawnedList.Count; i++) {
 			float posX = player.transform.position.x;
 			float objectPosX = spawnedList [i].transform.position.x;
-
+			
 			if (posX > objectPosX + 30) {
-				Destroy (spawnedList [i]);
-				spawnedList.RemoveAt(i);
+				Destroy (spawnedList[i]);
 			}
 		}
 	}
 
+	void despawnPowerup(GameObject[] gameObj){
+
+
+		for (int i = 0; i < gameObj.Length; i++) {
+			float posX = player.transform.position.x;
+			float objectPosX = gameObj [i].transform.position.x;
+
+			if (posX > objectPosX + 30) {
+				Destroy (gameObj [i]);
+			}
+		}
+	}
+	
 	/// <summary>
 	/// Calculates the position for each powerup and coin
 	/// </summary>
@@ -115,8 +143,6 @@ public class placement : MonoBehaviour
 			powerupPosition.y = height - 10.0f;
 		}
 
-		Debug.Log ("POWERUP Y POS " + powerupPosition.y);
-	
 		powerupPosition.x = player.transform.position.x + powerupOffsetX;
 		powerupPosition.z = 0;
 		prevPosY = currentPosY;

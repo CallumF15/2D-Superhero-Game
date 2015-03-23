@@ -21,6 +21,7 @@ public class bossAttack : MonoBehaviour
 	float timeElapsed;
 	float lastStateCheck;
 	float lastAttackCheck;
+	public float attackDelay = 5.0f;
 
 	/// below variables deal with boss attack delays
 	public float startGameDelay = 10.0f;  //start of game delay
@@ -133,6 +134,12 @@ public class bossAttack : MonoBehaviour
 
 			if (bossAttackTypes == attackTypes.spreadShot)
 				shotCountAttack (index);
+
+			if(lastStateCheck + attackDelay < timeElapsed)
+			if(currentCount == shotCount){
+				currentCount = 0;
+				determineAttack2();
+			}
 						
 			currentCount++;
 			lastStateCheck = timeElapsed;
@@ -196,5 +203,10 @@ public class bossAttack : MonoBehaviour
 			//attackInstance.velocity = transform.right * spreadShotSpeed;
 		}
 		transform.parent.position += transform.right * Time.deltaTime * shotSpeed;
+	}
+
+	void superCountAttack()
+	{
+
 	}
 }
