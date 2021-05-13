@@ -18,7 +18,7 @@ public class setup : MonoBehaviour {
 
 	void b(){
 
-		Camera cam = GameObject.FindGameObjectWithTag ("MainCamera").gameObject.camera;
+		Camera cam = GameObject.FindGameObjectWithTag ("MainCamera").gameObject.GetComponent<Camera>();
 		Vector3 playerPos = GameObject.FindGameObjectWithTag ("Player").transform.position;
 		Vector3 bossPos = transform.position;
 

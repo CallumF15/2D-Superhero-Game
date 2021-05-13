@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class powerMessage : MonoBehaviour
 {
-	public GUIText message;
+	public Text message;
 	public string powerupMessage = "POWERUP ACTIVATED";
 	public float disappearTime = 2.0f;
 

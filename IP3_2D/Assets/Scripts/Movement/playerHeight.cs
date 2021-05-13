@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class playerHeight : MonoBehaviour {
 
 	GameObject player;
-	public GUIText message;
+	public Text message;
 
 	public float playerHeightLimit = 100.0f;
 	public float timeRemaining = 11.0f;

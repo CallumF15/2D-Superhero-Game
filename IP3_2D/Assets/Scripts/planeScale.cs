@@ -7,7 +7,7 @@ public class planeScale : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		cam = GameObject.FindGameObjectWithTag ("MainCamera").camera;
+		cam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<Camera>();
 		float height = cam.orthographicSize;
 		float width = height * Screen.width / Screen.height;
 		transform.localScale = new Vector3(width, 0.1f, height);

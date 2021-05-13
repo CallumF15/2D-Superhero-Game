@@ -14,8 +14,8 @@ public class terrainCreator : MonoBehaviour
 
 	void Start ()
 	{
-		gameObject.AddComponent ("MeshFilter");
-		gameObject.AddComponent ("MeshRenderer");
+		gameObject.AddComponent <MeshFilter>();
+		gameObject.AddComponent <MeshRenderer>();
 		mesh = GetComponent<MeshFilter> ().mesh;
 		mesh.Clear ();
 	}
@@ -87,7 +87,7 @@ public class terrainCreator : MonoBehaviour
 	void mouseCreateVertices ()
 	{
 		Vector3 mousePos;
-		Camera cam = GameObject.FindGameObjectWithTag ("MainCamera").gameObject.camera;
+		Camera cam = GameObject.FindGameObjectWithTag ("MainCamera").gameObject.GetComponent<Camera>();
 
 		if (Input.GetMouseButtonDown (0)) {  //if left click
 

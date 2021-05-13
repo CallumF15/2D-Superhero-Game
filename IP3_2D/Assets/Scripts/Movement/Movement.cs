@@ -18,7 +18,9 @@ public class Movement : MonoBehaviour
 	public float jumpPower = 1.0f;
 	public float fallPower = 1.0f;
 	public float rotationSpeed = 1.5f;
-	
+
+	private float pitchAngle;
+
 	[HideInInspector]
 	public float getPitchAngle { get; set; }
 
@@ -57,31 +59,16 @@ public class Movement : MonoBehaviour
 		switch (type) {
 
 		case MovementType.stand:
-			transform.parent.rigidbody.velocity = new Vector3 (0, 0, 0);
+			transform.GetComponent<Rigidbody>().velocity = new Vector3 (0, 0, 0);
 			resetRotation ();
 			break;
-
-		//Flying code below:
-		
 		case MovementType.fly: 
-				float rot = getPitchAngle * Time.deltaTime * rotationSpeed;
-				transform.parent.Rotate(0,0, rot);
-				transform.parent.position += transform.right * Time.deltaTime * flySpeed;
-			break;
-
-		case MovementType.flyAscend:
-			Debug.Log("angle: " + getPitchAngle);
-			float ascendSpeed = getPitchAngle / 10;
-			Debug.Log("acs speed: " + ascendSpeed);
-			transform.parent.rigidbody.velocity = new Vector3 (0, ascendSpeed, 0);
-			break;
-
-		case MovementType.flyDescend:
-			float descentSpeed = getPitchAngle / 10;		
-			transform.parent.rigidbody.velocity = new Vector3 (0, -descentSpeed, 0);
+				//float rot = getPitchAngle * Time.deltaTime * rotationSpeed;
+				//gameObject.transform.Rotate(0,0, rot);
+				transform.position += transform.right * Time.deltaTime * flySpeed;
 			break;
 		case MovementType.fire:
-
+				playerAttack(); 
 			break;
 
 		default:
@@ -90,6 +77,14 @@ public class Movement : MonoBehaviour
 			// here, maybe an exception
 			break;
 		}
+	}
+
+	private void playerAttack()
+    {
+		GameObject firePrefab = Resources.Load("bossAttacks/fireAttack") as GameObject;
+		firePrefab.transform.localScale = new Vector3(0.1f, 0.1f, 1);
+		Vector3 playerPos = transform.position;
+		Instantiate(firePrefab, new Vector3(playerPos.x + 5, playerPos.y, playerPos.z), Quaternion.identity); //spawn object
 	}
 
 	/// <summary>

@@ -4,34 +4,40 @@ using System.Collections.Generic;
 
 public class bossAttack : MonoBehaviour
 {
+
+
 	public enum attackTypes 
 	{
-		defaultstate = 0,
-		singleFire = 1,
-		multipleShots = 2,
-		spreadShot = 3,
-		superAttack = 4
+		singleFire = 0,
+		multipleShots = 1,
+		spreadShot = 2,
+		//superAttack = 3
 	};
 
-	List<GameObject> attackList;
-	public GameObject attackPrefab;
-	Rigidbody2D attackInstance;
+    #region Variables
+
+    List<GameObject> attackList;
 	attackTypes bossAttackTypes;
-	Vector3 playerPos;
+
+
 	float timeElapsed;
 	float lastStateCheck;
 	float lastAttackCheck;
-	public float attackDelay = 5.0f;
+
+
+	#region AttackTypeVariables
+
+	//public float attackDelay = 5.0f;
 
 	/// below variables deal with boss attack delays
-	public float startGameDelay = 10.0f;  //start of game delay
+	public float startGameDelay = 10.0f; //start of game delay
 	public float shotDelay = 5.0f;       //delay between each shots
-	public float shotSpeed = 5.0f; 		  //speed of shots
+	public float shotSpeed = 5.0f; 		 //speed of shots
 
 	//below variables deal with the number of projectiles for each attack type
 	public int singleShotCount = 1;
 	public int multipleShotCount = 5;
-	public int spreadShotCount = 15; //must be dividle by 3
+	public int spreadShotCount = 15;
 	public int superAttackShotCount = 30;
 
 	//below variables deal with the projectiles speed
@@ -43,17 +49,23 @@ public class bossAttack : MonoBehaviour
 	//below variables deal with delay between projectiles
 	public float singleShotDelay = 1;
 	public float multipleShotDelay = 2;
-	public float spreadShotDelay = 2;
+	public float spreadShotDelay = 1f; 
 	public float superAttackShotDelay = 30;
-	float timeFrequency;
-	private int shotCount = 0;
-	private int currentCount = 0;
+
+    #endregion
+
+	private int shotCount = 0; //number of shots allocated for specified attack
+	private int currentCount = 0;  //number of shots boss has fired
+	private int previousHealth;
+
+	#endregion
 
 	// Use this for initialization
 	void Start ()
 	{
+		previousHealth = 1;
 		getPrefabs ();
-		bossAttackTypes = attackTypes.spreadShot;
+		bossAttackTypes = randomiseAttackType();
 	}
 	
 	// Update is called once per frame
@@ -73,7 +85,7 @@ public class bossAttack : MonoBehaviour
 		CheckAttackTypes (); 
 	}
 
-	void getPrefabs ()
+	private void getPrefabs ()
 	{
 		attackList = new List<GameObject> ();
 		GameObject icePrefab = Resources.Load ("bossAttacks/iceAttack") as GameObject;
@@ -86,72 +98,97 @@ public class bossAttack : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Randomly picks which attack type to use
+	/// Randomly picks which attack type (fire, plasma etc) to use
 	/// </summary>
-	int determineAttack ()
+	private int randomiseAttack ()
 	{
-		int index = Random.Range (0, attackList.Count);
+		int index = Random.Range(0, attackList.Count);
 		return index;
 	}
 
-	void determineAttack2 ()
+	private attackTypes randomiseAttackType()
 	{
-		int Health = playerHealth.getHealth;
-		int previousHealth = 0;
+		int index = Random.Range(0, 3);
+		attackTypes aType = (attackTypes)index;
+		return aType;
+	}
 
-		if (previousHealth > Health) { //been hit
+	/// <summary>
+	/// Determines which attack the boss will use
+	/// </summary>
+	private void determineAttack ()
+	{
+		int playersHealth = (int)healthbar.GetHealthBarValue();
+
+		if (previousHealth > playersHealth) { //player has been hit
 			if (lastAttackCheck + shotDelay < timeElapsed) { //delay until random attack is picked
 				System.Array A = System.Enum.GetValues(typeof(attackTypes));
 				bossAttackTypes = (attackTypes)A.GetValue(Random.Range(0,A.Length));
 			}
 		}
 
-		if (Health == previousHealth) //not been hit
+		if (playersHealth == previousHealth) //not been hit
 		if (lastAttackCheck + shotDelay < timeElapsed) { //time until attack is assigned
-			bossAttackTypes = attackTypes.superAttack;
+			//bossAttackTypes = attackTypes.superAttack;
 		}
 
-		previousHealth = Health;
+		previousHealth = playersHealth;
 	}
 
-	void spawnObject (bool fire)
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="fire"></param>
+	private void spawnObject (bool fire)
 	{
 		int index = 0;
-		//if (currentCount >= shotCount)
-		//	currentCount = 0;
+		//Debug.Log("Shot Delay: " + shotDelay);
 
 		if (currentCount >= shotCount)
-			index = determineAttack ();
-		
+			bossAttackTypes = randomiseAttackType();
+
+		Debug.Log("Shot Type: " + bossAttackTypes);
+
 		if (currentCount <= shotCount && fire)
 		if (lastStateCheck + shotDelay < timeElapsed) {
 	
 			Vector3 bossPos = transform.position;
 			Vector3 fireSpawn = new Vector3 (bossPos.x - 1, bossPos.y, 0.0f);
-
-			attackList [index].transform.localScale = new Vector3 (0.1f, 0.1f, 1);
-			Instantiate (attackList [index], fireSpawn, Quaternion.identity);
+			attackList [index].transform.localScale = new Vector3 (0.1f, 0.1f, 1); //transform scale of object
+			GameObject obj;  
+			
 
 			if (bossAttackTypes == attackTypes.spreadShot)
-				shotCountAttack (index);
+					SpreadShotAttackSpawner(index, attackList[index], fireSpawn);
+			else
+					Instantiate(attackList[index], fireSpawn, Quaternion.identity); //spawn object
 
-			if(lastStateCheck + attackDelay < timeElapsed)
-			if(currentCount == shotCount){
-				currentCount = 0;
-				determineAttack2();
-			}
-						
-			currentCount++;
+
+                if (currentCount == shotCount) //if attack has finished
+				{
+                    currentCount = 0;
+                    determineAttack();
+                }
+
+                //if (lastStateCheck + attackDelay < timeElapsed)
+                //if(currentCount == shotCount){ //if attack has finished
+                //	currentCount = 0;
+                //	determineAttack();
+                //}
+
+            currentCount++;
 			lastStateCheck = timeElapsed;
 		}
 	}
-	
-	void CheckAttackTypes ()
+
+	/// <summary>
+	/// assigns appropriate values for each attack based on the attack type assigned
+	/// </summary>
+	private void CheckAttackTypes ()
 	{
 		switch (bossAttackTypes) {
 
 		case attackTypes.singleFire:
-			;
 			shotCount = singleShotCount;
 			shotSpeed = singleShotSpeed;
 			shotDelay = singleShotDelay;
@@ -171,42 +208,44 @@ public class bossAttack : MonoBehaviour
 			spawnObject (true);
 
 			break;
-		case attackTypes.superAttack:
-			shotCount = superAttackShotCount;
-			shotSpeed = superAttackShotSpeed;
-			shotDelay = superAttackShotSpeed;
-
-				//call method
-			break;
+		//case attackTypes.superAttack:
+		//	shotCount = superAttackShotCount;
+		//	shotSpeed = superAttackShotSpeed;
+		//	shotDelay = superAttackShotSpeed;
+		//	spawnObject(true);
+		//	break;
 		default:
+				//determineAttack();
 			break;
 		}
 	}
 
-	void shotCountAttack (int index)
+	/// <summary>
+	/// Method for Spread Shot attack
+	/// Changes the angles of the attack
+	/// </summary>
+	private Vector3 SpreadShotAttackSpawner(int index, GameObject obj, Vector3 pos)
 	{
-		float shotSpread = shotCount / 3;
+		Vector3 objectAngle = new Vector3();
 
-		if (currentCount <= shotSpread) {
-			attackList [index].transform.Rotate (0, 0, 0);
-		}
-		
-		if (currentCount < (shotSpread * 2) && currentCount > shotSpread) {
-			//attackInstance.transform.Rotate(0, 0, 45);
-			attackList [index].transform.Rotate (0, 0, 45);
-			//attackInstance.transform.position -= transform.right * Time.deltaTime * shotSpeed;
-		}
-		
-		if (currentCount > (shotSpread * 2) && currentCount <= spreadShotCount) {
-			//attackInstance.transform.Rotate(0, 0, -45);
-			attackList [index].transform.Rotate (0, 0, -45);
-			//attackInstance.velocity = transform.right * spreadShotSpeed;
-		}
-		transform.parent.position += transform.right * Time.deltaTime * shotSpeed;
+		objectAngle = obj.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+		obj = Instantiate(attackList[index], pos, Quaternion.identity); //spawn object
+		objectAngle = obj.transform.eulerAngles = new Vector3(0.0f, 0.0f, 45.0f);
+		obj = Instantiate(attackList[index], pos, Quaternion.identity); //spawn object
+		objectAngle = obj.transform.eulerAngles = new Vector3(0.0f, 0.0f, -45.0f);
+		obj = Instantiate(attackList[index], pos, Quaternion.identity); //spawn object
+
+		//obj.transform.position += transform.right * Time.deltaTime * shotSpeed;
+		return objectAngle;
 	}
 
-	void superCountAttack()
-	{
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns></returns>
+	private Vector3 SuperAttackSpawner()
+    {
 
-	}
+		return new Vector3();
+    }
 }

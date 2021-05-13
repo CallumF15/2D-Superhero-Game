@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class Score : MonoBehaviour {
 
-	public GUIText message;
+	public Text message;
 	private int score = 0;
 	
 	// Use this for initialization

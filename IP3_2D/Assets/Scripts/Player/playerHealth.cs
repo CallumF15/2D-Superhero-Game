@@ -1,27 +1,31 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
 
 public class playerHealth : MonoBehaviour {
 
-	public static int getHealth { get; set; }
-
-	public float minHealth = 0;
-	public float maxHealth = 10;
-
-	public float damage;
-
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
+		healthbar.HealthBarImage = GameObject.Find("redHealthbar").GetComponent<Image>();
+		healthbar.SetHealthBarValue(1);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
-		Mathf.Clamp (getHealth, minHealth, maxHealth);
+		
 	}
 
-	void reduceHealth()
+	/// <summary>
+	/// If player is hit by enemy's attack. Reduce health and destroy attack game object
+	/// </summary>
+	/// <param name="other"></param>
+	void OnCollisionEnter(Collision other)
 	{
-		getHealth--;
+		if (other.gameObject.tag == "attack") { 
+		
+			healthbar.SetHealthBarValue(healthbar.GetHealthBarValue() - 0.1f);
+			Destroy(other.gameObject);
+		}
 	}
 }
