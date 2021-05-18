@@ -12,8 +12,8 @@ public class playerHealth : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-		
+
+
 	}
 
 	/// <summary>
@@ -22,10 +22,15 @@ public class playerHealth : MonoBehaviour {
 	/// <param name="other"></param>
 	void OnCollisionEnter(Collision other)
 	{
-		if (other.gameObject.tag == "attack") { 
+		if (other.gameObject.tag == "bossAttack") { 
 		
 			healthbar.SetHealthBarValue(healthbar.GetHealthBarValue() - 0.1f);
 			Destroy(other.gameObject);
+
+			if (healthbar.GetHealthBarValue() == 0)
+            {
+				//Destroy(gameObject);
+			}
 		}
 	}
 }

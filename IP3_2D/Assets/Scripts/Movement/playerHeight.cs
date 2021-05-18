@@ -4,18 +4,18 @@ using UnityEngine.UI;
 
 public class playerHeight : MonoBehaviour {
 
-	GameObject player;
+	public GameObject player;
 	public Text message;
 
-	public float playerHeightLimit = 100.0f;
-	public float timeRemaining = 11.0f;
+	public float playerHeightLimit = 100.0f; //maximum height limit
+	public float timeRemaining = 11.0f; //time left to return or player dies
 	private float timeLeft;
-	
-	float currentPosX, prevPosX;
 
-	// Use this for initialization
+	float currentPosX;
+	float prevPosX;
+
+	// Use this for initialization 
 	void Start () {
-		player = GameObject.FindGameObjectWithTag ("Player");
 		timeLeft = timeRemaining;
 		prevPosX = -16;
 		currentPosX = 1;
@@ -26,32 +26,31 @@ public class playerHeight : MonoBehaviour {
 		limitHeight ();
 	}
 
-	void limitHeight(){
-		//Debug.Log ("currentPosX " + currentPosX);
-		//Debug.Log ("prevPosX " + prevPosX);
-
+	/// <summary>
+	/// 
+	/// </summary>
+	private void limitHeight(){
 		currentPosX = player.transform.position.x;
 
 		float playerHeight = player.transform.position.y;
 
-		if (playerHeight >= playerHeightLimit) {
+		if (playerHeight >= playerHeightLimit) { //player has hit map height boundary
 			Vector3 playerPos = player.transform.position;
 			playerPos.y = playerHeightLimit;
 			player.transform.position = playerPos;
 		}
 
-		if (prevPosX > currentPosX) {
+		if (prevPosX > currentPosX) //going in wrong direction 
+		{
 			prevPosX = currentPosX;
-			WrongDirectionMessage ();
+			WrongDirectionMessage();
 		}
 
-		if (playerHeight <= 0) {
+		if (playerHeight <= 0) { //player has hit the ground
 			Vector3 playerPos = player.transform.position;
 			playerPos.y = 0;
 			player.transform.position = playerPos;
 		}
-
-
 
 		if (prevPosX < currentPosX) {
 			timeRemaining = timeLeft;
@@ -61,12 +60,15 @@ public class playerHeight : MonoBehaviour {
 		prevPosX = currentPosX;
 	}
 
-	void WrongDirectionMessage()
+	/// <summary>
+	/// Displays message with time remaining 
+	/// </summary>
+	private void WrongDirectionMessage()
 	{
 		timeRemaining -= Time.deltaTime;
+		//Debug.Log("timeR: " + timeRemaining);
 		int timeLeft = (int)timeRemaining;
 
-		Debug.Log ("message hitttt");
 		message.text = "Wrong direction! " + timeLeft.ToString() + " seconds to turn round"; ;
 
 		if (timeRemaining < 0) {

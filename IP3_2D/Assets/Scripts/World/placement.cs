@@ -3,112 +3,139 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 
-public class placement : MonoBehaviour
+//TODO: Get player's further position travelled and not spawn coins before that point.
+
+public class Placement : MonoBehaviour
 {
-	GameObject powerObject, player;
-	public List<GameObject> powerArray;
-	List<GameObject> spawnedList = new List<GameObject> ();
+    public GameObject player;
+    public List<GameObject> powerArray;
 
-	public float powerupOffsetX = 50.0f;
-	public float offsetY = 30.0f;
+    public float powerupOffsetX = 50.0f;
+    public float offsetY = 30.0f;
 
-	private float timeElapsed;
-	private float lastStateCheck = 0f;
-	public float delay = 5.0f;
+    private float timeElapsed;
+    private float lastStateCheck = 0f;
+    public float delay = 5.0f; //delay between each spawn
 
-	private float currentPosY, prevPosY, currentPosX, prevPosX;
-	private float lastValue;
-	private bool isCoin;
+    private float currentPosY, prevPosY, currentPosX, prevPosX;
+    private float lastValue;
 
-	private float groundLevel = 0;
+    private float groundLevel = 0;
 
-	// Use this for initialization
-	void Start ()
-	{
-		player = GameObject.FindGameObjectWithTag ("Player");
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate ()
-	{
-		timeElapsed = Time.time;
-		currentPosX = player.transform.position.x;
+    // Use this for initialization
+    void Start()
+    {
+        prevPosY = player.transform.position.y;
+    }
 
-		if (currentPosX > prevPosX) {
-			if (lastStateCheck + delay < timeElapsed) {
-				//Debug.Log("COUNT " + powerArray.Count);
-				int index = Random.Range (0, powerArray.Count);
-			
-				while (lastValue == index) {
-					index = Random.Range (0, powerArray.Count);
-				}
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        timeElapsed = Time.time;
+        currentPosX = player.transform.position.x;
+        currentPosY = player.transform.position.y; //get player Y pos
 
-				lastValue = index;
+        if (currentPosY > 100)
+            player.transform.position = new Vector3(currentPosX, 100.0f, 0);
 
-				Debug.Log ("INDEX " + index);
+        if (currentPosX > prevPosX)
+        { //make sure player isn't going back the way
 
-				spawnPowerup (index);
-				//powerupSelector ();
-				lastStateCheck = timeElapsed;
-			}
+            if (lastStateCheck + delay < timeElapsed)
+            {
+                //Debug.Log("COUNT: " + powerArray.Count);
+                int index = Random.Range(0, powerArray.Count);
 
-			prevPosX = currentPosX;
-		}
-	}
-	
-	/// <summary>
-	/// Spawns the powerup.
-	/// </summary>
-	public void spawnPowerup (int index)
-	{
-		GameObject selectedObject = powerArray [index];
-		currentPosX = player.transform.position.x;
-		Vector3 position = CalculatePowerupPosition();
+                while (lastValue == index)
+                {
+                    index = Random.Range(0, powerArray.Count);
+                }
 
-		GameObject worldObject = Instantiate (selectedObject, position, selectedObject.transform.rotation) as GameObject;	
+                lastValue = index;
 
-		if (worldObject.tag == "coin") {
-			isCoin = true;
-			worldObject.transform.DetachChildren ();
-			Destroy (worldObject);
-		} else
-			isCoin = false;
+                //Debug.Log ("INDEX " + index);
 
-		spawnedList.Add (worldObject);
-	}
+                SpawnPowerup(index);
 
-	/// <summary>
-	/// Calculates the position for each powerup and coin
-	/// </summary>
-	Vector3 CalculatePowerupPosition ()
-	{
-		player = GameObject.FindGameObjectWithTag ("Player"); //get player object
-		Vector3 powerupPosition = new Vector3 (); 
-		playerHeight heightLimit = new playerHeight ();
-		float height = heightLimit.playerHeightLimit; //get game level map boundary height
 
-		currentPosY = player.transform.position.y; //get player Y pos
+                lastStateCheck = timeElapsed;
+            }
 
-		if (currentPosY > prevPosY && currentPosY <= height - offsetY) { 	//Player is going up
-				powerupPosition.y = currentPosY + 5;
-		}
+            prevPosX = currentPosX;
+        }
+        else
+        {
+            //player is going back the way
+            lastStateCheck = timeElapsed; //reset time elapsed 
+        }
+    }
 
-		if (currentPosY < prevPosY && currentPosY >= groundLevel + offsetY) {		//Player is going down
-				powerupPosition.y = currentPosY - 5;
-		}
+    /// <summary>
+    /// Spawns the powerup.
+    /// </summary>
+    public void SpawnPowerup(int index)
+    {
+        GameObject selectedObject = powerArray[index];
+        currentPosX = player.transform.position.x;
+        Vector3 position = CalculatePowerupPosition();
+        GameObject worldObject = Instantiate(selectedObject, position, selectedObject.transform.rotation) as GameObject;    //spawn object
+    }
 
-		if (powerupPosition.y >= groundLevel && powerupPosition.y <= groundLevel + offsetY) {
-			powerupPosition.y = powerupPosition.y + 10.0f;
-		}
+    /// <summary>
+    /// Calculates the position for each powerup and coin  
+    /// </summary>
+    Vector3 CalculatePowerupPosition()
+    {
+        Vector3 powerupPosition = new Vector3();
+        powerupPosition.x = player.transform.position.x + powerupOffsetX; //so coins/powerups spawn off screen
+        powerupPosition.z = 0;
 
-		if (powerupPosition.y <= height && powerupPosition.y >= height - offsetY) {
-			powerupPosition.y = height - 10.0f;
-		}
+        playerHeight heightLimit = new playerHeight();
+        float height = heightLimit.playerHeightLimit; //get game level map boundary height
+        Debug.Log("player Y: " + player.transform.position.y);
 
-		powerupPosition.x = player.transform.position.x + powerupOffsetX;
-		powerupPosition.z = 0;
-		prevPosY = currentPosY;
-		return powerupPosition;
-	}
+        if (currentPosY >= prevPosY && currentPosY <= height + 2)
+        {
+            prevPosY = currentPosY;
+
+            if (currentPosY - 10 >= groundLevel)
+            {
+                powerupPosition.y = currentPosY - 10;
+            }
+            else
+            {
+                float difference = groundLevel + currentPosY;
+                powerupPosition.y = currentPosY - difference;
+            }
+
+            return powerupPosition;
+        }
+
+        if (currentPosY < prevPosY && currentPosY >= groundLevel - 2)
+        {   //Player is going down and is above ground level
+            prevPosY = currentPosY;
+
+            if(currentPosY + 10 <= height)
+            {
+                powerupPosition.y = currentPosY + 10;
+            }
+            else
+            {
+                float difference = height - currentPosY;
+                powerupPosition.y = currentPosY + difference;
+            }
+
+            return powerupPosition;
+        }
+
+        return powerupPosition;
+    }
+
+    Vector3 CalculateCloudPosition()
+    {
+
+
+        return new Vector3(1, 1, 1);
+    }
 }
 

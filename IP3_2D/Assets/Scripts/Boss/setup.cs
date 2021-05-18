@@ -27,8 +27,6 @@ public class setup : MonoBehaviour {
 		float width = cam.rect.width;
 		float height = cam.rect.height;
 
-	
-
 		Vector3 newPlayerPos = cam.ScreenToWorldPoint (playerPos);
 		Vector3 newBossPos =  cam.ScreenToWorldPoint (bossPos);
 	}

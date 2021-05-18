@@ -16,7 +16,7 @@ public class cameraFollow : MonoBehaviour {
 	void Update () {
 	
 		GameObject player = GameObject.FindGameObjectWithTag ("Player");
-		print("Player Postiion Camera " + player.transform.position);
+		//print("Player Postiion Camera " + player.transform.position);
 		var playerPos = player.transform.position;
 
 		float playerPositionX = playerPos.x;

@@ -9,7 +9,7 @@ public class cursor : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>(); //check this
+        camera = Camera.main;
 		cursorObject = GameObject.FindGameObjectWithTag ("cursor");
 	}
 	
