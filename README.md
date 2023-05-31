@@ -1,4 +1,4 @@
-# IP3_2D_CF
+# Project (IP3_2D_CF) 2D SuperHero Game
 
 This project is a 2D Flying game which utilizes the technology LeapMotion to move the in-game character. 
 The latest version of this respository supports mouse controls only. Older versions will most likely not work with LeapMotion unless updated.
