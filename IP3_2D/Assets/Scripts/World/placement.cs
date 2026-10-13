@@ -90,9 +90,8 @@ public class Placement : MonoBehaviour
         powerupPosition.x = player.transform.position.x + powerupOffsetX; //so coins/powerups spawn off screen
         powerupPosition.z = 0;
 
-        playerHeight heightLimit = new playerHeight();
-        float height = heightLimit.playerHeightLimit; //get game level map boundary height
-        Debug.Log("player Y: " + player.transform.position.y);
+        float height = HeightRestrictor.playerHeightLimit;
+        //Debug.Log("player Y: " + player.transform.position.y);
 
         if (currentPosY >= prevPosY && currentPosY <= height + 2)
         {

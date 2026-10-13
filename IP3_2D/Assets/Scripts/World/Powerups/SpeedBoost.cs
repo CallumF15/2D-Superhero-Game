@@ -17,6 +17,6 @@ public class SpeedBoost{
 	void SpecialEffects(){
 
 		GameObject obj =  GameObject.FindGameObjectWithTag ("Player");
-		obj.transform.GetComponent<Rigidbody>().velocity = new Vector3 (Speed, 0, 0);
+		obj.transform.GetComponent<Rigidbody>().linearVelocity = new Vector3 (Speed, 0, 0);
 	}
 }

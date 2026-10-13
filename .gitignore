@@ -41,3 +41,48 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Unity generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+
+# IDE-generated files
+.vs/
+.vscode/
+.idea/
+.gradle/
+ExportedObj/
+
+# IDE and code analysis databases
+*.suo
+*.user
+*.userprefs
+*.sln.docstates
+*.csproj
+*.unityproj
+*.sln
+*.pidb
+*.booproj
+*.svclog
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.Codehunks.db
+*.SemanticSymbols.db
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Build output
+[Bb]uild/
+[Bb]uilds/
+
+# Crash reports
+sysinfo.txt

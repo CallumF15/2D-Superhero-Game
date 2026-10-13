@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class healthbar : MonoBehaviour {
+public class Healthbar : MonoBehaviour {
 
     public static Image HealthBarImage;
-
 
     /// <summary>
     /// Sets the health bar value
@@ -13,31 +12,46 @@ public class healthbar : MonoBehaviour {
     public static void SetHealthBarValue(float value)
     {
         HealthBarImage.fillAmount = value;
+        ChangeHeathbarColour(value);
 
-        //if (HealthBarImage.fillAmount < 0.2f)
-        //    SetHealthBarColor(Color.red);    
-        //else if (HealthBarImage.fillAmount < 0.4f)
-        //    SetHealthBarColor(Color.yellow);
-        //else
-        //    SetHealthBarColor(Color.green);
 
-        if(HealthBarImage.fillAmount <= 0)
-        {
-            //player dead 
-            //display end game message
-        }
+
     }
 
+    /// <summary>
+    /// Return the health bar value
+    /// </summary>
+    /// <returns></returns>
     public static float GetHealthBarValue()
     {
         return HealthBarImage.fillAmount;
     }
 
     /// <summary>
+    /// Changes the color of the health bar based on the value
+    /// </summary>
+    /// <param name="value"></param>
+    private static void ChangeHeathbarColour(float value)
+    {
+        switch (value)
+        {
+            case <= 0.3f:
+                SetHealthBarColor(Color.red);
+                break;
+            case <= 0.6f:
+                SetHealthBarColor(Color.yellow);
+                break;
+            default:
+                SetHealthBarColor(Color.green);
+                break;
+        }
+    }
+
+    /// <summary>
     /// Sets the health bar color
     /// </summary>
     /// <param name="healthColor">Color </param>
-    public static void SetHealthBarColor(Color healthColor)
+    private static void SetHealthBarColor(Color healthColor)
     {
         HealthBarImage.color = healthColor;
     }

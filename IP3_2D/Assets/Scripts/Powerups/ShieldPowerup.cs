@@ -33,7 +33,7 @@ public class ShieldPowerup : MonoBehaviour
     private void ActivateImmunity()
     {
         if (timeElapsed < timeDelay)
-            healthbar.SetHealthBarValue(currentHealth);
+            Healthbar.SetHealthBarValue(currentHealth);
         else
             Destroy(GetComponent<ShieldPowerup>());
     }
@@ -42,7 +42,7 @@ public class ShieldPowerup : MonoBehaviour
     {
         if (other.gameObject.name == "shield")
         {
-            currentHealth = healthbar.GetHealthBarValue();
+            currentHealth = Healthbar.GetHealthBarValue();
             hasCollided = true;
         }
     }

@@ -24,7 +24,7 @@ public class HealthPowerup : MonoBehaviour
         if (other.gameObject.tag == "powerups")
             if (other.gameObject.name == "Health")
             {
-                healthbar.SetHealthBarValue(healthbar.GetHealthBarValue() + healthToReplenish);
+                Healthbar.SetHealthBarValue(Healthbar.GetHealthBarValue() + healthToReplenish);
             }
     }
 }

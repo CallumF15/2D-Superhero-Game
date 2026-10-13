@@ -17,7 +17,7 @@ public class Score : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision hit){
-		Debug.Log ("COLLISION COIN");
+		//Debug.Log ("COLLISION COIN");
 
 		if (hit.gameObject.tag == "coin") {
 			calculateScore();
