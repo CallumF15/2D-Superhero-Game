@@ -77,6 +77,8 @@ public class AttackSelector : MonoBehaviour
             case AttackType.SingleFire:
                 attack = singleFire;
                 settings = singleFireSettings;
+
+                
                 break;
 
             case AttackType.MultipleShots:

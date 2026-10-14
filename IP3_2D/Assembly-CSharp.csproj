@@ -65,52 +65,54 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.6.4f1\Editor\Data\BCLExtensions\TargetingPacks\netstandard2.1\analyzers\dotnet\roslyn4.0\cs\System.Text.Json.SourceGeneration.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Player\playerAttack.cs" />
-    <Compile Include="Assets\Scripts\World\rotate.cs" />
+    <Compile Include="Assets\Scripts\World\BackgroundSpawner.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerHeightRestrictor.cs" />
+    <Compile Include="Assets\Scripts\StatusEffects\BurnEffect.cs" />
+    <Compile Include="Assets\Scripts\Boss\Attacks\Projectile\Projectile.cs" />
     <Compile Include="Assets\Scripts\World\Powerups\IPowerups.cs" />
-    <Compile Include="Assets\Scripts\Boss\Projectile\IceProjectile.cs" />
+    <Compile Include="Assets\Scripts\Boss\Attacks\Projectile\IceProjectile.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\AttackDecision.cs" />
-    <Compile Include="Assets\Scripts\Player\HeightRestrictor.cs" />
-    <Compile Include="Assets\Scripts\Player\cameraFollow.cs" />
+    <Compile Include="Assets\Scripts\Player\Attacks\PlayerAttackMovement.cs" />
     <Compile Include="Assets\Scripts\Boss\BossMovement.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\BossAttacks.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerHealth.cs" />
+    <Compile Include="Assets\Scripts\Characters\IHealth.cs" />
     <Compile Include="Assets\Scripts\World\Powerups\SpeedBoost.cs" />
-    <Compile Include="Assets\Scripts\World\placement.cs" />
     <Compile Include="Assets\Scripts\Powerups\ShieldPowerup.cs" />
-    <Compile Include="Assets\Scripts\UI\altitude.cs" />
     <Compile Include="Assets\Scripts\Boss\BossPhase.cs" />
     <Compile Include="Assets\Scripts\Attacks\Boss\TargetedAttack.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\AttackTimer.cs" />
+    <Compile Include="Assets\Scripts\UI\Altitude.cs" />
     <Compile Include="Assets\Scripts\attackMove.cs" />
-    <Compile Include="Assets\Scripts\Boss\Projectile\PlasmaProjectile.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\AttackSelector.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\Types\SuperAttack.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\Elements\AttackElementType.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\BossAttackController.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\Types\MultipleFireAttack.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\AttackType.cs" />
-    <Compile Include="Assets\Scripts\Boss\BossHealth.cs" />
-    <Compile Include="Assets\Scripts\Boss\Projectile\FireProjectile.cs" />
-    <Compile Include="Assets\Scripts\Boss\Projectile\Projectile.cs" />
+    <Compile Include="Assets\Scripts\StatusEffects\StatusEffectManager.cs" />
+    <Compile Include="Assets\Scripts\Boss\Attacks\Projectile\FireProjectile.cs" />
     <Compile Include="Assets\Scripts\Player\Healthbar.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerHealth.cs" />
+    <Compile Include="Assets\Scripts\Boss\BossHealthUI.cs" />
     <Compile Include="Assets\Scripts\Boss\setup.cs" />
     <Compile Include="Assets\Scripts\World\Powerups\hyperShield.cs" />
     <Compile Include="Assets\Scripts\Health.cs" />
+    <Compile Include="Assets\Scripts\Boss\Attacks\Types\Attack.cs" />
     <Compile Include="Assets\Scripts\Boss\collisionIgnore.cs" />
-    <Compile Include="Assets\Scripts\Boss\AttackSpawner.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerCameraController.cs" />
     <Compile Include="Assets\Scripts\UI\powerMessage.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\Types\SpreadShotAttack.cs" />
-    <Compile Include="Assets\Scripts\Boss\Attacks\Elements\Attack.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\Types\SingleFireAttack.cs" />
     <Compile Include="Assets\Scripts\UI\Score.cs" />
     <Compile Include="Assets\Scripts\Attacks\Boss\scaleAttack.cs" />
     <Compile Include="Assets\Scripts\World\PlacementCleanup.cs" />
+    <Compile Include="Assets\Scripts\Characters\BossHealth.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\StatusEffects\StatusEffects.cs" />
+    <Compile Include="Assets\Scripts\Boss\Attacks\Projectile\PlasmaProjectile.cs" />
     <Compile Include="Assets\Scripts\Powerups\HealthPowerup.cs" />
     <Compile Include="Assets\Scripts\Menu\Menu.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\bossAttack.cs" />
-    <Compile Include="Assets\Scripts\terrainCreator.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\AttackSettings.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1280,6 +1282,10 @@
     </Reference>
     <Reference Include="Unity.PlasticSCM.Editor.Assistant">
       <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.Assistant.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEditor.UI.Analytics">

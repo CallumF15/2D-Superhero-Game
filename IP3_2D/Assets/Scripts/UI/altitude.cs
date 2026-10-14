@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class altitude : MonoBehaviour {
+public class Altitude : MonoBehaviour {
 
 	public Text message;
 

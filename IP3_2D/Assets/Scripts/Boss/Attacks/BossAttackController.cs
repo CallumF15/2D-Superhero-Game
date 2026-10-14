@@ -28,7 +28,7 @@ public class BossAttackController : MonoBehaviour
 
     private void Start()
     {
-        if (EnableTesting)   
+        if (EnableTesting)
             StartCoroutine(TestAttacks());    //Start the attack test loop
         else
             StartCoroutine(BossAttackLoop()); //Start the attack loop
@@ -42,18 +42,8 @@ public class BossAttackController : MonoBehaviour
             {
                 AttackDecision decision = attackSelector.SelectTestAttack(attack, EnableTargetedAttack);
 
-                yield return StartCoroutine(
-                    decision.attack.Execute(
-                        decision.Settings,
-                        attackPoint,
-                        decision.Prefab,
-                        attackContainer
-                    )
-                );
-
-                yield return new WaitForSeconds(2f);
+                yield return StartCoroutine(ExecuteAttack(decision));
             }
-
         }
     }
 
@@ -64,31 +54,43 @@ public class BossAttackController : MonoBehaviour
 
         while (true)
         {
-
             // Ask the selector what attack to perform.
             AttackDecision decision = attackSelector.SelectAttack();
-            Debug.Log($"Boss selected {decision.Type} " + $"using {decision.Element}" + $" targeting: {decision.Settings.isTargeted}");
-
-            // Perform the selected attack
 
             if (decision != null)
             {
-                yield return StartCoroutine(
-                    decision.attack.Execute(
-                        decision.Settings,
-                        attackPoint,
-                        decision.Prefab,
-                        attackContainer
-
-                    )
-                );
+                Debug.Log(
+                    $"Boss selected {decision.Type} " +
+                    $"using {decision.Element}" +
+                    $" targeting: {decision.Settings.isTargeted}"
+                   );
             }
 
-            // Wait until the boss can attack again.
-            yield return StartCoroutine(
-                AttackTimer.WaitForNextAttack(2f)
-            );
+
+            yield return StartCoroutine(ExecuteAttack(decision));
         }
+    }
+
+    private IEnumerator ExecuteAttack(AttackDecision decision)
+    {
+        if (decision == null)
+            yield break;
+
+        //attackPoint.position = transform.position + attackSpawnOffset;
+
+        // Perform the selected attack
+        yield return StartCoroutine(
+            decision.attack.Execute(
+                decision.Settings,
+                attackPoint,
+                decision.Prefab,
+                attackContainer
+            )
+        );
+
+
+        // Wait until the boss can attack again.
+        yield return StartCoroutine(AttackTimer.WaitForNextAttack(delayBetweenAttacks));
     }
 
 }

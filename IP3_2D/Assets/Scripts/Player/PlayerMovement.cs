@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Create a new copy of the attack prefab at the
         // calculated position and rotation.
-        playerAttackObject.GetComponent<playerAttack>().speed = flySpeed + 10; //set speed of attack to match player speed
+        playerAttackObject.GetComponent<PlayerAttackMovement>().speed = flySpeed + 10; //set speed of attack to match player speed
         GameObject obj = Instantiate(playerAttackObject, spawnPosition, transform.rotation);
 
 
