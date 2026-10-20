@@ -27,7 +27,7 @@ The original version explored gesture-based controls using a Leap Motion control
 
 - **Move mouse:** The player adjusts their direction based on the mouse position.
 - **Left-click:** Fire a projectile.
-- **Hold left-click:** Continuously fire while holding the button.
+- **Hold left-click:** Continuously fire while holding the button (yet to be implemented)
 
 ### Legacy Leap Motion Controls
 
