@@ -24,18 +24,6 @@ public class BurnEffect : StatusEffects
         this.duration = duration;
     }
 
-    public BurnEffect(float duration)
-        : base(duration)
-    { }
-
-    public BurnEffect(float damage, float duration,  float interval)
-        : base(duration)
-    {
-        this.damage = damage;
-        this.duration = duration;
-        this.interval = interval;
-    }
-
     public override void Apply(IHealth target)
     {
         Remove(this.target);

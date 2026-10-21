@@ -32,12 +32,13 @@ public class PlayerMovement : MonoBehaviour
         CalculateMouseAngle();
         transform.position += transform.right * Time.deltaTime * flySpeed; //move player
 
-     
+        
 
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             PlayerAttack();
         }
+
     }
 
     private void CalculateMouseAngle()
@@ -81,10 +82,12 @@ public class PlayerMovement : MonoBehaviour
         playerAttackObject.GetComponent<PlayerAttackMovement>().speed = flySpeed + 10; //set speed of attack to match player speed
         GameObject obj = Instantiate(playerAttackObject, spawnPosition, transform.rotation);
 
+        Debug.Log("Projectile spawn position: " + obj.transform.position);
+        Debug.Log("Projectile rotation: " + obj.transform.eulerAngles);
 
         // Set the scale of the newly created attack object.
         // This changes the spawned object rather than the
         // original prefab/reference.
-        obj.transform.localScale = new Vector3(-0.5f, 0.5f, 1.0f);
+        obj.transform.localScale = new Vector3(-.5f, 0.5f, 1.0f);
     }
 }

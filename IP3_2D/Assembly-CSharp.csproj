@@ -65,55 +65,55 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.6.4f1\Editor\Data\BCLExtensions\TargetingPacks\netstandard2.1\analyzers\dotnet\roslyn4.0\cs\System.Text.Json.SourceGeneration.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Boss\Attacks\AttackType.cs" />
     <Compile Include="Assets\Scripts\World\BackgroundSpawner.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHeightRestrictor.cs" />
     <Compile Include="Assets\Scripts\StatusEffects\BurnEffect.cs" />
+    <Compile Include="Assets\Scripts\StatusEffects\StatusEffectManager.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\Projectile\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Boss\Attacks\Projectile\FireProjectile.cs" />
     <Compile Include="Assets\Scripts\World\Powerups\IPowerups.cs" />
+    <Compile Include="Assets\Scripts\Player\Healthbar.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\Projectile\IceProjectile.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\AttackDecision.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\Player\Attacks\PlayerAttackMovement.cs" />
     <Compile Include="Assets\Scripts\Boss\BossMovement.cs" />
-    <Compile Include="Assets\Scripts\Boss\Attacks\BossAttacks.cs" />
-    <Compile Include="Assets\Scripts\Characters\IHealth.cs" />
-    <Compile Include="Assets\Scripts\World\Powerups\SpeedBoost.cs" />
-    <Compile Include="Assets\Scripts\Powerups\ShieldPowerup.cs" />
-    <Compile Include="Assets\Scripts\Boss\BossPhase.cs" />
-    <Compile Include="Assets\Scripts\Attacks\Boss\TargetedAttack.cs" />
-    <Compile Include="Assets\Scripts\Boss\Attacks\AttackTimer.cs" />
-    <Compile Include="Assets\Scripts\UI\Altitude.cs" />
-    <Compile Include="Assets\Scripts\attackMove.cs" />
-    <Compile Include="Assets\Scripts\Boss\Attacks\AttackSelector.cs" />
-    <Compile Include="Assets\Scripts\Boss\Attacks\Types\SuperAttack.cs" />
-    <Compile Include="Assets\Scripts\Boss\Attacks\Elements\AttackElementType.cs" />
-    <Compile Include="Assets\Scripts\Boss\Attacks\BossAttackController.cs" />
-    <Compile Include="Assets\Scripts\Boss\Attacks\Types\MultipleFireAttack.cs" />
-    <Compile Include="Assets\Scripts\Boss\Attacks\AttackType.cs" />
-    <Compile Include="Assets\Scripts\StatusEffects\StatusEffectManager.cs" />
-    <Compile Include="Assets\Scripts\Boss\Attacks\Projectile\FireProjectile.cs" />
-    <Compile Include="Assets\Scripts\Player\Healthbar.cs" />
-    <Compile Include="Assets\Scripts\Characters\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\Boss\BossHealthUI.cs" />
     <Compile Include="Assets\Scripts\Boss\setup.cs" />
     <Compile Include="Assets\Scripts\World\Powerups\hyperShield.cs" />
-    <Compile Include="Assets\Scripts\Health.cs" />
+    <Compile Include="Assets\Scripts\Boss\Attacks\BossAttacks.cs" />
+    <Compile Include="Assets\Scripts\Characters\IHealth.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\Types\Attack.cs" />
+    <Compile Include="Assets\Scripts\StatusEffects\IceEffect.cs" />
     <Compile Include="Assets\Scripts\Boss\collisionIgnore.cs" />
+    <Compile Include="Assets\Scripts\World\Powerups\SpeedBoost.cs" />
+    <Compile Include="Assets\Scripts\Powerups\ShieldPowerup.cs" />
+    <Compile Include="Assets\Scripts\Boss\BossPhase.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCameraController.cs" />
+    <Compile Include="Assets\Scripts\Attacks\Boss\TargetedAttack.cs" />
+    <Compile Include="Assets\Scripts\Boss\Attacks\AttackTimer.cs" />
     <Compile Include="Assets\Scripts\UI\powerMessage.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\Types\SpreadShotAttack.cs" />
+    <Compile Include="Assets\Scripts\UI\Altitude.cs" />
+    <Compile Include="Assets\Scripts\attackMove.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\Types\SingleFireAttack.cs" />
     <Compile Include="Assets\Scripts\UI\Score.cs" />
+    <Compile Include="Assets\Scripts\Characters\BossHealth.cs" />
     <Compile Include="Assets\Scripts\Attacks\Boss\scaleAttack.cs" />
     <Compile Include="Assets\Scripts\World\PlacementCleanup.cs" />
-    <Compile Include="Assets\Scripts\Characters\BossHealth.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\StatusEffects\StatusEffects.cs" />
+    <Compile Include="Assets\Scripts\Boss\Attacks\AttackSelector.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\Projectile\PlasmaProjectile.cs" />
     <Compile Include="Assets\Scripts\Powerups\HealthPowerup.cs" />
+    <Compile Include="Assets\Scripts\Boss\Attacks\Types\SuperAttack.cs" />
     <Compile Include="Assets\Scripts\Menu\Menu.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\bossAttack.cs" />
+    <Compile Include="Assets\Scripts\Boss\Attacks\Elements\AttackElementType.cs" />
+    <Compile Include="Assets\Scripts\Boss\Attacks\BossAttackController.cs" />
     <Compile Include="Assets\Scripts\Boss\Attacks\AttackSettings.cs" />
+    <Compile Include="Assets\Scripts\Boss\Attacks\Types\MultipleFireAttack.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -1264,24 +1264,12 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.6.4f1\Editor\Data\BCLExtensions\TargetingPacks\netstandard2.1\ref\System.Text.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VSCode.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.InternalAPIEngineBridge.004">
       <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.004.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Multiplayer.Center.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Center.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.PlasticSCM.Editor.Assistant">
-      <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.Assistant.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
@@ -1292,10 +1280,6 @@
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.Analytics.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.PlasticSCM.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
       <Private>False</Private>
@@ -1304,32 +1288,16 @@
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.AI.Navigation">
-      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.AI.Navigation.Editor.ConversionSystem">
-      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.ConversionSystem.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Multiplayer.Center.Common">
-      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Center.Common.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.AI.Navigation.Updater">
-      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Updater.dll</HintPath>
+    <Reference Include="Unity.VSCode.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Timeline">
@@ -1338,10 +1306,6 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.AI.Navigation.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
