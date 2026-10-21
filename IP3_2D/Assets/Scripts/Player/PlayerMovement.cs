@@ -3,11 +3,6 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float angle;
-
-    // Stores a reference to the main camera.
-    // We use this to convert the player's world position
-    // into screen coordinates.
     private Camera mainCamera;
 
     [SerializeField] private float flySpeed = 17.0f;
@@ -17,8 +12,6 @@ public class PlayerMovement : MonoBehaviour
 
     public float FlySpeed { get => flySpeed;}
 
-    //[SerializeField] = "These are settings I want to configure in Unity, but other scripts shouldn't directly modify them.
-
     // Use this for initialization
     void Start()
     {
@@ -27,18 +20,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        // Calculate the angle between the player
-        // and the mouse and rotate the player toward it.
+        // Calculate the angle between the and the mouse and rotate the player toward it.
         CalculateMouseAngle();
         transform.position += transform.right * Time.deltaTime * flySpeed; //move player
 
-        
-
+       
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             PlayerAttack();
         }
-
     }
 
     private void CalculateMouseAngle()
@@ -47,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 direction = Input.mousePosition - playerScreenPosition;
 
-        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
@@ -74,11 +64,7 @@ public class PlayerMovement : MonoBehaviour
         // distanceToSpawn units.
         Vector3 spawnPosition = playerPosition + playerDirection * distanceToSpawn;
 
-        // Print the spawn position to the Console.
-        //Debug.Log("spawnPos: " + spawnPosition);
-
-        // Create a new copy of the attack prefab at the
-        // calculated position and rotation.
+        // Create a new copy of the attack prefab at the calculated position and rotation.
         playerAttackObject.GetComponent<PlayerAttackMovement>().speed = flySpeed + 10; //set speed of attack to match player speed
         GameObject obj = Instantiate(playerAttackObject, spawnPosition, transform.rotation);
 

@@ -11,6 +11,8 @@ public class PlayerHealth : IHealth
     [Range(0.5f, 1)]
     [SerializeField] protected float currentHealth = 1f; // Player's health value, ranging from 0.5 to 1
 
+    public bool IsShielded { get; private set; }
+
     public float MaxHealth
     {
         get => maxHealth;
@@ -42,6 +44,9 @@ public class PlayerHealth : IHealth
 
 	public override void TakeDamage(float damage)
 	{
+        if (IsShielded) //player has shield powerup (don't damage)
+            return;
+
         CurrentHealth -= damage; // Reduce the player's health by the specified damage amount
 
         if (CurrentHealth <= 0)
@@ -52,5 +57,15 @@ public class PlayerHealth : IHealth
         }
 
         Healthbar.SetHealthBarValue(CurrentHealth); // Update the health bar to reflect the new health value		
+    }
+
+    public void ActivateShield()
+    {
+        IsShielded = true;
+    }
+
+    public void DeactivateShield()
+    {
+        IsShielded = false;
     }
 }

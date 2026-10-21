@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 public class Score : MonoBehaviour {
 
-	public Text message;
+	[SerializeField] private Text message;
 	private int score = 0;
 	
 	// Use this for initialization

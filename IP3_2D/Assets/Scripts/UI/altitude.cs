@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class Altitude : MonoBehaviour {
 
+	[SerializeField] private Transform player;
+
 	public Text message;
 
 	// Use this for initialization
@@ -13,8 +15,8 @@ public class Altitude : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float height = GameObject.Find ("Player").transform.position.y;
-		int newHeight = (int)height;
+		float height = player.transform.position.y;
+		int newHeight = Mathf.RoundToInt(height); //cast to an integer value for display purposes
 		message.text = "Altitude: " + newHeight;
 	}
 }

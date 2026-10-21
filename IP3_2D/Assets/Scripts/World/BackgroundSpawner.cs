@@ -20,7 +20,8 @@ public class BackgroundSpawner : MonoBehaviour
     private float currentPosY, prevPosY, currentPosX, prevPosX;
     private float lastValue;
 
-    private float groundLevel = 0;
+    [SerializeField] private float maximumHeight = 1500f;
+    [SerializeField] private float minimumHeight = 0;
 
     // Use this for initialization
     void Start()
@@ -35,28 +36,23 @@ public class BackgroundSpawner : MonoBehaviour
         currentPosX = player.transform.position.x;
         currentPosY = player.transform.position.y; //get player Y pos
 
-        if (currentPosY > 100)
-            player.transform.position = new Vector3(currentPosX, 100.0f, 0);
-
         if (currentPosX > prevPosX)
         { //make sure player isn't going back the way
 
             if (lastStateCheck + delay < timeElapsed)
             {
-                //Debug.Log("COUNT: " + powerArray.Count);
-                int index = Random.Range(0, worldObjectList.Count);
-
-                while (lastValue == index)
+                if (worldObjectList.Count > 1) //Ensure there is at least one value in the list
                 {
-                    index = Random.Range(0, worldObjectList.Count);
+                    int index = Random.Range(0, worldObjectList.Count);
+
+                    while (lastValue == index)
+                    {
+                        index = Random.Range(0, worldObjectList.Count);
+                    }
+
+                    lastValue = index;
+                    SpawnPowerup(index);
                 }
-
-                lastValue = index;
-
-                //Debug.Log ("INDEX " + index);
-
-                SpawnPowerup(index);
-
 
                 lastStateCheck = timeElapsed;
             }
@@ -90,37 +86,36 @@ public class BackgroundSpawner : MonoBehaviour
         powerupPosition.x = player.transform.position.x + powerupOffsetX; //so coins/powerups spawn off screen
         powerupPosition.z = 0;
 
-        float height = PlayerHeightRestrictor.playerHeightLimit;
-        //Debug.Log("player Y: " + player.transform.position.y);
-
-        if (currentPosY >= prevPosY && currentPosY <= height + 2)
+        //player is flying up and is below the maximum height
+        if (currentPosY >= prevPosY && currentPosY <= maximumHeight + 2) 
         {
             prevPosY = currentPosY;
 
-            if (currentPosY - 10 >= groundLevel)
+            if (currentPosY - 10 >= minimumHeight)
             {
                 powerupPosition.y = currentPosY - 10;
             }
             else
             {
-                float difference = groundLevel + currentPosY;
+                float difference = minimumHeight + currentPosY;
                 powerupPosition.y = currentPosY - difference;
             }
 
             return powerupPosition;
         }
 
-        if (currentPosY < prevPosY && currentPosY >= groundLevel - 2)
-        {   //Player is going down and is above ground level
+        //Player is flying down and is above the minimum height
+        if (currentPosY < prevPosY && currentPosY >= minimumHeight - 2)
+        {   
             prevPosY = currentPosY;
 
-            if(currentPosY + 10 <= height)
+            if(currentPosY + 10 <= maximumHeight)
             {
                 powerupPosition.y = currentPosY + 10;
             }
             else
             {
-                float difference = height - currentPosY;
+                float difference = maximumHeight - currentPosY;
                 powerupPosition.y = currentPosY + difference;
             }
 

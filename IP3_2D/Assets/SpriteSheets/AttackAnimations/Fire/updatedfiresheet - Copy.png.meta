@@ -1,0 +1,358 @@
+fileFormatVersion: 2
+guid: cdde94a2900f9b44abb4fe69d57c153a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5424920511963399249
+    second: updatedfiresheet - Copy_0
+  - first:
+      213: -8289129290169783338
+    second: updatedfiresheet - Copy_1
+  - first:
+      213: -2311064159145373489
+    second: updatedfiresheet - Copy_2
+  - first:
+      213: 8532615805901139937
+    second: updatedfiresheet - Copy_3
+  - first:
+      213: 7942940283254654121
+    second: updatedfiresheet - Copy_4
+  - first:
+      213: -2037062663096478793
+    second: updatedfiresheet - Copy_5
+  - first:
+      213: 4809709619948859809
+    second: updatedfiresheet - Copy_6
+  - first:
+      213: 7523385268959218769
+    second: updatedfiresheet - Copy_7
+  - first:
+      213: -5876395970286947104
+    second: updatedfiresheet - Copy_8
+  - first:
+      213: 7261514275304135959
+    second: updatedfiresheet - Copy_9
+  - first:
+      213: -8951788635611319179
+    second: updatedfiresheet - Copy_10
+  - first:
+      213: 6136553889153306487
+    second: updatedfiresheet - Copy_11
+  - first:
+      213: -703643956916551071
+    second: updatedfiresheet - Copy_12
+  - first:
+      213: 1874990882678665659
+    second: updatedfiresheet - Copy_13
+  - first:
+      213: 1155449508651964460
+    second: updatedfiresheet - Copy_14
+  - first:
+      213: 6722603187083998411
+    second: updatedfiresheet - Copy_15
+  - first:
+      213: 8280634920202063251
+    second: updatedfiresheet - Copy_16
+  - first:
+      213: -2495909344430527226
+    second: updatedfiresheet - Copy_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: updatedfiresheet - Copy_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 788
+        width: 428
+        height: 236
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1540f429670394b40800000000000000
+      internalID: 5424920511963399249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: updatedfiresheet - Copy_1
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 793
+        width: 432
+        height: 231
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dbe42a04d817fc80800000000000000
+      internalID: -8289129290169783338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: updatedfiresheet - Copy_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 544
+        width: 510
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc0d00d44637defd0800000000000000
+      internalID: -2311064159145373489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: updatedfiresheet - Copy_3
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 544
+        width: 511
+        height: 224
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1efee932ed0f96670800000000000000
+      internalID: 8532615805901139937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: updatedfiresheet - Copy_4
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 285
+        width: 478
+        height: 225
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a4c887aa1efa3e60800000000000000
+      internalID: 7942940283254654121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: updatedfiresheet - Copy_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 36
+        width: 470
+        height: 224
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b35cecfc46eab3e0800000000000000
+      internalID: -2037062663096478793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: updatedfiresheet - Copy_14
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 293
+        width: 475
+        height: 225
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c28991fc43bf80010800000000000000
+      internalID: 1155449508651964460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: bb27ba7b7070ce2489e597b257833427
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      updatedfiresheet - Copy_0: 5424920511963399249
+      updatedfiresheet - Copy_1: -8289129290169783338
+      updatedfiresheet - Copy_10: -8951788635611319179
+      updatedfiresheet - Copy_11: 6136553889153306487
+      updatedfiresheet - Copy_12: -703643956916551071
+      updatedfiresheet - Copy_13: 1874990882678665659
+      updatedfiresheet - Copy_14: 1155449508651964460
+      updatedfiresheet - Copy_15: 6722603187083998411
+      updatedfiresheet - Copy_16: 8280634920202063251
+      updatedfiresheet - Copy_17: -2495909344430527226
+      updatedfiresheet - Copy_2: -2311064159145373489
+      updatedfiresheet - Copy_3: 8532615805901139937
+      updatedfiresheet - Copy_4: 7942940283254654121
+      updatedfiresheet - Copy_5: -2037062663096478793
+      updatedfiresheet - Copy_6: 4809709619948859809
+      updatedfiresheet - Copy_7: 7523385268959218769
+      updatedfiresheet - Copy_8: -5876395970286947104
+      updatedfiresheet - Copy_9: 7261514275304135959
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

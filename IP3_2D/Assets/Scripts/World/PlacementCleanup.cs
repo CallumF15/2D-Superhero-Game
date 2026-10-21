@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlacementCleanup : MonoBehaviour
 {
-    private GameObject player;
+    [SerializeField] private GameObject player;
 
     public int placementOffsetX = 40;
 
