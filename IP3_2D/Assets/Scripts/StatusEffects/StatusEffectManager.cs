@@ -1,8 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine;
-
-using static StatusEffects;
 
 public class StatusEffectManager : MonoBehaviour
 {

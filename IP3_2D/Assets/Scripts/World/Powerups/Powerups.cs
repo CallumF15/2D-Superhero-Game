@@ -2,7 +2,7 @@
 
 public abstract class PowerUp : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Trigger detected: " + other.name+ ", Tag: " + other.tag);
 
@@ -13,7 +13,14 @@ public abstract class PowerUp : MonoBehaviour
         ApplyEffect(other.gameObject);
         DisplayMessage();
 
-        Destroy(gameObject);
+        if (transform.parent != null)
+        {
+            Destroy(transform.parent.gameObject);
+        }
+        else
+        {
+            Debug.Log("This GameObject has no parent!");
+        }
     }
 
     protected abstract void DisplayMessage();

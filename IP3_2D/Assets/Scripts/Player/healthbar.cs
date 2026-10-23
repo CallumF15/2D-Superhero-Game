@@ -13,9 +13,6 @@ public class Healthbar : MonoBehaviour {
     {
         HealthBarImage.fillAmount = value;
         ChangeHeathbarColour(value);
-
-
-
     }
 
     /// <summary>

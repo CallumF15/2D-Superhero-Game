@@ -1,8 +1,5 @@
 using UnityEngine;
 
-using UnityEngine;
-
-using UnityEngine;
 
 /// <summary>
 /// Keeps the Boss Health UI above the boss

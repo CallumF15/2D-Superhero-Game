@@ -1,0 +1,358 @@
+fileFormatVersion: 2
+guid: c79dd9d65c0711447a6016616691d504
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7459067743811115432
+    second: plasmaspritesheet_0
+  - first:
+      213: 5989214624457701184
+    second: plasmaspritesheet_1
+  - first:
+      213: 4888269712628811281
+    second: plasmaspritesheet_2
+  - first:
+      213: 73608069355297838
+    second: plasmaspritesheet_3
+  - first:
+      213: 6683740368179064622
+    second: plasmaspritesheet_4
+  - first:
+      213: 3908666312402803406
+    second: plasmaspritesheet_5
+  - first:
+      213: 2116124509118431558
+    second: plasmaspritesheet_6
+  - first:
+      213: 2728904965112004883
+    second: plasmaspritesheet_7
+  - first:
+      213: -8048399232631580043
+    second: plasmaspritesheet_8
+  - first:
+      213: -8352086348388647385
+    second: plasmaspritesheet_9
+  - first:
+      213: -6459759413695625647
+    second: plasmaspritesheet_10
+  - first:
+      213: 8706508207355622357
+    second: plasmaspritesheet_11
+  - first:
+      213: 5282374203854432316
+    second: plasmaspritesheet_12
+  - first:
+      213: -197233637994873603
+    second: plasmaspritesheet_13
+  - first:
+      213: -144007143621794150
+    second: plasmaspritesheet_14
+  - first:
+      213: 3615669104247543007
+    second: plasmaspritesheet_15
+  - first:
+      213: 3836380645529476087
+    second: plasmaspritesheet_16
+  - first:
+      213: 1294131068975554685
+    second: plasmaspritesheet_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: plasmaspritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 788
+        width: 428
+        height: 236
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a99f69d79ee38760800000000000000
+      internalID: 7459067743811115432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plasmaspritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 542
+        width: 510
+        height: 226
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 047306ef7f6fd1350800000000000000
+      internalID: 5989214624457701184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plasmaspritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 788
+        width: 429
+        height: 236
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1168a8b876f96d340800000000000000
+      internalID: 4888269712628811281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plasmaspritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 543
+        width: 510
+        height: 224
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2c568a2622850100800000000000000
+      internalID: 73608069355297838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plasmaspritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 293
+        width: 482
+        height: 223
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2f6040f37a61cc50800000000000000
+      internalID: 6683740368179064622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plasmaspritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 294
+        width: 477
+        height: 225
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3110d4f7b940fd520800000000000000
+      internalID: 2728904965112004883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plasmaspritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 37
+        width: 469
+        height: 224
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c382e67e953ce4940800000000000000
+      internalID: 5282374203854432316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: b6ebe10623cbbf040867e3602e8ba347
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      plasmaspritesheet_0: 7459067743811115432
+      plasmaspritesheet_1: 5989214624457701184
+      plasmaspritesheet_10: -6459759413695625647
+      plasmaspritesheet_11: 8706508207355622357
+      plasmaspritesheet_12: 5282374203854432316
+      plasmaspritesheet_13: -197233637994873603
+      plasmaspritesheet_14: -144007143621794150
+      plasmaspritesheet_15: 3615669104247543007
+      plasmaspritesheet_16: 3836380645529476087
+      plasmaspritesheet_17: 1294131068975554685
+      plasmaspritesheet_2: 4888269712628811281
+      plasmaspritesheet_3: 73608069355297838
+      plasmaspritesheet_4: 6683740368179064622
+      plasmaspritesheet_5: 3908666312402803406
+      plasmaspritesheet_6: 2116124509118431558
+      plasmaspritesheet_7: 2728904965112004883
+      plasmaspritesheet_8: -8048399232631580043
+      plasmaspritesheet_9: -8352086348388647385
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

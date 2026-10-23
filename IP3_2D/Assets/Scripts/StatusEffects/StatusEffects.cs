@@ -1,8 +1,3 @@
-using UnityEngine;
-
-using System.Collections;
-using UnityEngine;
-
 public abstract class StatusEffects
 {
     public float Duration { get; protected set; }

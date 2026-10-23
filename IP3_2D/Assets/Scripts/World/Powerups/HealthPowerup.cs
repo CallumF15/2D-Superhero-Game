@@ -9,7 +9,12 @@ public class HealthPowerup : PowerUp
 
     protected override void ApplyEffect(GameObject player)
     {
-        Healthbar.SetHealthBarValue(Healthbar.GetHealthBarValue() + healthToReplenish);
+        PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+
+        if (playerHealth == null)
+            return;
+
+        playerHealth.Heal(healthToReplenish);
     }
 
     protected override void DisplayMessage()

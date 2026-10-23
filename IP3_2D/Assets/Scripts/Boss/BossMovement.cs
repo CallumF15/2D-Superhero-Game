@@ -1,41 +1,36 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿
+using System.Runtime.CompilerServices;
+using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class BossMovement : MonoBehaviour
 {
+    public float delayTime = 1.0f;
+    public float offsetX = 30;
+ 
+    [SerializeField] private Transform player;
 
-	public float Speed = 3.0f;
-	public float delayTime = 1.0f;
-	public float offsetX = 30;
-	Vector3 bossPos, playerPos;
 
-		
-	// Update is called once per frame
-	void Update ()
-	{
-		moveBoss();
-	}
+    [SerializeField] private float ySmoothTime = 0.25f;  // seconds to catch up; lower = tighter
+    [SerializeField] private float maxYSpeed = 30f;      // optional cap
 
-	
-	void moveBoss ()
-	{
-		GameObject obj = GameObject.FindGameObjectWithTag ("Player");
-		
-		playerPos = obj.transform.position;
-		bossPos = transform.position;
-		
-		//boss position on Y axis has to be somewhat near the players slight delay
-		float val = trackPlayer ();
+    private float yVelocity; // used internally by SmoothDamp
 
-		bossPos.x = playerPos.x + offsetX;
-		bossPos.y = val;
-		transform.position = bossPos;
-	}
+    private void Awake()
+    {
 
-	float trackPlayer()
-	{
-		float tParam = Time.deltaTime * Speed;
-		float lerpVal = Mathf.Lerp (bossPos.y, playerPos.y, tParam);
-		return lerpVal;
-	}
+    }
+
+    private void Update()
+    {
+        if (player == null) return;
+
+        Vector3 pos = transform.position;
+
+        pos.x = player.position.x + offsetX;
+        pos.y = Mathf.SmoothDamp(pos.y, player.position.y, ref yVelocity, ySmoothTime, maxYSpeed);
+
+        transform.position = pos;
+    }
 }

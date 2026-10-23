@@ -1,16 +1,23 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     private Camera mainCamera;
 
-    [SerializeField] private float flySpeed = 17.0f;
-    [SerializeField] private float distanceToSpawn = 10.0f;
-    [SerializeField] private GameObject playerAttackObject;
+    [SerializeField] private float flySpeed = 10f;
+
     [SerializeField] private float rotationSpeed = 90f;
 
-    public float FlySpeed { get => flySpeed;}
+    public Vector2 CurrentVelocity => rb.linearVelocity;
+
+    private Rigidbody2D rb;
+
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     // Use this for initialization
     void Start()
@@ -18,62 +25,39 @@ public class PlayerMovement : MonoBehaviour
         mainCamera = Camera.main;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        // Calculate the angle between the and the mouse and rotate the player toward it.
         CalculateMouseAngle();
-        transform.position += transform.right * Time.deltaTime * flySpeed; //move player
-
-       
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
-        {
-            PlayerAttack();
-        }
+        rb.linearVelocity = (Vector2)transform.right * flySpeed;
     }
 
     private void CalculateMouseAngle()
     {
-        Vector3 playerScreenPosition = mainCamera.WorldToScreenPoint(transform.position);
+        if (Mouse.current == null) return;
 
-        Vector3 direction = Input.mousePosition - playerScreenPosition;
+        Vector3 playerScreenPosition =
+            mainCamera.WorldToScreenPoint(rb.position);
+
+        Vector3 mousePosition =
+            Mouse.current.position.ReadValue();
+
+        Vector3 direction = mousePosition - playerScreenPosition;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        float targetRotation = Mathf.MoveTowardsAngle(
+            rb.rotation,
+            angle,
+            rotationSpeed * Time.fixedDeltaTime
+        );
 
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        rb.MoveRotation(targetRotation);
     }
 
-
-    private void PlayerAttack()
+    public void IncreaseFlySpeed(float amount)
     {
-        // Get the player's current position in the world.
-        Vector3 playerPosition = transform.position;
-
-        // Get the direction the player is currently facing.
-        // transform.right is the player's local X axis.
-        // This means your player is expected to face right
-        // when its rotation is zero.
-        Vector3 playerDirection = transform.right;
-
-        // Get the player's current rotation.
-        Vector3 playerRotation = transform.rotation.eulerAngles;
-
-        // Calculate where the attack should appear
-        // Start at the player and move forward by
-        // distanceToSpawn units.
-        Vector3 spawnPosition = playerPosition + playerDirection * distanceToSpawn;
-
-        // Create a new copy of the attack prefab at the calculated position and rotation.
-        playerAttackObject.GetComponent<PlayerAttackMovement>().speed = flySpeed + 10; //set speed of attack to match player speed
-        GameObject obj = Instantiate(playerAttackObject, spawnPosition, transform.rotation);
-
-        Debug.Log("Projectile spawn position: " + obj.transform.position);
-        Debug.Log("Projectile rotation: " + obj.transform.eulerAngles);
-
-        // Set the scale of the newly created attack object.
-        // This changes the spawned object rather than the
-        // original prefab/reference.
-        obj.transform.localScale = new Vector3(-.5f, 0.5f, 1.0f);
+        flySpeed += amount;
     }
 }
+
+

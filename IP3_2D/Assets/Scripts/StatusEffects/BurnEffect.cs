@@ -1,9 +1,5 @@
 using UnityEngine;
-using static StatusEffects;
-
-
 using System.Collections;
-using UnityEngine;
 
 public class BurnEffect : StatusEffects
 {

@@ -8,11 +8,10 @@ public class SpeedPowerUp : PowerUp
     {
         PlayerMovement movement = player.GetComponent<PlayerMovement>();
 
-        if (movement != null)
-        {
-            // Implement a speed increase method
-            //movement.IncreaseSpeed(speedIncrease);
-        }
+        if (movement == null)
+            return;
+
+        //movement.IncreaseFlySpeed(speedIncrease);
     }
 
     protected override void DisplayMessage()

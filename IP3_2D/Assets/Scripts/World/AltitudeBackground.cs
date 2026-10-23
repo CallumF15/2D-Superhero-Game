@@ -1,8 +1,5 @@
 using UnityEngine;
 
-
-using UnityEngine;
-
 public class AltitudeBackground : MonoBehaviour
 {
     [Header("References")]

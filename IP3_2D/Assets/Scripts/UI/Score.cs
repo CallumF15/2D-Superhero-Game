@@ -16,12 +16,13 @@ public class Score : MonoBehaviour {
 		message.text = "Score: " + score;
 	}
 
-	void OnCollisionEnter(Collision hit){
+	private void OnTriggerEnter2D(Collider2D hit)
+	{
 		//Debug.Log ("COLLISION COIN");
 
 		if (hit.gameObject.tag == "coin") {
 			calculateScore();
-			Destroy (hit.gameObject);
+			Destroy (hit.gameObject.transform.parent.gameObject);
 		}
 	}
 

@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PowerUpNotification : MonoBehaviour
@@ -7,9 +8,11 @@ public class PowerUpNotification : MonoBehaviour
     public static PowerUpNotification Instance { get; private set; }
 
     [SerializeField] private Text message;
-    [SerializeField] private float disappearTime = 2.0f;
+    [SerializeField] private float disappearTime = 2f;
+    [SerializeField] private float messageDelay = 0.3f;
 
-    private Coroutine clearMessageCoroutine;
+    private readonly Queue<string> messageQueue = new Queue<string>();
+    private Coroutine messageCoroutine;
 
     private void Awake()
     {
@@ -20,28 +23,43 @@ public class PowerUpNotification : MonoBehaviour
         }
 
         Instance = this;
+
+        // Keep the UI object active; start with no visible text.
         message.text = "";
     }
 
     public void DisplayMessage(string powerupMessage)
     {
-        message.text = powerupMessage;
+        messageQueue.Enqueue(powerupMessage);
 
-        // Reset the timer if another message is displayed
-        if (clearMessageCoroutine != null)
+        // Start processing only if a queue coroutine isn't already running.
+        if (messageCoroutine == null)
         {
-            StopCoroutine(clearMessageCoroutine);
+            messageCoroutine = StartCoroutine(ProcessMessageQueue());
         }
-
-        clearMessageCoroutine = StartCoroutine(DelayTimer());
     }
 
-    private IEnumerator DelayTimer()
+    private IEnumerator ProcessMessageQueue()
     {
-        yield return new WaitForSeconds(disappearTime);
+        while (messageQueue.Count > 0)
+        {
+            // Display the oldest queued message.
+            message.text = messageQueue.Dequeue();
 
-        message.text = "";
-        clearMessageCoroutine = null;
+            yield return new WaitForSeconds(disappearTime);
+
+            // Clear the message before displaying the next one.
+            message.text = "";
+
+            // Add a short delay only when another message is waiting.
+            if (messageQueue.Count > 0)
+            {
+                yield return new WaitForSeconds(messageDelay);
+            }
+        }
+
+        // Allow a new coroutine to start when another message arrives.
+        messageCoroutine = null;
     }
 
     private void OnDestroy()
