@@ -6,6 +6,9 @@ public abstract class PowerUp : MonoBehaviour
     {
         Debug.Log("Trigger detected: " + other.name+ ", Tag: " + other.tag);
 
+        Debug.Log("Hit object: " + other.name);
+        Debug.Log("Parent: " + other.transform.parent);
+
         if (!other.CompareTag("Player"))
             return;
 
@@ -13,13 +16,14 @@ public abstract class PowerUp : MonoBehaviour
         ApplyEffect(other.gameObject);
         DisplayMessage();
 
+        // Destroy the PowerUp's parent
         if (transform.parent != null)
         {
             Destroy(transform.parent.gameObject);
         }
         else
         {
-            Debug.Log("This GameObject has no parent!");
+            Destroy(gameObject);
         }
     }
 

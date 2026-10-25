@@ -94,12 +94,14 @@
     <Compile Include="Assets\Scripts\World\AltitudeBackground.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCameraController.cs" />
     <Compile Include="Assets\Scripts\Attacks\Boss\AttackSelector.cs" />
+    <Compile Include="Assets\Scripts\World\Movement\RotateObject.cs" />
     <Compile Include="Assets\Scripts\Attacks\Boss\AttackSettings.cs" />
     <Compile Include="Assets\Scripts\Attacks\Boss\Types\SpreadShotAttack.cs" />
     <Compile Include="Assets\Scripts\UI\Score.cs" />
     <Compile Include="Assets\Scripts\Attacks\Projectile\PlasmaProjectile.cs" />
     <Compile Include="Assets\Scripts\World\PlacementCleanup.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\World\Movement\PowerupFloat.cs" />
     <Compile Include="Assets\Scripts\StatusEffects\StatusEffects.cs" />
     <Compile Include="Assets\Scripts\Attacks\Boss\Types\SingleFireAttack.cs" />
     <Compile Include="Assets\Scripts\Menu\Menu.cs" />
@@ -1253,6 +1255,10 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.6.4f1\Editor\Data\BCLExtensions\TargetingPacks\netstandard2.1\ref\System.Text.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.VSCode.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.InternalAPIEngineBridge.004">
       <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.004.dll</HintPath>
       <Private>False</Private>
@@ -1277,6 +1283,10 @@
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.AI.Navigation">
+      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.InputSystem.ForUI.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.InputSystem.ForUI.Editor.dll</HintPath>
       <Private>False</Private>
@@ -1289,6 +1299,10 @@
       <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.AI.Navigation.Editor.ConversionSystem">
+      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.ConversionSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.InputSystem.ForUI">
       <HintPath>Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
       <Private>False</Private>
@@ -1297,8 +1311,8 @@
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VSCode.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+    <Reference Include="Unity.AI.Navigation.Updater">
+      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Updater.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Timeline">
@@ -1307,6 +1321,10 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.AI.Navigation.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
