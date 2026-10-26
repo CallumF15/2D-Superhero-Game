@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
     private Camera mainCamera;
 
     [SerializeField] private float flySpeed = 10f;
+    private float originalFlySpeed;
+    public float FlySpeed => flySpeed;
 
     [SerializeField] private float rotationSpeed = 90f;
 
@@ -17,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        originalFlySpeed = flySpeed;
     }
 
     // Use this for initialization
@@ -57,6 +60,16 @@ public class PlayerMovement : MonoBehaviour
     public void IncreaseFlySpeed(float amount)
     {
         flySpeed += amount;
+    }
+
+    public void DecreaseFlySpeed(float amount)
+    {
+        flySpeed -= amount;
+    }
+
+    public void RestoreOriginalFlySpeed()
+    {
+        flySpeed = originalFlySpeed;
     }
 }
 

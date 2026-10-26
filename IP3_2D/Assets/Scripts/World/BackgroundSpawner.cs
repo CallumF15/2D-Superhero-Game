@@ -12,6 +12,7 @@ public class BackgroundSpawner : MonoBehaviour
 
     public float powerupOffsetX = 50.0f;
     public float offsetY = 30.0f;
+    public float offsetZ = 0;
 
     private float timeElapsed;
     private float lastStateCheck = 0f;
@@ -84,7 +85,7 @@ public class BackgroundSpawner : MonoBehaviour
     {
         Vector3 powerupPosition = new Vector3();
         powerupPosition.x = player.transform.position.x + powerupOffsetX; //so coins/powerups spawn off screen
-        powerupPosition.z = 0;
+        powerupPosition.z = 0 + offsetZ;
 
         //player is flying up and is below the maximum height
         if (currentPosY >= prevPosY && currentPosY <= maximumHeight + 2) 

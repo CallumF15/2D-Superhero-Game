@@ -16,12 +16,8 @@ public class MultipleFireAttack : Attack
 
             AttachScript(projectile, settings);
 
-            projectile.Initialize(
-                settings.damage,
-                settings.shotSpeed,
-                -firePoint.right,
-                gameObject
-            );
+
+            projectile.InitializeBoss(settings.damage, settings.shotSpeed);
 
             yield return new WaitForSeconds(settings.shotDelay);
         }

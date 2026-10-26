@@ -1,23 +1,20 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 public class IceEffect : StatusEffects
 {
     private readonly MonoBehaviour runner;
-    private readonly float damage;
-    private readonly float interval;
+    private readonly float slowPercentage;
     private readonly float duration;
 
     private IHealth target;
     private Coroutine iceCoroutine;
 
-    public IceEffect(MonoBehaviour runner, float damage, float interval, float duration)
+    public IceEffect(MonoBehaviour runner, float slowPercentage, float duration)
         : base(duration)
     {
         this.runner = runner;
-        this.damage = damage;
-        this.interval = interval;
+        this.slowPercentage = slowPercentage;
         this.duration = duration;
     }
 
@@ -31,18 +28,14 @@ public class IceEffect : StatusEffects
 
     private IEnumerator IceRoutine()
     {
-        float elapsed = 0f;
+        // Apply slow
+        PlayerMovement player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        player.DecreaseFlySpeed(player.FlySpeed * slowPercentage);
 
-        while (elapsed < duration)
-        {
-            yield return new WaitForSeconds(interval);
+        yield return new WaitForSeconds(duration);
 
-            if (target == null)
-                yield break;
-
-            target.TakeDamage(damage);
-            elapsed += interval;
-        }
+        // Restore movement speed
+        player.RestoreOriginalFlySpeed();
 
         iceCoroutine = null;
         target = null;
@@ -55,6 +48,8 @@ public class IceEffect : StatusEffects
             runner.StopCoroutine(iceCoroutine);
             iceCoroutine = null;
         }
+
+        // TODO: Restore movement speed if effect is removed early
 
         this.target = null;
     }
