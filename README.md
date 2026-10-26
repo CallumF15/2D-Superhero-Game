@@ -18,8 +18,9 @@ The original version explored gesture-based controls using a Leap Motion control
 
 - **Flying:** Control the superhero's movement and direction.
 - **Collectibles:** Gather coins and power-ups throughout the level.
-- **Combat:** Shoot projectiles to fight enemies and the main villain.
+- **Combat:** Shoot projectiles to fight the main villain.
 - **Boss encounters:** Dodge incoming attacks and fight back against the boss.
+- **Game States:** Gameplay can transition between playing, paused, and game-over states.
 
 ## Controls
 
@@ -64,6 +65,41 @@ Current improvements include:
 
 Movement is mostly implemented, with further refinement still ongoing.
 
+### Game State Management
+
+A centralised **GameManager** has been introduced to manage the overall game state and provide a consistent approach to controlling gameplay.
+
+The GameManager follows the **Singleton pattern**, allowing other gameplay systems to access the current game state without requiring individual references to the manager.
+
+Current functionality includes:
+
+- **Singleton Architecture:** Provides a centralised GameManager instance accessible throughout the project.
+- **Game States:** Introduces a `GameState` enum to represent the current state of the game:
+  - `Playing` – Normal gameplay.
+  - `Paused` – Gameplay is suspended.
+  - `GameOver` – The player has died and gameplay has ended.
+- **Pause and Resume:** Centralises pause and resume functionality by controlling the game's time scale and managing active gameplay scripts.
+- **Player Death Handling:** Provides a centralised method for handling player death and transitioning into the game-over state.
+- **Script Management:** Tracks and disables active scripts when pausing, preserving their previous enabled states so they can be restored when gameplay resumes.
+- **Scene Restarting:** Supports restarting the current scene and restoring the game's time scale.
+
+This architecture provides a foundation for additional game states and simplifies gameplay transitions as the project grows.
+
+### Power-up System
+
+The power-up system has been improved to provide better visual feedback and more organised collectible behaviour.
+
+Current improvements include:
+
+- **Power-up notifications:** Collecting a power-up triggers an on-screen notification to inform the player that an effect has been applied.
+- **Modular power-up behaviour:** Separates collision detection, effect application, and notification handling.
+- **Floating animation:** Power-ups gently move up and down using a sine-wave animation, making collectibles more visually noticeable.
+- **Independent rotation:** Separates the visual model from its collision object, allowing the power-up to rotate without affecting its collision orientation.
+- **Collision handling:** Uses 2D trigger detection to identify the player and activate the appropriate power-up effect.
+- **Object cleanup:** Removes collected power-ups and their associated child objects from the scene.
+
+These improvements aim to make collectibles more readable, reusable, and easier to extend with additional power-up types.
+
 ### Boss Attack Architecture
 
 The boss attack system has undergone significant architectural improvements and is nearing completion.
@@ -94,11 +130,16 @@ This is an ongoing personal development project based on an earlier university a
 **Completed:**
 - Migration from the legacy Input Manager to the new Unity Input System.
 - Integration of the new input system with Unity UI.
+- Introduction of centralised GameManager architecture using the Singleton pattern.
+- Implementation of playing, paused, and game-over states.
+- Basic power-up floating and rotation animations.
+- Power-up collection notifications and effect handling.
 
 **In Progress:**
 - Refining player movement and mouse-based aiming.
 - Finalising the boss attack architecture.
 - Developing and integrating additional boss attack behaviours.
+- Improving game state transitions and UI integration.
 - Improving code organisation, maintainability, and project structure.
 - Addressing remaining legacy asset and compatibility issues.
 
