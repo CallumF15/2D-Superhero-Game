@@ -21,10 +21,8 @@ public abstract class Projectile : MonoBehaviour
         Boss
     }
 
-
     [SerializeField] private TargetTag targetTag;
     private string targetName;
-
 
     private void Start()
     {
@@ -75,13 +73,13 @@ public abstract class Projectile : MonoBehaviour
     {
         Debug.Log("Object collided with: " + other.gameObject.name);
 
-        if (!other.gameObject.CompareTag(targetName))
-            return;
-
         if ((destroyedBy.value & (1 << other.gameObject.layer)) != 0)
         {
             Destroy(gameObject);
         }
+
+        if (!other.gameObject.CompareTag(targetName))
+            return;
 
         TakeDamage(other.gameObject, this.damage, this.speed);
         Destroy(gameObject);

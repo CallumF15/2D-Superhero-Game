@@ -82,8 +82,8 @@
     <Compile Include="Assets\Scripts\Attacks\Boss\Types\SuperAttack.cs" />
     <Compile Include="Assets\Scripts\Attacks\Boss\Types\MultipleFireAttack.cs" />
     <Compile Include="Assets\Scripts\Attacks\Boss\BossAttackController.cs" />
-    <Compile Include="Assets\Scripts\Attacks\Boss\BossPhase.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Attacks\Boss\BossPhase.cs" />
     <Compile Include="Assets\Scripts\PlayerAnimator.cs" />
     <Compile Include="Assets\Scripts\Attacks\Boss\New Folder\scaleAttack.cs" />
     <Compile Include="Assets\Scripts\StatusEffects\StatusEffectManager.cs" />
