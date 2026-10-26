@@ -14,8 +14,14 @@ public class Altitude : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		float height = player.transform.position.y;
+	void Update () 
+	{
+        // Stop if the player has been destroyed
+        if (GameManager.Instance.IsGameOver)
+            return;
+
+
+        float height = player.transform.position.y;
 		int newHeight = Mathf.RoundToInt(height); //cast to an integer value for display purposes
 		message.text = "Altitude: " + newHeight;
 	}

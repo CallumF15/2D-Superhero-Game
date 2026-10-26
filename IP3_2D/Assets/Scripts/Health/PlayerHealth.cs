@@ -42,6 +42,7 @@ public class PlayerHealth : IHealth
         {
             Debug.Log("Player has died.");
             Die();
+            GameManager.Instance.PlayerDied();
         }
     }
 
