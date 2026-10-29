@@ -101,14 +101,19 @@ public class GameManager : MonoBehaviour
     {
         pausedScripts.Clear();
 
-        MonoBehaviour[] scripts =
-            FindObjectsByType<MonoBehaviour>(
-                FindObjectsInactive.Include
-            );
+        MonoBehaviour[] scripts = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include);
 
         foreach (MonoBehaviour script in scripts)
         {
-            if (script == this || !script.enabled)
+            if (script == this || !script.enabled || script is PauseMenu)
+                continue;
+
+            // Don't disable UI scripts
+            // Preserve UI components
+            if (script is UnityEngine.UI.Graphic ||
+                script is Canvas ||
+                script is CanvasGroup ||
+                script is UnityEngine.EventSystems.UIBehaviour)
                 continue;
 
             pausedScripts.Add(script);

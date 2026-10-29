@@ -1,129 +1,374 @@
-using UnityEngine;
-using System.Collections;
-using System.Linq;
-using System.Collections.Generic;
 
-//TODO: Get player's further position travelled and not spawn coins before that point.
+using UnityEngine;
+using System.Collections.Generic;
 
 public class BackgroundSpawner : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private GameObject player;
+    [SerializeField] private Camera mainCamera;
     [SerializeField] private List<GameObject> worldObjectList;
 
-    public float powerupOffsetX = 50.0f;
-    public float offsetY = 30.0f;
-    public float offsetZ = 0;
+    [Header("Initial Spawning")]
+    [SerializeField] private bool spawnAtStart = true;
+    [SerializeField] private int initialSpawnCount = 5;
 
-    private float timeElapsed;
-    private float lastStateCheck = 0f;
-    public float delay = 5.0f; //delay between each spawn
+    [Header("Spawn Settings")]
+    [SerializeField] private float spawnDistanceX = 2f;
+    [SerializeField] private float spawnDistanceY = 2f;
+    [SerializeField] private float offsetZ = 0f;
+    [SerializeField] private float delay = 1f;
 
-    private float currentPosY, prevPosY, currentPosX, prevPosX;
-    private float lastValue;
-
+    [Header("World Boundaries")]
     [SerializeField] private float maximumHeight = 1500f;
-    [SerializeField] private float minimumHeight = 0;
+    [SerializeField] private float minimumHeight = 0f;
 
-    // Use this for initialization
+    [Header("Movement Detection")]
+    [SerializeField] private float movementThreshold = 0.001f;
+
+    [Header("Anti-Cheating / Lingering")]
+    [SerializeField] private float maxLingerTime = 5f;
+    [SerializeField] private float lingerMovementDistance = 3f;
+
+    // Spawn timer
+    private float lastSpawnTime;
+
+    // Previous player position
+    private float prevPosX;
+    private float prevPosY;
+
+    // Furthest position travelled
+    private float furthestPlayerX;
+
+    // Anti-lingering
+    private float lingerTimer;
+    private Vector3 lingerStartPosition;
+    private bool playerLingering;
+
+    // Prevent consecutive identical prefab selections
+    private int lastIndex = -1;
+
+    // Camera boundaries
+    private float screenLeft;
+    private float screenRight;
+    private float screenTop;
+    private float screenBottom;
+
+
     void Start()
     {
+        if (mainCamera == null)
+            mainCamera = Camera.main;
+
+        if (player == null || mainCamera == null)
+        {
+            Debug.LogError(
+                "BackgroundSpawner: Missing player or camera reference!"
+            );
+
+            enabled = false;
+            return;
+        }
+
+        // Initialise player positions
+        prevPosX = player.transform.position.x;
         prevPosY = player.transform.position.y;
+
+        furthestPlayerX = player.transform.position.x;
+
+        // Initialise spawn timer
+        lastSpawnTime = Time.time;
+
+        // Initialise anti-lingering
+        lingerStartPosition = player.transform.position;
+        lingerTimer = 0f;
+        playerLingering = false;
+
+        UpdateScreenBounds();
+
+        // Initial spawning
+        if (spawnAtStart)
+        {
+            SpawnInitialObjects();
+        }
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+
+    void Update()
     {
-        timeElapsed = Time.time;
-        currentPosX = player.transform.position.x;
-        currentPosY = player.transform.position.y; //get player Y pos
+        UpdateScreenBounds();
 
-        if (currentPosX > prevPosX)
-        { //make sure player isn't going back the way
+        // Check if player is lingering
+        CheckPlayerLingering();
 
-            if (lastStateCheck + delay < timeElapsed)
+        Vector3 currentPosition = player.transform.position;
+
+        // Calculate player movement
+        Vector3 movement = new Vector3(
+            currentPosition.x - prevPosX,
+            currentPosition.y - prevPosY,
+            0f
+        );
+
+        bool isMoving =
+            movement.sqrMagnitude >
+            movementThreshold * movementThreshold;
+
+        // Check furthest position
+        bool exceededFurthestPosition =
+            currentPosition.x > furthestPlayerX;
+
+        // Only spawn when all conditions are met
+        if (!playerLingering &&
+            isMoving &&
+            movement.x > movementThreshold &&
+            exceededFurthestPosition &&
+            Time.time >= lastSpawnTime + delay)
+        {
+            if (worldObjectList != null &&
+                worldObjectList.Count > 0)
             {
-                if (worldObjectList.Count > 1) //Ensure there is at least one value in the list
-                {
-                    int index = Random.Range(0, worldObjectList.Count);
+                int index = GetRandomIndex();
 
-                    while (lastValue == index)
-                    {
-                        index = Random.Range(0, worldObjectList.Count);
-                    }
-
-                    lastValue = index;
-                    SpawnPowerup(index);
-                }
-
-                lastStateCheck = timeElapsed;
+                SpawnPowerup(index, movement);
             }
 
-            prevPosX = currentPosX;
+            // Update furthest position
+            furthestPlayerX = currentPosition.x;
+
+            // Reset spawn timer
+            lastSpawnTime = Time.time;
+        }
+
+        // Update previous position
+        prevPosX = currentPosition.x;
+        prevPosY = currentPosition.y;
+    }
+
+
+    /// <summary>
+    /// Detects whether the player is lingering in a small area.
+    /// </summary>
+    void CheckPlayerLingering()
+    {
+        Vector3 currentPosition = player.transform.position;
+
+        // Calculate distance from where lingering started
+        float distanceMoved = Vector2.Distance(
+            new Vector2(
+                currentPosition.x,
+                currentPosition.y
+            ),
+            new Vector2(
+                lingerStartPosition.x,
+                lingerStartPosition.y
+            )
+        );
+
+        // Player has moved far enough to leave the area
+        if (distanceMoved >= lingerMovementDistance)
+        {
+            lingerStartPosition = currentPosition;
+
+            lingerTimer = 0f;
+            playerLingering = false;
         }
         else
         {
-            //player is going back the way
-            lastStateCheck = timeElapsed; //reset time elapsed 
+            lingerTimer += Time.deltaTime;
+
+            if (lingerTimer >= maxLingerTime)
+            {
+                playerLingering = true;
+            }
         }
     }
 
+
     /// <summary>
-    /// Spawns the powerup.
+    /// Calculate camera boundaries in world space.
     /// </summary>
-    public void SpawnPowerup(int index)
+    void UpdateScreenBounds()
     {
-        GameObject selectedObject = worldObjectList[index];
-        currentPosX = player.transform.position.x;
-        Vector3 position = CalculateObjectPosition();
-        GameObject worldObject = Instantiate(selectedObject, position, selectedObject.transform.rotation) as GameObject;    //spawn object
+        float distance = Mathf.Abs(
+            player.transform.position.z -
+            mainCamera.transform.position.z
+        );
+
+        Vector3 bottomLeft =
+            mainCamera.ViewportToWorldPoint(
+                new Vector3(0f, 0f, distance)
+            );
+
+        Vector3 topRight =
+            mainCamera.ViewportToWorldPoint(
+                new Vector3(1f, 1f, distance)
+            );
+
+        screenLeft = bottomLeft.x;
+        screenRight = topRight.x;
+
+        screenBottom = bottomLeft.y;
+        screenTop = topRight.y;
     }
 
-    /// <summary>
-    /// Calculates the position for specified background object in the world
-    /// </summary>
-    Vector3 CalculateObjectPosition()
-    {
-        Vector3 powerupPosition = new Vector3();
-        powerupPosition.x = player.transform.position.x + powerupOffsetX; //so coins/powerups spawn off screen
-        powerupPosition.z = 0 + offsetZ;
 
-        //player is flying up and is below the maximum height
-        if (currentPosY >= prevPosY && currentPosY <= maximumHeight + 2) 
+    /// <summary>
+    /// Spawn objects randomly inside the screen at game start.
+    /// </summary>
+    void SpawnInitialObjects()
+    {
+        if (worldObjectList == null ||
+            worldObjectList.Count == 0)
         {
-            prevPosY = currentPosY;
-
-            if (currentPosY - 10 >= minimumHeight)
-            {
-                powerupPosition.y = currentPosY - 10;
-            }
-            else
-            {
-                float difference = minimumHeight + currentPosY;
-                powerupPosition.y = currentPosY - difference;
-            }
-
-            return powerupPosition;
+            Debug.LogWarning("World Object List is empty!");
+            return;
         }
 
-        //Player is flying down and is above the minimum height
-        if (currentPosY < prevPosY && currentPosY >= minimumHeight - 2)
-        {   
-            prevPosY = currentPosY;
+        float minY = Mathf.Max(screenBottom, minimumHeight);
+        float maxY = Mathf.Min(screenTop, maximumHeight);
 
-            if(currentPosY + 10 <= maximumHeight)
-            {
-                powerupPosition.y = currentPosY + 10;
-            }
-            else
-            {
-                float difference = maximumHeight - currentPosY;
-                powerupPosition.y = currentPosY + difference;
-            }
+        if (minY > maxY)
+            return;
 
-            return powerupPosition;
+        for (int i = 0; i < initialSpawnCount; i++)
+        {
+            int index = GetRandomIndex();
+
+            float randomX = Random.Range(
+                screenLeft,
+                screenRight
+            );
+
+            float randomY = Random.Range(minY, maxY);
+
+            Vector3 position = new Vector3(
+                randomX,
+                randomY,
+                offsetZ
+            );
+
+            Instantiate(
+                worldObjectList[index],
+                position,
+                worldObjectList[index].transform.rotation
+            );
+        }
+    }
+
+
+    /// <summary>
+    /// Select a random prefab without repeating the previous one.
+    /// </summary>
+    int GetRandomIndex()
+    {
+        if (worldObjectList.Count <= 1)
+            return 0;
+
+        int index;
+
+        do
+        {
+            index = Random.Range(0, worldObjectList.Count);
+        }
+        while (index == lastIndex);
+
+        lastIndex = index;
+
+        return index;
+    }
+
+
+    /// <summary>
+    /// Spawn an object based on player movement direction.
+    /// </summary>
+    public void SpawnPowerup(int index, Vector3 movement)
+    {
+        if (index < 0 || index >= worldObjectList.Count)
+            return;
+
+        GameObject selectedObject = worldObjectList[index];
+
+        List<Vector3> positions =
+            CalculateObjectPositions(movement);
+
+        foreach (Vector3 position in positions)
+        {
+            Instantiate(
+                selectedObject,
+                position,
+                selectedObject.transform.rotation
+            );
+        }
+    }
+
+
+    /// <summary>
+    /// Calculate spawn positions based on movement direction.
+    /// </summary>
+    List<Vector3> CalculateObjectPositions(Vector3 movement)
+    {
+        List<Vector3> positions = new List<Vector3>();
+
+        float minY = Mathf.Max(screenBottom, minimumHeight);
+        float maxY = Mathf.Min(screenTop, maximumHeight);
+
+        // Detect flying left
+        bool bFlyingLeft =
+            movement.x < -movementThreshold;
+
+        // Flying left = no spawning
+        if (bFlyingLeft)
+            return positions;
+
+
+        // Moving right
+        if (movement.x > movementThreshold &&
+            minY <= maxY)
+        {
+            float randomY = Random.Range(minY, maxY);
+
+            positions.Add(new Vector3(
+                screenRight + spawnDistanceX,
+                randomY,
+                offsetZ
+            ));
         }
 
-        return powerupPosition;
+
+        // Flying upwards
+        if (movement.y > movementThreshold &&
+            !bFlyingLeft)
+        {
+            float randomX = Random.Range(
+                screenLeft,
+                screenRight
+            );
+
+            positions.Add(new Vector3(
+                randomX,
+                screenTop + spawnDistanceY,
+                offsetZ
+            ));
+        }
+
+
+        // Flying downwards
+        if (movement.y < -movementThreshold &&
+            !bFlyingLeft)
+        {
+            float randomX = Random.Range(
+                screenLeft,
+                screenRight
+            );
+
+            positions.Add(new Vector3(
+                randomX,
+                screenBottom - spawnDistanceY,
+                offsetZ
+            ));
+        }
+
+        return positions;
     }
 }
-

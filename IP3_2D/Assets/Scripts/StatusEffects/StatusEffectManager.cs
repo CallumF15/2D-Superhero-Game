@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class StatusEffectManager : MonoBehaviour
 {
-    private IHealth health;
+    private Health health;
     private readonly List<StatusEffects> activeEffects = new();
 
 
     private void Awake()
     {
-        health = GetComponent<IHealth>();
+        health = GetComponent<Health>();
     }
 
     public void ApplyEffect(StatusEffects effect)

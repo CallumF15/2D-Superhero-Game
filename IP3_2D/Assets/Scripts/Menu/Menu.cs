@@ -7,9 +7,9 @@ public class Menu : MonoBehaviour
 {
 	private Camera camera;
 
-    [SerializeField] public Button btnPlay;
-    [SerializeField] public Button btnSettings;
-    [SerializeField] public Button btnQuit;
+    [SerializeField] private Button btnPlay;
+    [SerializeField] private Button btnSettings;
+    [SerializeField] private Button btnQuit;
 
 
     // Use this for initialization
@@ -21,11 +21,6 @@ public class Menu : MonoBehaviour
         btnQuit.onClick.AddListener(Quit);
     }
 	
-	// Update is called once per frame
-	void Update () {
-        //hoveringButton(cursorObject.transform.position);
-	}
-
     void PlayGame()
     {
         Debug.Log("btnPlay");
