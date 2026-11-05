@@ -54,12 +54,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\World\BackgroundSpawner.cs" />
-    <Compile Include="Assets\Scripts\StatusEffects\Types\BurnEffect.cs" />
     <Compile Include="Assets\Scripts\Characters\Boss\BossGunTargeting.cs" />
     <Compile Include="Assets\Scripts\Characters\Attacks\Boss\Super\HyperBeam.cs" />
     <Compile Include="Assets\Scripts\Characters\Attacks\Boss\AttackTimer.cs" />
     <Compile Include="Assets\Scripts\Characters\Attacks\IDamageable.cs" />
-    <Compile Include="Assets\Scripts\StatusEffects\Types\IceEffect.cs" />
     <Compile Include="Assets\Scripts\Characters\Attacks\Boss\BossAttackController.cs" />
     <Compile Include="Assets\Scripts\Characters\Movement\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Characters\Attacks\Boss\New Folder\scaleAttack.cs" />
@@ -71,9 +69,12 @@
     <Compile Include="Assets\Scripts\Characters\Attacks\Boss\BossStateManager.cs" />
     <Compile Include="Assets\Scripts\Characters\Boss\BossHealthUI.cs" />
     <Compile Include="Assets\Scripts\Characters\Attacks\Player\PlayerAttackController.cs" />
+    <Compile Include="Assets\Scripts\World\Placement\SpawnManager.cs" />
     <Compile Include="Assets\Scripts\Characters\Attacks\Boss\BossPhase.cs" />
     <Compile Include="Assets\Scripts\Characters\Attacks\Boss\Types\MultipleFireAttack.cs" />
     <Compile Include="Assets\Scripts\Characters\Attacks\Projectile\Types\Projectile.cs" />
+    <Compile Include="Assets\Scripts\World\Placement\SpawnScheduler.cs" />
+    <Compile Include="Assets\Scripts\Characters\StatusEffects\Types\StatusEffects.cs" />
     <Compile Include="Assets\Scripts\Characters\Health\Health.cs" />
     <Compile Include="Assets\Scripts\Characters\Attacks\Boss\Types\SingleFireAttack.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerHeightRestrictor.cs" />
@@ -83,17 +84,21 @@
     <Compile Include="Assets\Scripts\UI\DirectionMessage.cs" />
     <Compile Include="Assets\Scripts\World\Powerups\SpeedPowerup.cs" />
     <Compile Include="Assets\Scripts\UI\PowerUpNotification.cs" />
+    <Compile Include="Assets\Scripts\Characters\StatusEffects\Types\IceEffect.cs" />
+    <Compile Include="Assets\Scripts\World\Placement\SpawnRule.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\World\Placement\ObjectSpawner.cs" />
     <Compile Include="Assets\Scripts\PlayerAnimator.cs" />
     <Compile Include="Assets\Scripts\Characters\Movement\BossMovement.cs" />
-    <Compile Include="Assets\Scripts\StatusEffects\StatusEffectManager.cs" />
-    <Compile Include="Assets\Scripts\Menu\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\Characters\Attacks\Projectile\Elements\AttackElementType.cs" />
     <Compile Include="Assets\Scripts\Characters\Movement\IMoveable.cs" />
+    <Compile Include="Assets\Scripts\Characters\Player\PlayerDirection.cs" />
     <Compile Include="Assets\Scripts\Characters\Attacks\Boss\AttackSelector.cs" />
-    <Compile Include="Assets\Scripts\StatusEffects\Types\StatusEffects.cs" />
+    <Compile Include="Assets\Scripts\UI\Menu\PauseMenu.cs" />
+    <Compile Include="Assets\Scripts\Characters\StatusEffects\Types\BurnEffect.cs" />
     <Compile Include="Assets\Scripts\Characters\Health\BossHealth.cs" />
     <Compile Include="Assets\Scripts\World\AltitudeBackground.cs" />
+    <Compile Include="Assets\Scripts\World\Placement\SpawnPositionProvider.cs" />
     <Compile Include="Assets\Scripts\Characters\Attacks\Projectile\Types\IceProjectile.cs" />
     <Compile Include="Assets\Scripts\World\Movement\RotateObject.cs" />
     <Compile Include="Assets\Scripts\Characters\Attacks\Boss\New Folder\TargetedAttack.cs" />
@@ -104,9 +109,10 @@
     <Compile Include="Assets\Scripts\World\Movement\PowerupFloat.cs" />
     <Compile Include="Assets\Scripts\Characters\Attacks\Boss\Types\SuperAttack.cs" />
     <Compile Include="Assets\Scripts\Characters\Attacks\Boss\AttackDecision.cs" />
-    <Compile Include="Assets\Scripts\Menu\Menu.cs" />
+    <Compile Include="Assets\Scripts\Characters\StatusEffects\StatusEffectManager.cs" />
     <Compile Include="Assets\Scripts\Characters\Attacks\Boss\Types\AttackType.cs" />
     <Compile Include="Assets\Scripts\Characters\Attacks\Projectile\Movement\PhysicsProjectileMovement.cs" />
+    <Compile Include="Assets\Scripts\UI\Menu\Menu.cs" />
     <Compile Include="Assets\Scripts\Characters\Attacks\Projectile\Types\PlasmaProjectile.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerCameraController.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\Healthbar.cs" />

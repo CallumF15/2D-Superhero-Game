@@ -16,7 +16,7 @@ public class MultipleFireAttack : Attack
 
             AttachScript(projectile, settings);
 
-            projectile.Initialize(settings.damage, settings.shotSpeed, firePoint.right, firePoint.parent.gameObject);
+            projectile.Initialize(settings.damage, settings.shotSpeed, -firePoint.right, firePoint.parent.gameObject);
 
             yield return new WaitForSeconds(settings.shotDelay);
         }

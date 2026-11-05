@@ -111,8 +111,7 @@ public class GameManager : MonoBehaviour
             // Don't disable UI scripts
             // Preserve UI components
             if (script is UnityEngine.UI.Graphic ||
-                script is Canvas ||
-                script is CanvasGroup ||
+          
                 script is UnityEngine.EventSystems.UIBehaviour)
                 continue;
 

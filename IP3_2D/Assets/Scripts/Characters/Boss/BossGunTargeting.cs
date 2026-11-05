@@ -5,112 +5,64 @@ using UnityEngine;
 
 public class BossGunTargeting : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private Transform player;
-
-    [SerializeField] private TransformProjectileMovement bossAttackMovement;
-
-    [Header("Aim Settings")]
-    [SerializeField] private float maxRotation = 45f;
-    [SerializeField] private float rotationSpeed = 5f;
-
-    [Header("Accuracy Settings")]
-    [SerializeField, Range(0f, 1f)]
-    private float aimAccuracy = 0.8f;
-
-    [SerializeField] private float aimOffset = 180f;
-    private Vector2 playerLastPosition;
-    private Vector2 playerVelocity;
-
-    private float initialRotation;
-
-    public float projectileSpeed;
-
-    public void SetProjectileSpeed(float speed)
-    {
-        projectileSpeed = speed;
-    }
-
-    private void Awake()
-    {
-        initialRotation = transform.localEulerAngles.z;
-    }
+    [SerializeField] private Rigidbody2D playerRb;
+    [SerializeField] private float shotSpeed = 50f;       // match your attack's shotSpeed
+    [SerializeField, Range(0f, 1f)] private float leadAmount = 0.8f;
+    [SerializeField] private float rotateSpeed = 360f;    // degrees/sec, 0 = snap instantly
 
     private void Update()
     {
-        if (player == null)
-            return;
+        if (playerRb == null) return;
 
-        AimAtPlayer();
+        Vector2 gunPos = transform.position;
+        Vector2 direct = ((Vector2)playerRb.position - gunPos).normalized;
+
+        TryGetInterceptDirection(gunPos, playerRb.position, playerRb.linearVelocity, shotSpeed, out Vector2 lead);
+
+        Vector2 dir = Vector2.Lerp(direct, lead, leadAmount).normalized;
+
+        // your shots travel along -right, so -right must point along dir
+        float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 180f;
+
+        float angle = rotateSpeed > 0f
+            ? Mathf.MoveTowardsAngle(transform.eulerAngles.z, targetAngle, rotateSpeed * Time.deltaTime)
+            : targetAngle;
+
+        transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
-    private void AimAtPlayer()
+    public static bool TryGetInterceptDirection(Vector2 shooterPos, Vector2 targetPos, Vector2 targetVel, float projectileSpeed, out Vector2 dir)
     {
-        Vector2 direction = player.position - transform.position;
+        Vector2 d = targetPos - shooterPos;
 
-        float targetAngle = Mathf.Atan2(
-            direction.y,
-            direction.x
-        ) * Mathf.Rad2Deg;
+        float a = Vector2.Dot(targetVel, targetVel) - projectileSpeed * projectileSpeed;
+        float b = 2f * Vector2.Dot(d, targetVel);
+        float c = Vector2.Dot(d, d);
 
-        targetAngle += aimOffset;
+        float t;
 
-        // Calculate angle relative to starting rotation
-        float relativeAngle = Mathf.DeltaAngle(
-            initialRotation,
-            targetAngle
-        );
+        if (Mathf.Abs(a) < 0.0001f)
+        {
+            // shot speed == target speed: equation becomes linear
+            if (Mathf.Abs(b) < 0.0001f) { dir = d.normalized; return false; }
+            t = -c / b;
+        }
+        else
+        {
+            float disc = b * b - 4f * a * c;
+            if (disc < 0f) { dir = d.normalized; return false; } // can't catch him
 
-        // Restrict rotation
-        relativeAngle = Mathf.Clamp(
-            relativeAngle,
-            -maxRotation,
-            maxRotation
-        );
+            float sqrt = Mathf.Sqrt(disc);
+            float t1 = (-b - sqrt) / (2f * a);
+            float t2 = (-b + sqrt) / (2f * a);
 
-        float finalAngle = initialRotation + relativeAngle;
+            // smallest positive time
+            t = (t1 > 0f && t2 > 0f) ? Mathf.Min(t1, t2) : Mathf.Max(t1, t2);
+        }
 
-        Quaternion targetRotation = Quaternion.Euler(
-            0f,
-            0f,
-            finalAngle
-        );
+        if (t <= 0f) { dir = d.normalized; return false; }
 
-        transform.rotation = Quaternion.RotateTowards(
-            transform.rotation,
-            targetRotation,
-            rotationSpeed * 100f * Time.deltaTime
-        );
-    }
-
-    private void AimAtPlayer2()
-    {
-        if (player == null) return;
-
-        // Estimate the player's movement speed
-        Vector2 currentPosition = player.position;
-
-        playerVelocity = (currentPosition - playerLastPosition) / Time.deltaTime;
-
-        playerLastPosition = currentPosition;
-
-        // Direction and distance to the player
-        Vector2 direction = (Vector2)player.position - (Vector2)transform.position;
-
-        float distance = direction.magnitude;
-
-        // Estimate how long the projectile will take to reach the player
-        float travelTime = distance / bossAttackMovement.ProjectileSpeed;
-
-        // Predict where the player will be
-        Vector2 predictedPosition = (Vector2)player.position + playerVelocity * travelTime;
-
-        // Aim at the predicted position
-        Vector2 aimDirection = predictedPosition - (Vector2)transform.position;
-
-        float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-
-        // Adjust for your gun's artwork orientation
-        transform.rotation = Quaternion.Euler(0f, 0f, angle + 180f);
+        dir = (d + targetVel * t).normalized; // aim at where he will be
+        return true;
     }
 }

@@ -18,6 +18,7 @@ public class BackgroundSpawner : MonoBehaviour
     [SerializeField] private float spawnDistanceY = 2f;
     [SerializeField] private float offsetZ = 0f;
     [SerializeField] private float delay = 1f;
+    [SerializeField] private Transform backgroundObjectContainer;
 
     [Header("World Boundaries")]
     [SerializeField] private float maximumHeight = 1500f;
@@ -29,6 +30,8 @@ public class BackgroundSpawner : MonoBehaviour
     [Header("Anti-Cheating / Lingering")]
     [SerializeField] private float maxLingerTime = 5f;
     [SerializeField] private float lingerMovementDistance = 3f;
+
+
 
     // Spawn timer
     private float lastSpawnTime;
@@ -251,7 +254,8 @@ public class BackgroundSpawner : MonoBehaviour
             Instantiate(
                 worldObjectList[index],
                 position,
-                worldObjectList[index].transform.rotation
+                worldObjectList[index].transform.rotation,
+                backgroundObjectContainer
             );
         }
     }
@@ -297,7 +301,8 @@ public class BackgroundSpawner : MonoBehaviour
             Instantiate(
                 selectedObject,
                 position,
-                selectedObject.transform.rotation
+                selectedObject.transform.rotation,
+                backgroundObjectContainer
             );
         }
     }

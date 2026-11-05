@@ -80,8 +80,6 @@ public class BossAttackController : MonoBehaviour
         if (decision == null)
             yield break;
 
-        //attackPoint.position = transform.position + attackSpawnOffset;
-
         // Use the current phase to adjust the before the next attack.
         float phaseMultiplier = 1f;
 

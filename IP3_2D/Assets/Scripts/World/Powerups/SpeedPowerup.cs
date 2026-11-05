@@ -2,7 +2,7 @@
 
 public class SpeedPowerUp : PowerUp
 {
-    [SerializeField] private float speedIncrease = 5f;
+    [SerializeField] private float speedIncrease = .5f;  //per coin player collects it increases player speed
 
     protected override void ApplyEffect(GameObject player)
     {
@@ -11,7 +11,7 @@ public class SpeedPowerUp : PowerUp
         if (movement == null)
             return;
 
-        //movement.IncreaseFlySpeed(speedIncrease);
+        movement.IncreaseFlySpeed(speedIncrease);
     }
 
     protected override void DisplayMessage()

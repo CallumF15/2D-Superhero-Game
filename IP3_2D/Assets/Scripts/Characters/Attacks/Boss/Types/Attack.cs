@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.U2D.Physics;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ public abstract class Attack : MonoBehaviour
 
     public void AttachScript(Projectile projectile, AttackSettings settings)
     {
-        TransformProjectileMovement attackMove = projectile.GetComponent<TransformProjectileMovement>();
+        PhysicsProjectileMovement attackMove = projectile.GetComponent<PhysicsProjectileMovement>();
         TargetedAttack targetedAttack = projectile.GetComponent<TargetedAttack>();
 
         if (attackMove == null || targetedAttack == null)
@@ -39,7 +40,7 @@ public abstract class Attack : MonoBehaviour
         }
     }
 
-    private IEnumerator EnableTrackingAfterDelay(Projectile projectile, TargetedAttack attackTarget, TransformProjectileMovement attackMove, float delay)
+    private IEnumerator EnableTrackingAfterDelay(Projectile projectile, TargetedAttack attackTarget, PhysicsProjectileMovement attackMove, float delay)
     {
         Debug.Log($"Waiting {delay} seconds before targeting.");
         yield return new WaitForSeconds(delay);

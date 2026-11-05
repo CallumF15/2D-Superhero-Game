@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour, IMoveable
     private Camera mainCamera;
 
     [SerializeField] private float flySpeed = 10f;
+    [SerializeField] private float maxFlySpeed = 20f;
     private float originalFlySpeed;
     public float FlySpeed => flySpeed;
 
@@ -62,7 +63,11 @@ public class PlayerMovement : MonoBehaviour, IMoveable
 
     public void IncreaseFlySpeed(float amount)
     {
+        
         flySpeed += amount;
+
+        if (flySpeed >= maxFlySpeed)
+            flySpeed = maxFlySpeed;
     }
 
     public void DecreaseFlySpeed(float amount)

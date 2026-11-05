@@ -8,11 +8,14 @@ public class SingleFireAttack : Attack
     {
         for (int i = 0; i < settings.shotCount; i++)
         {
-            Projectile projectile = Instantiate(prefab, firePoint.position, firePoint.rotation, attackContainer);
+            Vector3 spawnPosition = transform.position + firePoint.right;
+
+
+            Projectile projectile = Instantiate(prefab, spawnPosition, firePoint.rotation, attackContainer);
 
             AttachScript(projectile, settings);
 
-            projectile.Initialize(settings.damage, settings.shotSpeed, firePoint.right, firePoint.parent.gameObject);
+            projectile.Initialize(settings.damage, settings.shotSpeed, -firePoint.right, firePoint.parent.gameObject);
 
             yield return new WaitForSeconds(settings.shotDelay);
         }
